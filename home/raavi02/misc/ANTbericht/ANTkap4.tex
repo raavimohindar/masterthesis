@@ -1,0 +1,148 @@
+\chapter{ANT-Spezifisches}\label{CPTbeisp} 
+%
+In diesem Kapitel geht es um Features, die nicht zum Umfang der
+\LaTeX-Distribution geh"oren, sondern von flei"sigen
+ANT-Mitarbeitern\footnote{\bildsc{ANTonly}{0.134} und
+\bildsc{ANTonly}{0.132}} ersonnen wurden, um sich und dem Rest der
+ANT-Welt das Textverarbeitungs-Leben leichter zu machen. So definieren
+die Dateien {\tt latex2e.tex} und {\tt mathe.tex} Befehle, die mit
+hoher Wahrscheinlichkeit auch f"ur Dich n"utzlich sein werden. Sie
+stehen allen Benutzern des Rechnernetzes im Arbeitsbereich automatisch
+zur Verf"ugung, vorausgesetzt sie werden mit \verb+\input{latex2e}+
+bzw.\ \verb+\input{mathe}+ eingebunden (wie es auch hier der Fall
+ist).  Dabei kann {\tt mathe.tex}  erst {\em hinter} {\tt latex2e.tex}
+eingebunden werden, in der umgekehrten Reihenfolge funktioniert es
+nicht!
+
+Auch hier gilt, da"s auf Anregung der Benutzer weitere Elemente
+eingebracht werden k"onnen. Die "Anderungen kann allerdings nicht jeder
+Fuzzi eigenst"andig vornehmen (ein Gl"uck), er sollte sich bei Bedarf
+an eine kompetente Person wenden.
+
+
+\section{Die Datei {\tt latex2e.tex}} \label{SECbild}
+
+\subsection{L"angere Kommentare}
+%
+\LaTeX\ erlaubt das Auskommentieren von Passagen aus dem \LaTeX-File
+nur durch voranstellen eines Prozentzeichens. Dies kommentiert allerdings
+nur den Test hinter dem Prozentzeichen {\em bis zum n"achsten Zeilenumbruch} aus.
+Will man ganze Abschnitte auskommentieren, so m"u"ste man jeder Zeile
+m"uhsam ein Prozentzeichen verpassen --~wenn es da nicht den Befehl
+\verb+\comment{...}+ aus der Datei {\tt latex2e.tex} g"abe:
+Damit sind Kommentare f"ur l"angere Textpassagen komfortabel zu
+erreichen. Die (nicht) gew"unschte Textstelle einfach in die geschweiften 
+Klammern des Befehls setzen --- der Text wird dann beim Compilieren nicht mehr
+ber"ucksichtigt. Bei l"angeren Auskommentierungen ist allerdings sehr
+zu empfehlen, das Ende des Kommentars nicht nur durch eine geschweifte Klammer
+zu kennzeichnen (die man sp"ater nie wieder findet, bei soo vielen Klammern),
+sondern durch eine Zeile wie z.B.\ ``\verb+} % END OF \comment+''. So hat man auch
+mit einem ``dummen'' Texteditor die Chance, das Kommentarende wiederzufinden.
+
+\subsection{Einbinden von Grafiken} \label{SUBSECbilder}
+%
+Die Datei {\tt latex2e.tex} definiert auch Befehle zur Grafikeinbindung.
+So binden die folgenden Zeilen das Postscript-Bild {\tt muster.pst} im 
+Directory {\tt PS} in das \LaTeX-Dokument ein.
+%
+\begin{figure}[htb]
+  \centerline{ \bildsc{PS/muster.pst}{0.48} }
+  \caption{Fehlerraten. Anmerkung:
+           Mehrzeilige Bildunterschriften sehen "ubrigens auch super
+           aus, es sei denn, man w"ahlt \emph{nicht} die hier voreingestellte
+           Konfiguration, sondern versucht es auf eigene Faust \ldots}
+  \label{FIGmust}
+\end{figure}
+%
+\begin{verbatim}
+\begin{figure}[htb]
+  \centerline{ \bildsc{PS/muster.pst}{0.48} }
+  \caption{Fehlerraten. Anmerkung: ...}
+  \label{FIGmust}
+\end{figure}
+\end{verbatim}
+%
+Dazu wird der Befehl \verb+\bildsc{FILENAME}{0.48}+ verwendet,
+der das Bild auf 48\% seiner urspr"unglichen Gr"o"se skaliert.
+W"urde man statt \verb+\bildsc+ den Befehl \verb+\bildwi+ benutzen,
+so w"urde das Bild auf 48\% der Textbreite einer Seite 
+skaliert\footnote{Eselsbr"ucke:
+{\tt bildsc} kommt von {\em scale}, bei {\tt bildwi} wird auf feste {\em width} skaliert.}.\\
+Mit \verb+\caption{xxx}+ wird der Abbildung eine Bildnummer und die Bildunterschrift
+{\tt xxx} zugewiesen. Definiert man mit \verb+\label{FIGmust}+ ein label,
+so kann aus dem Text durch \verb+\ref{FIGmust}+ auf die Bildnummer zugegriffen werden
+(s.a.\ Abschnitt~\ref{SECverw}).
+
+{\bf Bild-Plazierung:} Da die {\tt figure}-Umgebung ebenso wie die
+Tabellen-Umgebung {\tt table} ein {\em floating object} definiert,
+gelten f"ur die Plazierung von Bildern die in Abschnitt~\ref{SECtab}
+f"ur Tabellen getroffenen Aussagen.  Im allgemeinen l"a"st sich der
+Plazierungswunsch mit umso geringerer Wahrscheinlichkeit erf"ullen, je
+gr"o"ser das Gleitobjekt ist. Mal sehen, wo Bild~\ref{FIGmust}
+landet...
+
+Mehrere Bilder bindet man wie folgt ein. Um die vier Bilder {\tt
+b1.eps} $\cdots$ {\tt b4.eps} in einer $2 \times 2$ Matrix-Anordnung
+einzubinden, k"onnte man folgende Konstruktion verwenden:
+
+\begin{verbatim}
+  \centerline{ \bildsc{PS/b1.eps}{0.16}\quad\bildsc{PS/b2.eps}{0.16} }
+  \centerline{ \bildsc{PS/b3.eps}{0.16}\quad\bildsc{PS/b4.eps}{0.16} }
+\end{verbatim}
+
+Je nach IQ des Lesers d"urften somit auch andere Bildanordnungen (k)ein Problem sein ...
+
+\subsection{Fettschrift im Mathemodus}
+
+Weiterhin wird in {\tt latex2e.tex} das Kommando \verb+\bfm+ definiert,
+das in seiner Form \verb+{\bfm H}+ im Mathemodus ein fettgedrucktes `H' darstellt.
+
+
+
+\section{Die Datei {\tt mathe.tex}} \label{SUBmathe}
+%
+Die Datei {\tt mathe.tex} ist als ASCII-Text in Anhang~\ref{CPTmehrascii}
+auf Seite~\pageref{CPTmehrascii} eingebunden und sollte vom interessierten Nutzer
+aufmerksam gelesen werden. In Tabelle~\ref{TABmathe} sind die wichtigsten Definitionen
+und ihre Wirkungen (im Mathemodus) angegeben.
+%
+\begin{table}[htb]\label{TABmathe}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+  \hline
+  Thema               & Befehl                                    & Wirkung (im Mathemodus)\\
+  \hline
+  Komplexe Zahlen     & \verb+ \real{2j}, \imag{3j}             + & $\real{2j}, \imag{3j}$\\
+                      & \verb+ \ejO, \ex{nix}                   + & $\ejO, \ex{nix}$\\
+  Funktionen          & \verb+ \rect{T_0}, \tri{\frac{T}{2}}    + & $\rect{T_0}, \tri{\frac{T}{2}}$\\
+                      & \verb+ \si(\omega t), \ld(2)            + & $\si(\omega t), \ld(2)$\\
+  Einheiten           & \verb+ 4\kHz, 3\MHz, 2\mus, 1\ms        + & $4\kHz, 3\MHz, 2\mus, 1\ms$\\
+                      & \verb+ 3\dB                             + & $3\dB$\\
+  Vek.~\& Matrizen    & \verb+ \vek{a}, \vek{A}                 + & $\vek{a}, \vek{A}$\\
+  Transformationen    & \verb+ f \korrespond F, F \ikorrespond f+ & $f \korrespond F, F \ikorrespond f$\\
+                      & \verb+ \FT{K\,\delta(t)}=K              + & $\FT{K\,\delta(t)}=K$\\
+                      & \verb+ \IFT{2\pi K\,\delta(\omega)}=K   + & $\IFT{2\pi K\,\delta(\omega)}=K$\\
+                      & \verb+ \DFT{.}, \IDFT{.}                + & $\DFT{.}, \IDFT{.}$\\
+                      & \verb+ \FFT{.}, \IFFT{.}                + & $\FFT{.}, \IFFT{.}$\\
+                      & \verb+ \ZT{.},\IZT{.},\HT{.},\IHT{.}    + & $\ZT{.}, \IZT{.}, \HT{.}, \IHT{.}$\\
+  K"urzel             & \verb+ \SNR, \EbN                       + & $\SNR, \EbN$\\
+  \hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Wie man am Beispiel des Befehls \verb+\tri{.}+ erkennen kann, sind
+alle Kommandos, an die ein Argument "ubergeben wird, so definiert,
+da"s sich die Gr"o"se der geschweiften Klammern automatisch an die 
+Gr"o"se des Argumentes anpa"st.
+
+In Gleichungen ben"otigt man des "ofteren bestimmte W"orter, die im
+normalen Textmodus erscheinen sollen, wie es im folgenden Beispiel 
+beim Wort ``f"ur'' der Fall ist:\ \ $x=\sqrt{\lambda} \fuer \lambda\leq 0$.
+Deshalb sind in {\tt mathe.tex} die Befehle \verb+\und+, 
+\verb+\da+, \verb+fuer+, \verb+\Mit+ und \verb+\wobei+ 
+definiert, die einen Zwischenraum lassen (\verb+\quad+), dann das entsprechende
+Wort im Textmodus darstellen und danach noch einen kleinen Zwischenraum lassen 
+(\verb+\;\,+).
+
+% EOF

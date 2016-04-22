@@ -1,0 +1,48 @@
+\documentclass[11pt]{report}
+\usepackage[latin1]{inputenc} 
+\usepackage{showkeys}
+\input{latex2e.tex}
+\usepackage{epsfig}
+\input{mathe.tex}
+\usepackage{fancyheadings}
+\usepackage{options}
+\usepackage[hang,small,bf]{caption}
+\usepackage{amsopn}
+\usepackage{amsmath, amsthm, amssymb}
+%\DeclareMathOperator{\argmax}{argmax}
+\def\argmax{\mathop{\mathrm{arg\,max}}}
+\def\argmin{\mathop{\mathrm{arg\,min}}}
+\def\max{\mathop{\mathrm{max}}}
+\def\min{\mathop{\mathrm{min}}}
+\newcommand{\Arbeitsart}{Master Thesis}     % oder: Studienarbeit, Projektarbeit
+\newcommand{\Ausgabetermin}{13.04.2005}
+\newcommand{\Abgabetermin}{13.10.2005}
+\newcommand{\Berichtsdatum}{20.10.2005}
+\newcommand{\Betreuer}{Dipl.-Ing. Petra Weitkamper}
+\newcommand{\Autor}{Raavi M. Mohindar Rao}
+\newcommand{\Berichtstitel}{Analysis of Iterative Multi-User \\ Detection by Information Theory}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\begin{document}
+\include{titel}
+\clearemptydoublepage
+  \thispagestyle{fancyplain}
+  \pagenumbering{Roman}
+  \tableofcontents            % Inhaltsverzeichnis
+  \thispagestyle{fancy}
+  \clearemptydoublepage
+  \pagenumbering{arabic}
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
+\include{chapter5}
+\include{conclusion}
+\nocite{Pro01,Kam04,TC91,Kuehn,GC,VTC}
+\bibliographystyle{plain}
+\thispagestyle{fancyplain}  % Literaturverzeichnis
+{\small
+\bibliography{docu}
+%\addcontentsline{toc}{chapter}{Literatur}
+}
+
+\end{document}

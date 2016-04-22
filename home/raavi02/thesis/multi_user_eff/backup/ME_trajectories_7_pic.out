@@ -1,0 +1,74 @@
+
+                              < M A T L A B >
+                  Copyright 1984-2003 The MathWorks, Inc.
+              Version 6.5.1.199709 Release 13 (Service Pack 1)
+                                Aug  4 2003
+
+ 
+  To get started, type one of these: helpwin, helpdesk, or demo.
+  For product information, visit www.mathworks.com.
+ 
+>> >> >> >> 
+EsN0_dB =
+
+    10
+
+>> >> >> >> >> >> >> >> >> >> >> ??? Undefined function or variable 'make_trellis'.
+
+>> ??? Undefined variable 'trellis' or class 'trellis.out'.
+
+>> ??? Undefined variable 'trellis' or class 'trellis.next'.
+
+>> >> >> >> >> >> >> >> >> >> >> >> >> ??? Undefined function or variable 'conv_encoder'.
+
+>> >> ??? Undefined function or variable 'data'.
+
+>> >> ??? Undefined function or variable 'data'.
+
+>> >> ??? Undefined function or variable 'data_c'.
+
+>> >> ??? Undefined function or variable 'data1'.
+
+>> ??? Undefined function or variable 'tx0'.
+
+>> >> >> ??? Undefined function or variable 'tx1'.
+
+>> ??? Undefined function or variable 'tx1'.
+
+>> >> ??? Undefined function or variable 'tx'.
+
+>> >> >> >> >> >> ??? Undefined function or variable 'data_c'.
+
+>> >> ??? Undefined function or variable 'mf'.
+
+>> >> >> ??? Undefined function or variable 'nu'.
+
+>> ??? Undefined function or variable 'nu_m'.
+
+>> ??? Undefined function or variable 'test'.
+
+>> ??? Undefined function or variable 'test'.
+
+>> ??? Undefined function or variable 'nu_m'.
+
+>> ??? Undefined function or variable 'test2'.
+
+>> >> ??? Undefined function or variable 'x_ax'.
+
+>> >> >> >> >> >> >> 
+filename =
+
+MU_vs_SINR_CC_max_log_map_75.mat
+
+??? Error using ==> load
+Unable to read MAT file /home/raavi02/thesis/me/MU_vs_SINR_CC_max_log_map_75.mat
+
+File may be corrupt.
+
+Error in ==> /home/raavi02/thesis/me/ME_plot_pic.m
+On line 3  ==> load(filename);
+
+>> >> >> >> ??? Error using ==> save
+Variable 'nu_m' not found.
+
+>> 

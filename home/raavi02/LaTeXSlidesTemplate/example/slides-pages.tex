@@ -1,0 +1,605 @@
+%%% Folie 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc \textsf{Analysis of Iterative Multi-User Detection by Information Theory}}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+%\hbox{{\bf .} }}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+    \put(10,14){\today}
+    \put(2,12){\Huge \Blue{\textsf{Analysis of Iterative Multi-User Detection by Information Theory}}}
+    \put(10,10){Raavi M. Mohindar Rao}
+
+    \put(3,4){Supervisors}
+    \put(3.5,2.5){\normalsize Dr.-Ing. Volker Kuehn}
+    \put(3.5,1.25){\normalsize Dipl.-Ing. Petra Weitkemper}
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Contents}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{\textbf{Contents} }
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+    \put(4,15){$\bullet$ Introduction}
+    \put(4,13){$\bullet$ Motivation}
+    \put(4,11){$\bullet$ Single Parameter Dynamical Model and Analysis Tools}
+    \put(5,9){$\Longrightarrow$ Extrinsic Information Transfer Charts (EXIT)}
+    \put(5,7){$\Longrightarrow$ Multi User Efficiency (MUE)}
+	\put(5,5){$\Longrightarrow$ Variance Transfer Characteristic charts (VTC)}
+	\put(4,3){$\bullet$ Circular Disk Model to Understand Cyclic Behavior}
+	\put(4,1){$\bullet$ Conclusion}
+    
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Multi User Communication System Model}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Multi User Communication Model} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,8){\psfig{figure=../../documentation/ps/communication.eps,angle=0,width=15cm}}
+  \put(15,1){\psfig{figure=../../documentation/ps/spreading.eps,angle=0,width=10cm}}
+  
+  \put(17,16){$\bullet$ Let $u$ be the user index with $1\leq u \leq U$}  
+  
+  \put(17,15){$\bullet$ Information bits: $\mathrm{\mathbf{d}}_u=[d_u[1],\dots,d_u[K]]$}
+  \put(17.4,14.25){where, $d_u[k]\in\{0,1\}$ and $1\leq k \leq K$.}
+  
+  \put(17,13){$\bullet$ Coded bits: $\mathrm{\mathbf{b}}_u=[b_u[1],\dots,b_u[N]]$}
+  \put(17.4,12.25){where, $b_u[n]\in\{0,1\}$ and $1\leq n \leq N$.}
+  
+  \put(17,10.75){$\bullet$ Coded rate $R=K/N$.}  
+  
+  \put(17,9.5){$\bullet$ Modulated Symbols: $\mathrm{\mathbf{a}}_u=[a_u[1],\dots,a_u[N]]$.}  
+  \put(17.4,8.75){where, $a_u[n]\in\{+1,-1\}$ and $1\leq n \leq N$.}
+  
+  \put(17,7.5){$\bullet$ User specific Interleavers $\Pi_u$ of length $L_\pi$.}  
+  
+  \put(0,6.25){$\bullet$ Spreading: DS-CDMA with $N_s=T_b/T_c$ as}
+  \put(0.4,5.5){spreading factor and $\beta=U/N_s$.}
+  
+  \put(0,4.25){$\bullet$ Spreading sequence $\mathrm{\mathbf{c}}_u=[c_u[1],\dots,c_u[N_s]]$}
+  \put(0.4,3.5){where, $c_u[\ell]\in\{+1,-1\}$ and $1\leq \ell \leq N_s$.}
+  
+  \put(0,2.25){$\bullet$ Spreaded seq $\mathrm{\mathbf{x}}_u$ is of length $(N\cdot N_s)\;\mathrm{x}\;1$}
+  
+  \put(0,1){$\bullet$ $\mathrm{\mathbf{h}}_u$: Channel impulse response of user $u$.}
+  
+  
+  \end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Receiver Section}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Receiver Section} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,6.5){\psfig{figure=../../documentation/ps/receiver_section.eps,angle=0,width=15cm}}
+  
+  \put(17,16){$\bullet$ Received vector $\mathrm{\mathbf{y}}=\mathrm{\mathbf{H}}\cdot\mathrm{\mathbf{x}}+\mathrm{\mathbf{n}}=\mathrm{\mathbf{S}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{n}}$ }  
+  
+  \put(17,15){$\bullet$ $\mathrm{\mathbf{H}}=[\mathrm{\mathbf{T_{h_1}}}\dots \mathrm{\mathbf{T_{h_U}}}]$ and $\mathrm{\mathbf{S}}$ is the Signature}
+  \put(17.4,14.25){of all the users.}
+  
+  \put(17,13.25){$\bullet$ $\mathrm{\mathbf{n}}$: AWGN with zero mean and variance $\sigma_n^2$.}
+
+  \put(17,12){$\bullet$ MF: $\mathrm{\mathbf{r}}=\mathrm{\mathbf{S}}^H\cdot \mathrm{\mathbf{y}}=\mathrm{\mathbf{S}}^H(\mathrm{\mathbf{S}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{n}} )=\mathrm{\mathbf{R}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{\tilde{n}}} $}
+  %\put(17.4,11.25){where, $b_u[n]\in\{0,1\}$ and $1\leq n \leq N$.}
+  
+  \put(17,10){$\bullet$ ZF: $\tilde{\mathrm{\mathbf{a}}}=\mathrm{\mathbf{R}}^{-1}\cdot(\mathrm{\mathbf{R}}\cdot \mathrm{\mathbf{a}}+\mathrm{\mathbf{R}}^{-1}\mathrm{\mathbf{S}}^H\mathrm{\mathbf{n}})$}
+    \put(20,9.25){\hspace{-12mm}$=\mathrm{\mathbf{a}}+\mathrm{\mathbf{R}}^{-1}\mathrm{\mathbf{S}}^H\mathrm{\mathbf{n}}$}
+  
+  \put(17,7.25){$\bullet$ MMSE: $\mathrm{\mathbf{\tilde{a}}}=(\mathrm{\mathbf{R}}+\sigma_n^2\mathrm{\mathbf{I}}_U)^{-1}\cdot\mathrm{\mathbf{r}}$}
+ \put(17.4,6.5){$\sigma_n^2\rightarrow 0$ MMSE filter approaches decorrelator.}
+ \put(17.4,5.75){$\sigma_n^2\rightarrow \infty$ MMSE filter reduces to MF.}
+   
+  \put(1,4.5){$\bullet$ PIC (Linear): $\mathrm{\mathbf{\tilde{a}}}_u^{(m+1)}=\frac{1}{M_{u,u}}\cdot\left(r_u-\sum\limits_{v=1}^{u-1}M_{u,v}\cdot \tilde{a}_v^{(m)}-\sum\limits_{v=u+1}^{U}M_{u,v}\cdot \tilde{a}_v^{(m)}\right)$}
+  \put(1.4,3.5){$M_{u,u}=R_{u,u}\Longrightarrow$ ZF.}
+  \put(1.4,2.75){$M_{u,u}=r_{u,u}+\sigma_n^2\Longrightarrow$ MMSE.}
+  
+  \put(1,1){$\bullet$ PIC (Non-Linear): $\mathrm{\mathbf{\tilde{a}}}_u=4\frac{\hbox{$E_s$}}{\hbox{$N_0$}}\cdot\left[\mathrm{\mathbf{r}}_u-\sum\limits_{\stackrel{v=1}{v\neq u}}^{U}\mathrm{tanh}(L_a(\mathrm{\mathbf{\hat{a}}}_v)/2)\right]$}  
+  
+   \put(17,2){\Huge $\Longrightarrow$ \Red{How to Analyze?}}
+
+  
+  
+  \end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Single-Parameter Dynamical Model}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Single-Parameter Dynamical Model} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(2,5.75){\psfig{figure=../../documentation/ps/dynamical_generic.eps,angle=0,width=5cm}}
+  
+  \put(4.5,15){\Blue{Boutros and Caire}: Iterative Multiuser Joint Decoding (Unified Framework and Asymptotic Analysis)}
+
+
+  \put(10,12){$\bullet$ Behavior of iterative multiuser joint decoding is approximately characterized}
+  \put(10.4,11.25){by the stable fixed points of a simple one-dimensional non-linear dynamical}
+  \put(10.4,10.5){systems, when making Gaussian approximation of the decoder soft-outputs.}
+  
+  \put(10,8){$\bullet$ \Blue{$a$} is a single-parameter which describes the system of whole. }  
+  
+  \put(10,6){$\bullet$ With \Blue{$a$} as Mutual Information $\Longrightarrow$ EXIT Charts.}  
+ 	
+ 	\put(10,4){$\bullet$ With \Blue{$a$} as Multi-User Interference $\Longrightarrow$ MUE.}
+ 	  
+  		\put(10,2){$\bullet$ With \Blue{$a$} as Variance of the estimation error $\Longrightarrow$ VTC.}
+    
+
+  
+  
+  \end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc EXIT Charts}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{EXIT Charts} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,6){\psfig{figure=../../documentation/ps/receiver_section.eps,angle=0,width=12cm}}
+  
+  \put(2.5,15){$\bullet$ Extrinsic Information Transfer Characteristic Charts are obtained by plotting the exchange of Mutual-Information}
+  \put(2.9,14.25){between the components of a iterative multiuser joint decoder.}
+
+  \put(14,12){$\bullet$ Let $x$ be the transmitted signal and $y$ be the received signal}
+  \put(14.4,11.25){and the mutual information between $x$ and $y$ } 
+  \put(14,9.5){$\bullet$ $I(x;y)=1+\frac{\hbox{$1$}}{\hbox{$2$}}\cdot\hbox{$\sum\limits_{d=\pm 1}^{}$}\int\limits_{-\infty}^{\infty}p(y\vert x=d)$}
+  \put(16,8){x $\mathrm{log}\frac{\hbox{$p(y\vert x=d)$}}{\hbox{$p(y\vert x=+1)+p(y\vert x=-1)$}}\cdot dy$}
+  
+
+  
+  \put(14,6){$\bullet$ ten brink's approach to model a-priori LLR's $L_a(\hat{\mathrm{\mathbf{a}}}_u)$.}  
+ 	
+ 	\put(2,4){$\bullet$ $L_a(\hat{\mathrm{\mathbf{a}}}_u)=\bar{n}_u b_u+n_u$ where, $n_u$ WGN with variance $\sigma_n^2$ and the mean of $L_a(\hat{\mathrm{\mathbf{a}}}_u)$ is $\bar{n}_u=\sigma_n^2/2$}
+ 	  
+  		\put(4,2){$\bullet$ $I(L_a(\hat{\mathrm{\mathbf{a}}}_u);\mathrm{\mathbf{a}}_u)=1-\frac{\hbox{$1$}}{\hbox{$\sqrt{2\pi\sigma_n^2}$}}\cdot\int\limits_{-\infty}^{+\infty}e^{-\frac{(\xi-\sigma_n^2/2)}{2\sigma_n^2}}\mathrm{log}(1+e^{-\xi})d\xi$.}
+    
+  \end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 7 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc EXIT Charts}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{EXIT Charts} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,8){\psfig{figure=../../documentation/ps/tens_model.eps,angle=0,width=10cm}}
+%  \put(3.5,7.5){\small{Mutual Information Vs $\sigma_a^2$}} 
+
+  \put(12,15.5){$\bullet$ Mutual information at the input and the output of }
+  \put(12.4,14.75){the PIC and the Decoder.} 
+  
+  	\put(14,13.5){$\bullet$ $I_{a,u}^{PIC}=I(L_a(\hat{\mathrm{\mathbf{a}}}_u);\mathrm{\mathbf{a}}_u)$}
+  		\put(14,12.25){$\bullet$ $I_{e,u}^{PIC}=I((L_a(\hat{\mathrm{\mathbf{a}}}_u\vert\mathrm{\mathbf{r}})-L_a(\hat{\mathrm{\mathbf{a}}}_u));\mathrm{\mathbf{a}}_u)$}
+ 			\put(14,11){$\bullet$ $I_{a,u}^D=I_{e,u}^{PIC}$}
+ 				\put(14,9.75){$\bullet$ $I_{t,u}^D=I_{a,u}^{PIC}$}
+ 				
+        \put(14,1.5){\psfig{figure=../../documentation/ps/generic_half_exit.eps,angle=0,width=10cm}}		
+ 	%\put(21.5,4.5){$\bullet$ $U=4$, $N_s=8$ and} 
+	%\put(21.9,3.75){$\beta=1/2$} 
+ 	\put(21.5,4.5){$\bullet$ Half loaded System}
+% 	\put(21.9,3.75){System}
+ 	\put(21.5,3){$\bullet$ $U=4$, $N_s=8$ and} 
+ 	\put(21.9,2.25){$\beta=1/2$} 
+ 		
+	\put(1,5){$\bullet$ $\bar{I}_e^{PIC}=\frac{\hbox{$1$}}{\hbox{$U$}}\cdot\sum\limits_{u=1}^{U}I_{e,u}^{PIC}$} 	
+ 	\put(1,3.5){$\bullet$ Mutual Information depends on SNR.}
+ 	\put(1,2){$\bullet$ $\bar{I}_e^{PIC}=1$ interference is totally suppressed, reaches to }
+ 	\put(1.4,1.25){single-user AWGN system.}		
+ 	
+  \end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc EXIT Charts}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{EXIT Charts} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(11,10.5){\psfig{figure=../../documentation/ps/dynamical_exit.eps,angle=0,width=4cm}}
+  \put(0,8.5){\psfig{figure=../../documentation/ps/exit_trajectories_0dB_half.eps,angle=0,width=10cm}}
+  \put(7,12.5){$\bullet$ $\beta=1/2$} 
+  \put(7.4,11.75){$\mathrm{SNR=0dB}$} 
+  \put(16,8.5){\psfig{figure=../../documentation/ps/exit_trajectories_3dB_half.eps,angle=0,width=10cm}}
+  \put(23.5,12.5){$\bullet$ $\beta=1/2$} 
+  \put(23.9,11.75){$\mathrm{SNR=3dB}$} 
+  \put(0,0.5){\psfig{figure=../../documentation/ps/exit_trajectories_5dB_half.eps,angle=0,width=10cm}}	
+  \put(7,4.5){$\bullet$ $\beta=1/2$} 
+  \put(7.4,3.75){$\mathrm{SNR=5dB}$}  	
+  \put(16,0.5){\psfig{figure=../../documentation/ps/exit_trajectories_8dB_half.eps,angle=0,width=10cm}}			
+  \put(23.5,4.5){$\bullet$ $\beta=1/2$} 
+  \put(23.9,3.75){$\mathrm{SNR=8dB}$}
+ 		
+ 	
+  \end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 9 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc EXIT Charts}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{EXIT Charts} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+
+  \put(0,8.5){\psfig{figure=../../documentation/ps/generic_full_exit.eps,angle=0,width=10cm}}
+  \put(8,11.75){$\bullet$ Fully loaded} 
+  \put(8.4,11){system.}
+  \put(8,10.25){$\bullet$ $U=8$ and $N_s=8$} 
+  \put(16,8.5){\psfig{figure=../../documentation/ps/exit_trajectories_0dB_full.eps,angle=0,width=10cm}}
+  \put(23.5,12.5){$\bullet$ $\beta=1$} 
+  \put(23.9,11.75){$\mathrm{SNR=0dB}$} 
+  \put(0,0.5){\psfig{figure=../../documentation/ps/exit_trajectories_3dB_full.eps,angle=0,width=10cm}}	
+  \put(7,4.5){$\bullet$ $\beta=1$} 
+  \put(7.4,3.75){$\mathrm{SNR=3dB}$}  	
+  \put(16,0.5){\psfig{figure=../../documentation/ps/exit_trajectories_8dB_full.eps,angle=0,width=10cm}}			
+  \put(23.5,4.5){$\bullet$ $\beta=1$} 
+  \put(23.9,3.75){$\mathrm{SNR=8dB}$}
+ 		
+ 	
+  \end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 10 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc EXIT Charts}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Concluding remarks on EXIT Charts} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+
+  \put(0,8.5){\psfig{figure=../../documentation/ps/exit_trajectories_2p5dB_half.eps,angle=0,width=10cm}}
+  \put(7,12.5){$\bullet$ $\beta=1/2$} 
+  \put(7.4,11.75){$\mathrm{SNR\approx2.5dB}$} 
+  \put(16,8.5){\psfig{figure=../../documentation/ps/exit_trajectories_2p5dB_full.eps,angle=0,width=10cm}}
+  \put(23.5,12.5){$\bullet$ $\beta=1$} 
+  \put(23.9,11.75){$\mathrm{SNR\approx2.5dB}$} 
+  
+  \put(2,6){$\bullet$ EXIT charts characterize the system very well, since prediction curves are so tight.}
+  \put(2,4.5){$\bullet$ Convergence properties of the system can be studied very well.}
+  
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 11 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Multi User Efficiency}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Multi User Efficiency} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+   \put(0,7){\psfig{figure=../../documentation/ps/receiver_section.eps,angle=0,width=12cm}}
+ \put(14,15){$\bullet$ $\eta=\frac{\hbox{$\mathrm{SINR}$}}{\hbox{$\mathrm{SNR}$}}=\frac{\hbox{$2\sigma_d^2/(\sigma_n^2+\sigma_{\mathrm{MUI}}^2)$}}{\hbox{$2\sigma_d^2/\sigma_n^2$}}$}
+ \put(14,13.5){$\bullet$ $\sigma_d^2$ Variance of the desired signal.}
+ \put(14,12){$\bullet$ $\sigma_{\mathrm{MUI}}^2$ Variance of the remaining MUI after cancellation.} 
+ \put(14,10.5){$\Longrightarrow$ $\sigma_{\mathrm{MUI}}^2=\sigma_d^2\cdot \mu (U-1)/N_s$, where $\mu=\mathrm{E}\{\vert L_a(\mathrm{\mathbf{\hat{a}}})-\mathrm{\mathbf{a}}\vert ^2\}$}  
+ \put(14,9){$\bullet$ $\sigma_n^2$ Variance of the noise.}
+ \put(17,7.5){$\Longrightarrow$ $\eta=\frac{\hbox{$1$}}{\hbox{$1+\beta \mu E_s/N_0$}}$}  
+ \put(14,6){$\bullet$ $\eta^{(1)}=1/(1+\beta E_s/N_0)$ }
+ \put(1,4.5){$\bullet$ The predetermination of $\mu^{(m)}=g(\mathrm{SINR})=g(\eta^{(m-1)}\mathrm{SNR})$ }
+ \put(1,3){$\bullet$ Relating everything we obtain $\eta^{(m)}=f(\eta^{(m-1)})$}
+ \put(1,1.5){$\bullet$ Hence, single-parameter dynamical model is obtained.}
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 12 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Multi User Efficiency}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Multi User Efficiency} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  
+  \put(0,8.5){\psfig{figure=../../documentation/ps/generic_mue_half.eps,angle=0,width=10cm}}
+  \put(7.75,12){$\bullet$ $U=4$}
+  \put(8.15,11.25){$N_s=8$}
+  \put(8.15,10.5){$\beta=1/2$}
+     \put(11,10.5){\psfig{figure=../../documentation/ps/dynamical_me.eps,angle=0,width=4cm}}
+  
+  \put(16,8.5){\psfig{figure=../../documentation/ps/load_h_0dB.eps,angle=0,width=10cm}}
+  \put(23.5,12.5){$\bullet$ $\beta=1/2$} 
+  \put(23.9,11.75){$\mathrm{SNR=0dB}$} 
+  \put(0,0.5){\psfig{figure=../../documentation/ps/load_h_3dB.eps,angle=0,width=10cm}}	
+  \put(7.5,4.5){$\bullet$ $\beta=1/2$} 
+  \put(7.9,3.75){$\mathrm{SNR=3dB}$}  	
+  \put(16,0.5){\psfig{figure=../../documentation/ps/load_h_8dB.eps,angle=0,width=10cm}}			
+  \put(23.5,4.5){$\bullet$ $\beta=1/2$} 
+  \put(23.9,3.75){$\mathrm{SNR=8dB}$}
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 13 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Multi User Efficiency}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Multi User Efficiency} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  
+  \put(0,8.5){\psfig{figure=../../documentation/ps/generic_mue_full.eps,angle=0,width=10cm}}
+  \put(7.75,12){$\bullet$ $U=8$}
+  \put(8.15,11.25){$N_s=8$}
+  \put(8.15,10.5){$\beta=1$}
+  
+  
+  \put(16,8.5){\psfig{figure=../../documentation/ps/load_f_0dB.eps,angle=0,width=10cm}}
+  \put(23.5,12.5){$\bullet$ $\beta=1$} 
+  \put(23.9,11.75){$\mathrm{SNR=0dB}$} 
+  \put(0,0.5){\psfig{figure=../../documentation/ps/load_f_3dB.eps,angle=0,width=10cm}}	
+  \put(7.5,4.5){$\bullet$ $\beta=1$} 
+  \put(7.9,3.75){$\mathrm{SNR=3dB}$}  	
+  \put(16,0.5){\psfig{figure=../../documentation/ps/load_f_8dB.eps,angle=0,width=10cm}}			
+  \put(23.5,4.5){$\bullet$ $\beta=1$} 
+  \put(23.9,3.75){$\mathrm{SNR=8dB}$}
+  
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 14 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Multi User Efficiency}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Multi User Efficiency} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  
+  \put(0,8.5){\psfig{figure=../../documentation/ps/load_h_2p5dB.eps,angle=0,width=10cm}}
+  \put(7.5,12.5){$\bullet$ $\beta=1/2$} 
+  \put(7.9,11.75){$\mathrm{SNR\approx2.5dB}$} 
+  \put(16,8.5){\psfig{figure=../../documentation/ps/load_f_2p5dB.eps,angle=0,width=10cm}}
+  \put(23.5,12.5){$\bullet$ $\beta=1$} 
+  \put(23.9,11.75){$\mathrm{SNR\approx2.5dB}$} 
+   
+  \put(2,7){$\bullet$ MUE is one of the analysis tool gives very tight} 
+  \put(2.4,6.25){predictions curves.} 
+  
+  \put(2,5){$\bullet$ Can characterize the system very well.} 
+
+
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 15 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Variance Transfer Characteristics}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Variance Transfer Characteristics} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  
+  \put(0,8){\psfig{figure=../../documentation/ps/receiver_section.eps,angle=0,width=12cm}}
+  
+ \put(13,15){$\bullet$ VTC: Variance of an estimation error is exchanged}
+  \put(13.4,14.25){between the component.}
+ 
+ \put(13,13){$\bullet$ Estimation error: $\gamma=\sum\limits_{\stackrel{m=1}{(m\neq u)}}^{U}(a_m[n]-\tilde{a}_m[n])s_m[\ell]^H s_m[\ell]+\mathrm{\mathbf{\tilde{n}}}$}
+ 
+ \put(13,11.25){$\bullet$ $\mathrm{E}[\gamma]=0$}
+ 
+ \put(13,9.75){$\bullet$ $\mathrm{E}[\gamma^2]=\sum\limits_{\stackrel{m=1}{(m\neq u)}}^{U}\mathrm{E}\left[\left({{a}}_m[n]-{{\tilde{a}}}_m[n]\right)^2\right]\mathrm{E}\left[({s}_m[\ell]^H{s}_m[\ell])\right]+\sigma_n^2$}  
+ 
+ \put(13,7.5){$\bullet$ With $P(a=1/\sqrt{N})=P(a=-1/\sqrt{N})=1/2$, }
+ \put(13.4,6.5){$\mathrm{E}\left[({s}_m[\ell]^H{s}_m[\ell])\right]=1/N$ and $\mathrm{E}\left[\left({{a}}_m[n]-{{\tilde{a}}}_m[n]\right)^2\right]=\sigma_d^2$}
+ 
+ \put(13,4.5){$\bullet$ $\sigma_{\mathrm{eff}}^2=\frac{\hbox{$K-1$}}{\hbox{$N$}}\sigma_d^2+\sigma_n^2$ }
+ 
+ \put(2,1){\psfig{figure=../../documentation/ps/dynamical_model.eps,angle=0,width=4cm}}
+ 
+
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 16 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Variance Transfer Characteristics}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Variance Transfer Characteristics} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,8.5){\psfig{figure=../../documentation/ps/generic_half_vtc.eps,angle=0,width=10cm}}
+  \put(8,11.75){$\bullet$ Half loaded} 
+  \put(8.4,11){system.}
+  \put(8,10.25){$\bullet$ $U=4$ and $N_s=8$} 
+  
+  \put(16,8.5){\psfig{figure=../../documentation/ps/VTC_trajectories_4_8_0dB.eps,angle=0,width=10cm}}
+  \put(23.5,12.5){$\bullet$ $\beta=0.5$} 
+  \put(23.9,11.75){$\mathrm{SNR=0dB}$} 
+  \put(0,0.5){\psfig{figure=../../documentation/ps/VTC_trajectories_4_8_3dB.eps,angle=0,width=10cm}}	
+  \put(7,4.5){$\bullet$ $\beta=0.5$} 
+  \put(7.4,3.75){$\mathrm{SNR=3dB}$}  	
+  \put(16,0.5){\psfig{figure=../../documentation/ps/VTC_trajectories_4_8_5dB.eps,angle=0,width=10cm}}			
+  \put(23.5,4.5){$\bullet$ $\beta=0.5$} 
+  \put(23.9,3.75){$\mathrm{SNR=5dB}$}
+  
+ 
+
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 17 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Variance Transfer Characteristics}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Variance Transfer Characteristics} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,8.5){\psfig{figure=../../documentation/ps/generic_full_vtc.eps,angle=0,width=10cm}}
+   \put(8,11.75){$\bullet$ Fully loaded} 
+  \put(8.4,11){system.}
+  \put(8,10.25){$\bullet$ $U=8$ and $N_s=8$} 
+  \put(16,8.5){\psfig{figure=../../documentation/ps/VTC_trajectories_8_8_0dB.eps,angle=0,width=10cm}}
+  \put(23.5,12.5){$\bullet$ $\beta=1$} 
+  \put(23.9,11.75){$\mathrm{SNR=0dB}$} 
+  \put(0,0.5){\psfig{figure=../../documentation/ps/VTC_trajectories_8_8_3dB.eps,angle=0,width=10cm}}	
+  \put(7,4.5){$\bullet$ $\beta=1$} 
+  \put(7.4,3.75){$\mathrm{SNR=3dB}$}  	
+  \put(16,0.5){\psfig{figure=../../documentation/ps/VTC_trajectories_8_8_5dB.eps,angle=0,width=10cm}}			
+  \put(23.5,4.5){$\bullet$ $\beta=1$} 
+  \put(23.9,3.75){$\mathrm{SNR=5dB}$}
+  
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 18 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Cyclic Behavior and Circular Disk}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Cyclic Behavior and Circular Disk} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,9.25){\psfig{figure=../../documentation/ps/circular_disk.eps,angle=0,width=10cm}}
+  
+  \put(6,8.5){\psfig{figure=../../documentation/ps/concave.eps,angle=0,width=7cm}}
+  
+  \put(16,16){Extrinsic Information}
+   
+  \put(14,8.5){\psfig{figure=../../documentation/ps/1.eps,angle=0,width=9cm}}
+  
+  \put(23.5,12.5){Start} 
+  
+  \put(0,0.5){\psfig{figure=../../documentation/ps/3.eps,angle=0,width=9cm}}	
+  
+  \put(9.5,4.5){Middle} 
+  
+  \put(14,0.5){\psfig{figure=../../documentation/ps/4.eps,angle=0,width=9cm}}			
+  
+  \put(23.5,4.5){End} 
+  
+  
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 19 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Cyclic Behavior and Circular Disk}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Cyclic Behavior and Circular Disk} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,8.5){\psfig{figure=../../documentation/ps/cycles.eps,angle=0,width=10cm}}
+
+  \put(16,16){Total Information}
+   
+  \put(14,8.5){\psfig{figure=../../documentation/ps/x1.eps,angle=0,width=9cm}}
+  
+  \put(23.5,12.5){Middle} 
+  
+  \put(0,3.5){\psfig{figure=../../documentation/ps/convex.eps,angle=0,width=9cm}}	
+
+  
+  \put(14,0.5){\psfig{figure=../../documentation/ps/z1.eps,angle=0,width=9cm}}			
+  
+  \put(23.5,4.5){End} 
+  
+  
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 20 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Analysis of Successive Interference Cancellation}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Analysis of Successive Interference Cancellation} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(0,8.5){\psfig{figure=../../documentation/ps/receiver_section_sic.eps,angle=0,width=10cm}}
+ 
+  \put(1,7){$\bullet$ By successive treatment all users cannot be treated as same, as in case of PIC}
+  \put(1,5){$\bullet$ Hence averaging among all users is not possible.}
+  \put(1,3){$\bullet$ Due to this convergence properties cannot be plotted in 2-D plot.}
+  \put(4,1){$\Longrightarrow$ N-dimensional problem.}
+  
+\end{picture}
+\end{Large}
+\vfill
+\vss}
+\newpage
+%%% Folie 21 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Conclusion}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Conclusion} 
+\begin{Large}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+  \put(1,13){$\bullet$ Convergence properties of an Iterative Multi-User detector was studied.}
+  \put(1,11){$\bullet$ Various Analysis tools was proposed and studied in detail.}
+  \put(1,9){$\bullet$ Circular disk was introduced to understand the cyclic behavior.}
+  \put(1,7){$\bullet$ Analysis of SIC became infeasible, since it poses N-dimensional problem.}
+\end{picture}
+\end{Large}
+\vfill
+\vss}

@@ -1,0 +1,67 @@
+\chapter{Cyclic Behavior and Rotating Disk}
+Single-Parameter dynamical model presented by \cite{JC} have paved the way to analyze the coded CDMA systems in a unique way. We analyze the coded CDMA system by using various analysis tools, in which single-parameter uniquely characterize the system. We also showed the analysis results with varying some of the systems parameters, with which we can able to understand the requirements for a system to converge globally. Convergence is rather good and smooth when we use only the extrinsic information otherwise we see cyclic behavior in characteristic curves as shown in \textbf{Figure 6.1}. Such a behavior in characteristic curves can be understood very well from the dynamics of the granules on the rotating disk.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/cycles.eps} {0.8} }
+\caption{Characteristic Curve with Cyclic behavior}
+%\label{Coded CDMA}
+\end{figure}\\
+Soft-output decoder delivers the likelihood values $L(\hat{b}_u[n])$ for the coded bits $b_u[n]$ and we now only pass the extrinsic part of it to the limiting function $tanh$ and we observe the dynamics of the bits as follows. Since we use iterative decoding process we will see the variation of the dynamics in each and every iteration.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/1.eps} {0.8} }
+\caption{Extrinsic Information during the start of the first iteration}
+%\label{Coded CDMA}
+\end{figure}\\
+During the first iteration the bits are randomly distributed in the range of 0 and 1 as shown in \textbf{Figure 6.2}. Such a random distribution is analogous to the randomly distributed granules on the rotating disk as shown in \textbf{Figure 6.3a}.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/circular_disk.eps} {1.2} }
+\caption{Circular Disk model}
+%\label{Coded CDMA}
+\end{figure}\\ \\
+\newpage
+After some iterations the bits concentrate towards the outer limit '1' as shown in \textbf{Figure 6.4}.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/3.eps} {0.8} }
+\caption{Extrinsic Information after couple of iterations}
+%\label{Coded CDMA}
+\end{figure}\\
+finally for the last iteration we see all the bits are concentrated at the outer limit '1', show in \textbf{Figure 6.5}\begin{figure}[htb]
+\centerline{ \bildsc{ps/4.eps} {0.8} }
+\caption{Extrinsic Information after couple of iterations}
+%\label{Coded CDMA}
+\end{figure}
+\newpage
+The dynamics of the bits is quite analogous to the dynamics of the granules on the rotating disk. From \textbf{Figure 6.3b} and \textbf{Figure 6.3c} we see the granules are tending towards the circumference of the disk. \\ \\
+Now a question can be asked how the dynamics of the granules on the rotating disk helps us to understand the reason for the cyclic and the smooth trajectories in the characteristic curves.\\ \\
+The answer lies on the surface of the rotating disk. Now it is interesting to investigate the dynamics of the granules when the surface of the disk is concave and convex.
+\section{Convex Surface}
+When the surface of the disk is convex which is shown in \textbf{Figure 6.6} and when the granules are seeded on the surface, it will tend to move towards the circumference of the disk. Such a behavior is also seen in the \textbf{Figure 6.2}, where the bits are tending towards the outer limit. Even though random distribution of bits, but we see dense distribution at the outer limit. 
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/concave.eps} {1.0} }
+\caption{Convex Surface}
+%\label{Coded CDMA}
+\end{figure}\\
+Now the disk is rotated, when so bits pick up the acceleration and move towards the circumference of the disk. When the angular velocity is so high all the granules move towards to the circumference without any effort and the obtained characteristic curves are cycle free.
+\section{Concave Surface}
+Interesting question now is, what kind of dynamics do the bits exhibit when we do not use the extrinsic information. We observer the output from the limiting function after few iteration which is shown in \textbf{Figure 6.7}.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/x1.eps} {0.7} }
+\caption{Total information after couple of iterations}
+%\label{Coded CDMA}
+\end{figure}\\
+As we see the bits are tending to towards the outer limit, but when we compare the same with extrinsic part it is not moving that fast towards the outer limit. Reason can be understood from the rotating disk model and if we employ the concave surface as shown in \textbf{Figure 6.8}
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/convex.eps} {1.0} }
+\caption{Concave Surface}
+%\label{Coded CDMA}
+\end{figure}\\
+When the surface is concave the granules tend towards the center, when we rotate the disk it moves towards the circumference and the rotation is stopped the granules roll back towards the center even for very high angular velocities it move towards the circumference first and roll back to towards the center. Such a behavior is also seen in bits take out from the limiting function, which is shown in \textbf{Figure 6.9}.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/z1.eps} {0.7} }
+\caption{Total information after the final iteration}
+%\label{Coded CDMA}
+\end{figure}
+\newpage
+\newpage
+\newpage
+\newpage
+From the rotating disk model we found the interesting reason behind the cycles in the characteristic curves and we conclude that for to obtain the good characteristic curves we must employ the extrinsic part of the information.

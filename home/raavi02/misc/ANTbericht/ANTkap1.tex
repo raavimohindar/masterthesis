@@ -1,0 +1,119 @@
+\chapter{Einleitung} \label{CPTeinleit}
+%
+Dieses Kapitel dient einer ersten Erl"auterung, was mit diesem 
+Musterbericht beabsichtigt ist. Jeder Student,
+der im Arbeitsbereich Nachrichtentechnik (ANT) einen Bericht mit
+dem wissenschaftlichen Textverarbeitungsprogramm \LaTeX\ anfertigen
+m"ochte, kann diesen Musterbericht als Vorlage verwenden. Dadurch wird 
+zum einen viel Arbeit gespart, zum anderen "ahneln sich die gesamten
+Arbeiten dann in ihrer Aufmachung und haben daher einen gewissen 
+Wiedererkennungswert.
+
+\section{Wieso gerade \LaTeX?}
+%
+Im Gegensatz zu allen anderen Textverarbeitungssystemen bietet
+\LaTeX\ die folgenden vier Hauptvorteile:
+%
+\begin{enumerate}
+\item Es ist {\em public domain} und damit (als source code) frei kopierbar.
+\item Es ist f"ur (fast) alle Betriebssysteme verf"ugbar.
+\item Bei der Darstellung von mathematischen Zusammenh"angen ist es ungeschlagen.
+\item Es wird hervorragend gewartet und erweitert.
+\end{enumerate}
+
+
+\section{Ist aller \LaTeX-Anfang schwer?} \label{SECallg}
+%
+Diese Frage k"onnte just in diesem Augenblick im Mittelpunkt stehen.
+Da man \LaTeX\ am besten anhand eines Beispiel-Files lernt, versorgen
+wir uns zun"achst einmal mit einem Musterdokument. Wieso sollen wir
+nicht genau diesen Musterbericht dazu nehmen?
+Alle Dateien, die f"ur den Musterbericht notwendig sind, k"onnen von jedem
+User der ANT-Workstations mit dem Befehl {\tt get} in sein Home-Verzeichnis 
+kopiert werden. Dabei wird im \LaTeX-Verzeichnis ein Unterdirectory namens
+{\tt ANTbericht} angelegt und einige Files hineinkopiert.
+Dabei ist die Datei {\tt ANTbericht.tex} das {\em top level}\/ \LaTeX\ File,
+das alle anderen Dateien einbindet.
+
+Ist das erledigt, so stellt sich die Frage, wie man nun mit \LaTeX\ arbeitet.
+Wann mu"s ich welches Programm aufrufen, um irgendwas zu machen?
+Zum Gl"uck steht dazu das sogenannte {\tt LaTeX-Tool} von Dieter Boss
+zur Verf"ugung\footnote{Diese Passage hat Dirk Nikolai geschrieben, und nicht
+der Gelobte!}, das einem viel unn"otige Tipparbeit erspart und
+dar"uber hinaus auch weniger versierten \LaTeX-Benutzern erlaubt, 
+sofort einzusteigen. Vielleicht hast Du es auch in diesem Moment, in dem 
+Du diese Zeilen liest, in Gebrauch.
+
+Falls Du es noch nicht kennen 
+solltest, tippe einfach in einer x-beliebigen Shell {\tt lat FILENAME} ein,
+wobei {\tt FILENAME.tex} ein \LaTeX-File im aktuellen Verzeichnis sein mu"s
+(z.B.\ {\tt ANTbericht.tex}).
+Mit der Option {\tt `c'} wie {\em compile}\/ wird dieses File kompiliert 
+und mit {\tt `v'} wie {\em view}\/ angezeigt. Mehr mu"s man im Moment nicht wissen.
+Spiel' mit dem Tool einfach ein wenig herum. Kaputtmachen kann man dabei
+kaum etwas -- zumindest hat das bisher noch keiner geschafft.
+Sollten trotzdem Probleme auftreten, frage einfach eine Person um Rat, 
+die sich schon etwas besser auskennt, z.B.\ einen Kommilitonen, der schon
+l"anger ``dabei ist''.
+
+
+\section{Sinn und Zweck des ANT Musterberichts}
+%
+Dieser Musterbericht verfolgt ein doppeltes Ziel:
+%
+\begin{enumerate}
+\item Er liefert --~wie der Name schon andeutet~-- ein Muster f"ur Berichte "uber
+      Diplom-, Studien- und Projektarbeiten. Eigentlich mu"s der (k"unftige)
+      Berichtverfasser (nur noch) diese \LaTeX-Files entsprechend anpassen.
+\item Weiterhin liefert der Musterbericht eine extrem kurze Einf"uhrung in \LaTeX.
+      Jedoch soll hier ``nur das unbedingt Erforderliche'' erkl"art werden bzw.\ das,
+      was "ublicherweise nicht in B"uchern steht, man aber aus Erfahrung lernt.
+      Dabei wird {\em Learning by Doing} unterst"utzt: durch das
+      \underline{gleichzeitige} Betrachten beispielsweise dieser Textstelle
+      in der ASCII-Datei {\tt ANTkap1.tex} und der entsprechenden Stelle
+      im fertigen Dokument sollte z.B.\ die Wirkung des \LaTeX-Befehls 
+      \verb+\underline{...}+ deutlich werden.
+
+Eine {\em umfassende} Darstellung von \LaTeX-Befehlen, die ein Lesen
+weiterer Dokumente zum Thema "uberfl"ussig machen w"urde, ist nicht
+beabsichtigt.
+Eine ausf"uhrlichere Einf"uhrung in \LaTeX\ sowie weitere Manuals stehen im Software-Labor
+zur Einsicht bereit und k"onnen auch mittels {\tt help}-Kommando {\em on-line}
+auf den Bildschirm geholt werden. Sollte es erforderlich sein, so k"onnen auch
+B"ucher zu diesem Thema ausgeliehen werden (c/o Betreuer).
+\end{enumerate}
+
+
+\section{Fragen und Anregungen zum Musterbericht}
+%
+Obwohl den Studenten mit diesem Musterbericht Arbeit abgenommen werden soll,
+kann (und soll) nicht verhindert werden, da"s diese sich dar"uber hinaus 
+mit dem Thema \LaTeX\ besch"aftigen\footnote{Zugegeben: 
+Ein bi"schen kompliziert erscheint \LaTeX\ auf den ersten Blick ja
+schon...}. Hierbei sollte ein Nachschlagen in der einschl"agigen
+Literatur helfen, weiterhin k"onnen Kommilitonen, notfalls auch der
+Betreuer oder andere Mitarbeiter zu Rate gezogen werden.
+
+Falls einige Sachverhalte, die durch dieses Dokument erl"autert bzw.\
+abgedeckt werden sollen, nur sehr nebul"os verstanden werden, so macht
+das zun"achst nichts. Schlimmer ist es dagegen, wenn man durch ein
+schlecht gemachtes Beispiel auf den Holzweg gebracht wird, man ohne
+eine Erkl"arung also besser dagestanden h"atte. Tauchen aus Sicht eines
+Anwenders solche didaktischen Fehltritte auf, so hilft es wenig, dies
+in dieser Kopie des Originals zu verbessern --- die n"achsten Anwender
+st"unden dann wahrscheinlich wieder vor dem gleichen Problem. Also: Dem
+Autor, den Autoren bzw.\ den sonstwie Verantwortlichen dieses Textes
+``Bescheid'' sagen und am besten gleich den Verbesserungsvorschlag
+mitbringen! Die Eingaben werden dann wohlwollend gepr"uft und ggf.\ die
+entsprechenden "Anderungen eingebracht.
+
+"Anderungsvorschl"age z.Z.\ bitte an:
+\vspace*{-1em}
+\begin{tabbing}
+  Dieter Boss\quad  \= $\Rightarrow$ \= {\tt boss@comm.uni-bremen.de} \\
+  Dirk Nikolai      \> $\Rightarrow$ \> {\tt nikolai@comm.uni-bremen.de} 
+\end{tabbing}
+
+
+% EOF
+

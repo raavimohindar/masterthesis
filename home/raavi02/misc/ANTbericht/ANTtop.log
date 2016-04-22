@@ -1,0 +1,337 @@
+This is e-TeX, Version 3.14159-2.1 (Web2C 7.4.5) (format=latex 2005.6.13)  9 OCT 2005 20:49
+entering extended mode
+**ANTtop.tex
+(./ANTtop.tex
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, b
+ahasa, basque, catalan, croatian, czech, danish, dutch, finnish, greek, iceland
+ic, irish, italian, latin, magyar, norsk, norsk, portuges, romanian, russian, s
+lovak, slovene, spanish, swedish, turkish, ukrainian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/report.cls
+Document Class: report 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size11.clo
+File: size11.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@chapter=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/base/inputenc.sty
+Package: inputenc 2001/07/10 v0.99a Input encoding file 
+
+(/usr/share/texmf/tex/latex/base/latin1.def
+File: latin1.def 2001/07/10 v0.99a Input encoding file 
+))
+(/usr/share/texmf/tex/generic/babel/babel.sty
+Package: babel 2001/03/01 v3.7h The Babel package
+
+(/usr/share/texmf/tex/generic/babel/germanb.ldf
+Language: germanb 2001/01/26 v2.6k German support from the babel system
+
+(/usr/share/texmf/tex/generic/babel/babel.def
+File: babel.def 2001/03/01 v3.7h Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+)
+\l@austrian = a dialect from \language\l@german 
+Package babel Info: Making " an active character on input line 72.
+))
+(/usr/share/texmf/tex/latex/tools/showkeys.sty
+Package: showkeys 1997/06/12 v3.12 Show cite and label keys (DPC)
+) (./latex2e.tex
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: dvips.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)) (./mathe.tex (./mathcomp.tex)) (./fancyheadings.sty
+\headrulewidth=\dimen106
+\footrulewidth=\dimen107
+\plainheadrulewidth=\dimen108
+\plainfootrulewidth=\dimen109
+\headwidth=\dimen110
+) (./options.sty) (./caption.sty
+Package: caption 1995/04/05 v1.4b caption package (HS)
+
+Package: caption v1.4b <1995/04/05> (Harald Sommerfeldt)
+\captionmargin=\skip43
+\as@captionbox=\box26
+\as@captionwidth=\skip44
+) (./verbatimfiles.sty
+
+LaTeX Warning: You have requested package `verbatimfiles',
+               but the package provides `verbatim'.
+
+Package: verbatim 2001/03/12 v1.5p LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks15
+\verbatim@line=\toks16
+\verbatim@in@stream=\read1
+)
+\footnotelaenge=\skip45
+ (./ANTtop.aux (./ANTtitel.aux) (./ANTkap1.aux) (./ANTkap2.aux) (./ANTkap3.aux)
+ (./ANTkap4.aux) (./ANTkap5.aux) (./ANTanh.aux))
+\openout1 = `ANTtop.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 142.
+LaTeX Font Info:    ... okay on input line 142.
+\openout2 = `ANTtitel.aux'.
+
+ (./ANTtitel.tex
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <20.74> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 11.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 11.
+File: uniHB2.eps Graphic file (type eps)
+ <uniHB2.eps>
+[1
+
+
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 63.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 63.
+File: ANT.eps Graphic file (type eps)
+ <ANT.eps>
+File: uniHB2.eps Graphic file (type eps)
+ <uniHB2.eps>
+Underfull \hbox (badness 10000) in paragraph at lines 86--92
+
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 92.
+[2
+
+]) (./ANTtop.toc)
+\tf@toc=\write3
+\openout3 = `ANTtop.toc'.
+
+
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[1
+
+
+
+
+]
+\openout2 = `ANTkap1.aux'.
+
+ (./ANTkap1.tex
+Kapitel 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 12.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 42.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 42.
+
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[1
+
+
+
+]
+Overfull \hbox (1.57552pt too wide) in paragraph at lines 65--68
+\OT1/cmr/m/n/10.95 und Pro-jekt-ar-bei-ten. Ei-gent-lich mu^^Y der (k[]unf-ti-g
+e) Be-richt-ver-fas-ser (nur noch) die-se L[]T[]X-
+ []
+
+)
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[2]
+\openout2 = `ANTkap2.aux'.
+
+ (./ANTkap2.tex
+Kapitel 2.
+
+Overfull \hbox (9.66058pt too wide) in paragraph at lines 52--56
+[]\OT1/cmr/m/n/10.95 Die Schrift\OT1/cmr/m/it/10.95 gr[]o^^Yen \OT1/cmr/m/n/10.
+95 lau-ten -- in kleiner-wer-den-der Rei-hen-fol-ge: \OT1/cmtt/m/n/10.95 Huge, 
+huge, LARGE, Large, large,
+ []
+
+
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[3
+
+
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 114.
+
+ (/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 114.
+
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[4]
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[5])
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[6]
+\openout2 = `ANTkap3.aux'.
+
+ (./ANTkap3.tex
+Kapitel 3.
+
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[7
+
+
+
+]
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[8])
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[9]
+\openout2 = `ANTkap4.aux'.
+
+ (./ANTkap4.tex
+Kapitel 4.
+File: ANTonly.eps Graphic file (type eps)
+<ANTonly.eps>
+File: ANTonly.eps Graphic file (type eps)
+ <ANTonly.eps>
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 23.
+File: PS/muster.pst Graphic file (type eps)
+ <PS/muster.pst>
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[10
+
+
+
+]
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[11]
+Overfull \hbox (3.27293pt too wide) in paragraph at lines 111--131
+ [] 
+ []
+
+)
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[12]
+\openout2 = `ANTkap5.aux'.
+
+ (./ANTkap5.tex
+Kapitel 5.
+
+Overfull \hbox (9.15646pt too wide) in paragraph at lines 46--50
+\OT1/cmr/m/n/10.95 Verweise auf das Literatur-Verzeichnis er-fol-gen mit dem []
+\OT1/cmtt/m/n/10.95 \cite{QUELLExx}\OT1/cmr/m/n/10.95 -Befehl, wo-bei \OT1/cmtt
+/m/n/10.95 QUELLExx
+ []
+
+
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[13
+
+
+
+]
+
+LaTeX Warning: Citation `KK92' on page 14 undefined on input line 56.
+
+
+LaTeX Warning: Citation `Kam92' on page 14 undefined on input line 56.
+
+
+LaTeX Warning: Citation `Pro95' on page 14 undefined on input line 56.
+
+)
+Overfull \vbox (1.59999pt too high) has occurred while \output is active []
+
+
+[14]
+
+LaTeX Warning: Citation `Pro95' undefined on input line 163.
+
+
+LaTeX Warning: Citation `KK92' undefined on input line 163.
+
+No file ANTtop.bbl.
+(./ANTtop.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 1444 strings out of 95370
+ 15791 string characters out of 1188185
+ 72000 words of memory out of 1000001
+ 4451 multiletter control sequences out of 10000+50000
+ 16491 words of font info for 58 fonts, out of 500000 for 1000
+ 198 hyphenation exceptions out of 1000
+ 30i,12n,33p,388b,371s stack positions out of 1500i,500n,5000p,200000b,5000s
+
+Output written on ANTtop.dvi (17 pages, 50336 bytes).

@@ -1,0 +1,77 @@
+\chapter{EXIT Charts}
+In this chapter we will see the other class of analysis tools to analyse coded CDMA based on measuring the mutual information between the output and the input of the decoder. This scheme was proposed to analyse the iterative decoding scheme for the turbo codes. In context to the analysis of turbo codes this scheme is called EXIT charts. The name is also the same for the analysis of coded CDMA, since the measure is same.
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/exit.eps}{0.8} }
+  \caption{Multiple-Access Communication}
+%  \label{Multiple-Access\\ Communication}
+\end{figure}
+\section{System Model}
+In general the model is same for all the analysis tool, briefly we write the received vector as the superposition of all transmitted signals and the noise component.
+\begin{equation}
+y[n]=S[n]\,W\,a[n]+\nu[n],
+\end{equation}
+The despreading of the received sequence is performed by passing through the matched filter, whose output delivers the sufficient statistics, which is sufficient enough for the decision. The output of the matched filter is give as
+\begin{equation}
+z[n]=\mathrm{Re}\left\{W^{-1}S^{\mathrm{H}}[n]y[n]\right\}=T[n]a[n]+v[n]
+\end{equation}
+The matched filter output is fed to a block called joint processor, which process all users jointly and delivers the soft-estimate for each user symbol. Each sequence is decoded by soft-in/soft-out decoder, which delivers the estimates $\hat{a}_u[i]$ of the information bits $a_u[i]$ and the log-likelihood ratios (LLR) $L(\hat{b}_u[k])$ of the coded symbols $b_u[k]$. The LLRs are again interleaved and fed to the joint processing block as a-priori information. This is repeated until certain criterion is reached.
+\section{Joint Processing}
+Since, we assume the binary BPSK symbols, the optimum soft information at the output of the joint processor is given in log-likelihood-ratio
+\begin{equation}
+L(\hat{b}_u[k]\vert r[k])=\mathrm{log}\frac{\hbox{$\mathrm{Pr}\{b_u[k]=+1\vert r[k]\}$}}{\hbox{$\mathrm{Pr}\{b_u[k]=+1\vert r[k]\}$}}
+\end{equation}
+After some algebraic manipulation the output of the joint processor for all the iteration is given as
+\begin{eqnarray}
+\begin{array}{lll}
+L(\hat{b}_u\vert r)&=&L_a(\hat{b}_u)+ \\ \\
+&&\mathrm{log}\frac{\hbox{$\sum_{\tilde{\mathrm{\mathbf{b}}},\tilde{b}_u=+1}e^{\left(2\mathrm{\mathbf{r}}^T-\tilde{\mathrm{b}}^T\mathrm{R}\right)\tilde{\mathrm{b}}/\sigma_n^2+\sum_{\stackrel{v=1}{v\neq u}}^U e^{\tilde{b}_vL_a(\hat{b}_v)/2}}$}}{\hbox{$\sum_{\tilde{\mathrm{\mathbf{b}}},\tilde{b}_u=-1}e^{\left(2\mathrm{\mathbf{r}}^T-\tilde{\mathrm{b}}^T\mathrm{R}\right)\tilde{\mathrm{b}}/\sigma_n^2+\sum_{\stackrel{v=1}{v\neq u}}^U e^{\tilde{b}_vL_a(\hat{b}_v)/2}}$}} 
+\end{array}
+\end{eqnarray}
+The output of the joint processor split into two components as a priori part $L_a(\hat{b}_u)$ and an extrinsic part. A-priori part is subtracted and the remaining is fed to the decoder. \\ 
+
+As we see in the equation (1.4) the soft-output is directly proportional to exponential term, then the computation complexity is too high and become infeasible for higher number of users. There by we conclude that optimum joint processing is practically not possible, so we opt for sub-optimum processing. \\
+
+\section{Exit Chart Analysis}
+EXtrinsic Information Transfer charts are suitable means to study the convergence behaviour of iterative schemes. Early it was used extensively to analyse the iterative decoding schemes for turbo codes and it was extended to analyse the concatenated systems, so it has become a suitable means for analysing the coded CDMA. The basic idea behind the EXIT charts is the exchange of mutual information between the components of a concatenated system. \\
+
+We now define the mutual information between a binary signal $x$ and a continuously distributed signal $y$ as
+
+\small
+\begin{equation}
+I(x;y)=1+\frac{\hbox{$1$}}{\hbox{$2$}}\cdot \sum\limits_{d=\pm 1}\int\limits_{-\infty}^{\infty}p(y\vert x = d)\cdot \mathrm{log}\frac{\hbox{$p(y\vert x=d)$}}{\hbox{$p(y\vert x=1)+p(y\vert x=-1)$}}dy
+\end{equation}
+\normalsize
+
+With ten Brink approach that the a priori LLR's $L_a(\hat{b}_u)$ can be modelled as a superposition of the transmitted data symbol $b_u$ and white Gaussian noise
+
+\begin{equation}
+L_a(\hat{b}_u)=\bar{n}_ub_u+n_u
+\end{equation}
+
+In the above equation $n_u$ denotes the white Gaussian noise with variance $\sigma_a^2$. The mean of $L_a(\hat{b}_u)$ is $\bar{n}_u\;=\;\sigma_a^2/2$. \\
+
+The mutual information between $L_a(\hat{b}_u)$ and the true $b_u\;=\;\pm 1$ is
+
+\begin{equation}
+I(L_a(\hat{b}_u);b_u)=1-\frac{\hbox{$1$}}{\hbox{$\sqrt{2\pi \sigma^2_a}$}}\int\limits_{-\infty}^{\infty}e^{-\frac{\hbox{$(\xi-\sigma_a^2/2)^2$}}{\hbox{$2\sigma_a^2$}}}\mathrm{log}(1+e^{-\xi})d\xi
+\end{equation}
+and it depends only on the variance $\sigma_a^2$.\\
+
+The mutual information at the input of the each component is always modelled as like in equation (1.6). All together we have four different mutual information at the components of the iterative joint processor. They are listed as
+\begin{eqnarray}
+\begin{array}{lll}
+I_{a,u}^{jp}&=&I(L_a(\hat{b}_u);b_u) \\ \\
+
+I_{e,u}^{jp}&=&I(L(\hat{b}_u\vert \mathrm{r})-L_a(\hat{b}_u);b_u)\\ \\
+
+I_{a,u}^{D}&=&I_{e,u}^{jp} \\ \\
+
+I_{t,u}^{D}&=&I_{a,u}^{jp} \\ \\
+\end{array}
+\end{eqnarray}
+where $I_{a,u}^{jp}$ is the mutual information of the $u^{th}$ joint processor input and $I_{e,u}^{jp}$ is the extrinsic part of the $u^{th}$ joint processor input, and this becomes a-priori information at the $u^{th}$ decoder input. Since, information cannot be manipulated by any sophisticated processing, interleaving the data does affect the information. Obeying the iterative principle the information at the $u^{th}$ decoder output becomes the a priori information of the joint processor. The total mutual a priori information of this device is
+\begin{equation}
+I_a^{jp}=\sum\limits_{u=1}^{U}I(L_a(\hat{b}_u);b_u)
+\end{equation}
+the above equation may sounds inappropriate, but user specific interleaving ensures the in-dependency among the user branches so simple summation of all the information is appropriate.
+

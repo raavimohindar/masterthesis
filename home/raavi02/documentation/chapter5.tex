@@ -1,0 +1,403 @@
+\chapter{Analysis of Coded CDMA}
+In this chapter study about various analysis tools, to analyze the coded CDMA system. Before we describe about the analysis tools we give a brief description about the system as shown in \textbf{Figure 5.1}, in which the information bits $\mathrm{\mathbf{d}}_u$ of user $u$ are encoded by convolutional codes with rate $1/n$ and modulated by BPSK to get the vector of mapped symbols $\mathrm{\mathbf{a}}_u\;=\;\left[a_u[0],\dots,a_u[N-1]\right]$. Mapped symbols are interleaved by random-interleavers $\Pi_u$ of length $L_\pi$, which are then spread by pseudo random spreading codes $\mathrm{\mathbf{c}}_u\;=\;\left[c_u[0],\dots,c_u[N_s-1]\right]$ with $N_s$ as the spreading factor and transmitted over an AWGN channel with channel impulse response $\mathrm{\mathbf{h}}_u$.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/multi_user.eps} {1.0} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}\\
+At the receiver, upon receiving the superposition of all transmitted signals $\mathrm{\mathbf{x}}$ which are corrupted by additive white Gaussian noise $\mathrm{\mathbf{n}}$ with power $\sigma^2_n$ and we write the received vector as follows 
+\begin{equation}
+\mathrm{\mathbf{y}}=\mathrm{\mathbf{H}}\cdot\mathrm{\mathbf{x}}+\mathrm{\mathbf{n}}=\mathrm{\mathbf{S}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{n}}
+\end{equation}
+The received vector $\mathrm{\mathbf{y}}$ is feed to bank of matched filters which de-spreads the signal and delivers the sufficient statistics, which are given as
+\begin{equation}
+\mathrm{\mathbf{r}}=\mathrm{\mathbf{S}}^H\cdot \mathrm{\mathbf{y}}=\mathrm{\mathbf{R}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{\tilde{n}}}
+\end{equation}
+where $\mathrm{\mathbf{R}}\;=\;\mathrm{\mathbf{S}}^H\cdot\mathrm{\mathbf{S}}$ is the correlation matrix and modified noise vector denoted by $\mathrm{\mathbf{\tilde{n}}}\;=\;\mathrm{\mathbf{S}}^H\cdot\mathrm{\mathbf{n}}[k]$ with instantaneous covariance matrix $\Phi_{\tilde{n}\tilde{n}}\;=\;E\{\mathrm{\mathbf{\tilde{n}}}\cdot\mathrm{\mathbf{\tilde{n}}}^H\}\;=\;\sigma^2_n\cdot\mathrm{\mathbf{R}}$.\\ \\
+We start the process by feeding matched filter output to parallel interference canceler which then delivers the soft-output estimates of each user bits $\tilde{b}_u[n]$. These estimates are de-interleaved and passed into soft-in/soft-out (SISO) decoders such as BCJR \cite{BCJR} and Max-Log-Map \cite{MLP} as an a-priori information. Soft-output decoder delivers the estimates of $\hat{d}_u[k]$ for the information bit $d_u[k]$ and as well as likelihood values $L(\hat{b}_u[n])$ of the coded bits $b_u[n]$. When using Turbo principle the likelihood values $L(\hat{b}_u[n])$ are interleaved and passed through the non-linear function $\mathrm{E}\{\hat{b}_u[n]\}=tanh(L(\hat{b}_u[n])/2)$ which delivers the mean values of the likelihood values and alos limit the amplitudes of the likelihood values to 0 and 1 which are then feed as a-priori information for PIC for subsequent processing to improve the estimates. This process is repeated until high reliability of the estimates are obtained.\\ \\
+In the next few sections we study some of the analysis tools to analyze the code CDMA system. Interestingly all the analysis are shown only for the parallel interference cancellation. Since, analyzing the system with serial interference cancellation poses N-dimensional problem. \\ \\
+There are three parameters based upon which we analyze the coded CDMA system. One concentrates on the mutual information between the components giving the very famous Extrinsic Information Transfer Characteristics (EXIT) charts. Second one concentrates on amount of interference exist in the system, which lead to Multi-User Efficiency (ME) and the last one concentrates on the variance of the estimation error, such an estimation error is fed back and forth to obtain the Varaince Transfer Characteristics (VTC) curves. 
+\section{Extrinsic Information Transfer Characteristic (EXIT) Charts}
+Basic idea behind the EXIT charts are very simple, where the mutual information between the components of the concatenated system are exchanged. We define the mutual information between the binary signal $x$ and a continuously distributed signal $y$ as
+\begin{equation}
+I(x;y)=1+\frac{\hbox{$1$}}{\hbox{$2$}}\cdot \sum\limits_{d=\pm 1}\;\int\limits_{-\infty}^{\infty}p(y\vert x = d)\cdot \mathrm{log}\frac{\hbox{$p(y\vert x = d)$}}{\hbox{$p(y\vert x= 1)+p(y\vert x =-1)$}}dy
+\end{equation}
+There are very interesting properties about the mutual information which are well discussed in \cite{TC91}, nevertheless mutual information tells the commonalities between the continuously distributed variable $y$ and the discrete information bits $x$. In reality, $y$ is the received vector which is corrupted by additive white Gaussian noise and $x$ be the vector of transmitted symbols. The mutual information tells about how much common information between $x$ and $y$, when $x$ is corrupted by additive white Gaussian noise.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/tens_model.eps} {0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}\\
+Focusing on our main theme and we now address the main issue on modeling a-priori LLR's $L_a(\hat{b}_u)$. An interesting approach adapted by Stephan ten Brink \cite{TEN} with regard to modeling is by superposition of transmitted data symbols $b_u$ and the white Gaussian noise $n_u$ yields
+\begin{equation}
+L_a(\hat{b}_u)=\bar{n}_u b_u + n_u
+\end{equation}
+and we describe $n_u$ as white Gaussian noise with variance $\sigma_a^2$ and $\bar{n}_u\;=\;\sigma_a^2/2$. Now the mutual information information between $L_a(\hat{b}_u)$ and the true bits $b_u\;=\;\pm 1$ can be calculated by using (5.3) as follows
+\begin{equation}
+I(L_a(\hat{b}_u);b_u)=1-\frac{\hbox{$1$}}{\hbox{$\sqrt{2\pi\sigma_a^2}$}}\cdot\int\limits_{-\infty}^{\infty}e^{-\frac{(\xi-\sigma_a^2/2)^2}{2\sigma_a^2}}\cdot \mathrm{log}(1+e^{-\xi})d\xi
+\end{equation}
+as we see in the (5.5), such a modeling depends only on the variance $\sigma_a^2$.\\ \\
+Such a dependency is shown in \textbf{Figure 5.2}.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/exit_rx.eps} {1.0} }
+\caption{Turbo Detector.}
+%\label{Coded CDMA}
+\end{figure}\\
+We now depict the receiver structure in \textbf{Figure 5.3} for to get an idea for computation of mutual information between the components. The mutual information at the input of each component can be approximately modeled according to (5.4). A slightly different approach is adopted in calculating mutual information between $b_u$ and the output of the device is estimating the probability density function $p(y\vert x)$ by calculating the histograms $\hat{p}(y\vert x)$.\\ \\
+Once the calculation is done and we see our-self having four different mutual information, which are
+\begin{eqnarray}
+\begin{array}{lll}
+I_{a,u}^{\tiny PIC}&=&I(L_a(\hat{b}_u);b_u) \\ \\
+I_{e,u}^{\tiny PIC}&=&I(L(\hat{b}_u\vert \mathbf{\mathrm{r}})-L_a(\hat{b}_u);b_u) \\ \\
+I_{a,u}^D&=&I_{e,u}^{\tiny PIC} \\ \\
+I_{t,u}^D&=&I_{a,u}^{\tiny PIC} \\ \\
+\end{array}
+\end{eqnarray}
+where $I_{a,u}^{PIC}$ describes the mutual information at the output of the $u$-th PIC and $I_{e,u}^{PIC}$ is the extrinsic part of that. $I_{a,u}^{D}$ describes the a-priori mutual information which is feed to the decoder and $I_{t,u}^{D}$ is the total mutual-information available at the input of the decoder. As we see in the later part in the enlist of equations that information at the output of the PIC will act as a-priori information for the decoder and the vise-verse, thus obeying the turbo principle \cite{Kuehn}.\\ \\
+We now express the mutual information at the input of Parallel Interference Canceler as 
+\begin{equation}
+I_a^{PIC}=\sum\limits_{u=1}^{U}I(L_a(\hat{b}_u);b_u)
+\end{equation}
+Since we use parallel interference cancellation and all users are affected by interference and noise by same way then we have perfect symmetry in the system and also the a-priori and extrinsic mutual information are identical then we can average the mutual information as
+\begin{equation}
+\bar{I}_a^{PIC}=\frac{\hbox{$1$}}{\hbox{$U$}}\cdot I_a^{PIC}=\frac{\hbox{$1$}}{\hbox{$U$}}\cdot \sum\limits_{u=1}^{U}I(L_a(\hat{b}_u);b_u)
+\end{equation}
+and the extrinsic part is given as 
+\begin{equation}
+\bar{I}_e^{PIC}=\frac{\hbox{$1$}}{\hbox{$U$}}\cdot \sum\limits_{u=1}^{U}I_{e,u}^{PIC}
+\end{equation}
+since user specific interleavers ensures the in-dependence between the signals of different users when so the property of mutual information allows to sum up all the mutual information as in (5.7).\\ \\
+Till now we discuss in general about the system and how to calculate the mutual information and how mutual information is exchanged between the components. Next we describe the exchange of mutual information between the components in a graphical way and study the convergence properties of the decoder and the multi-user detector. So to do that we choose an half-load system with number of users $U=4$ and each user information bits are encoded using the convolutional code with generator $g_1\;=\;5_8$ and $g_2\;=\;7_8$ with the constraint length $L_c=3$ which are then spread by random spreading code with spreading factor $N_s=8$. The vector of spreaded sequence is transmitted over AWGN channel. \\ \\
+The received vector of information bits are passed through the bank of matched filter which then delivers the sufficient statistics, which are then feed to parallel interference canceler. The parallel interference canceler which delivers the soft-estimates of the coded bits which are then de-interleaved the fed to the decoder as a-priori information. Soft-output decoder delivers the estimates of the information bits and the likelihood ratios of the coded bits, which are then interleaved and passed through the clipping function and fed as an a-priori information for the PIC. This process is repeated for several number of times to reach the convergence. Then the mutual information at different components are calculated according to (5.6) and this mutual information is plotted in a diagram is called the Extrinsic Information Transfer characteristics or EXIT charts.
+\newpage
+We now plot the characteristic curve with the system load $\beta=1/2$ with Signal-to-Noise Ratio SNR=\textbf{3dB}.
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_3dB_half.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=3$dB}
+\end{figure*} \\
+The running line show the transfer characteristics or theoretical curves of the decoder and the parallel interference canceler and the running line with $\mathrm{x}$ shows the trajectories which are obtained from the simulations. From \textbf{Figure 5.4} we see that the simulated curves are exactly matching the theoretical curves thus giving very tight prediction. \\ \\
+The trajectories start at the left-hand side of the plot, in this example just above 0.6 bits/sec/Hz, which the mutual information at the output of the PIC and also the mutual information at the input of the decoder, which is seen in the plot where trajectories start at the transfer characteristics of the PIC and reaching to the transfer characteristic of the decoder. \\ \\
+After successful decoding of users we see a raise in the mutual information, which is one step rise in the trajectories and reach the transfer characteristics of the PIC and thus completing one iteration. In such a way mutual information is calculated and exchanged between the components of the coded CDMA system \\ \\
+As we see in \textbf{Figure 5.4} trajectories reach to the final point or the point of convergence which on the top-right of the plot after two iterations. For this we conclude for an half-load system $\beta=1/2$ with SNR=\textbf{3dB} it is sufficient to reach the convergence point after two iterations.\\ \\
+We now see the characteristic curves of coded CDMA by varying some of the system parameters. At first we vary the Signal-to-Noise ratio and see what conclusion we can draw from that.
+\newpage
+For SNR=\textbf{0dB} and the load of the system $\beta=1/2$
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_0dB_half.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=0$dB}
+\end{figure*}\\
+As we see in \textbf{Figure 5.5} the transfer characteristics of the PIC is intersecting on the transfer characteristics of the decoder. This is the point where the decoding process get stuck. We can conclude that when Signal-to-Noise ratio is \textbf{0dB} and when the load $\beta=1/2$ it is not possible to reach the convergence point no matter how many iterations are used.\\ \\
+It is also interesting to see the characteristic curves when SNR is equal to \textbf{-3dB} to see how early it get struck.
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_m3dB_half.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=-3$dB}
+\end{figure*}\\
+At very low SNR's interference in the system dominates which makes impossible to decode any of the user successfully.
+\newpage
+It is also interesting to know the characteristics for higher signal-to-noise ratios, so we simulate for SNR=\textbf{5dB} with the system load $\beta=1/2$,
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_5dB_half.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=5$dB}
+\end{figure*}\\
+As we compare with \textbf{Figure 5.4} the decoder receives slightly higher a-priori mutual information from the PIC, so it start with 0.7 bits/sec/Hz and reach the convergence point very quickly. The amount of iterations required to reach the convergence point is two, as in the case the system with SNR=\textbf{3dB}. Again the prediction is so tight. \\ \\
+We now see whether any improvement can be achieved in terms of number of iterations by further increasing the Signal-to-Noise ratio.
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_8dB_half.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=8$dB}
+\end{figure*}\\
+At very high SNR, trajectories reach to the convergence point very quickly and as we see in \textbf{Figure 5.8}, $\bar{I}_a^{PIC}$ reaching to 1, which is the point where no interference present in the system and the system reaches to the single-user bound.
+\newpage
+We now ask a question what is the minimum Signal-to-Noise ratio is required to reach the convergence point when the system load $\beta=1/2$. After simulating the characteristic curves for various SNR's we see when SNR is approximately around \textbf{2.5dB} we find the trajectories reaching to the convergence point without getting struck.
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_2p5dB_half.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=2.5$dB}
+\end{figure*}\\
+From this we conclude that for a system to decoded the users successfully it needs atleast the minimum SNR of \textbf{2dB} and the system to reach the single-user bound we need SNR of atleast \textbf{8dB}, which is shown in \textbf{Figure 5.8}.
+\newpage
+We now start the analysis for full-load system $\beta=1$, i.e., $U=8$ and $N_s=8$. At first for SNR=\textbf{3dB}.
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_3dB_full.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=3$dB}
+\end{figure*}\\
+As we compare the characteristic curves for half-loaded system in \textbf{Figure 5.4} with the same SNR, decoding starts at roughly around 0.45 bits/sec/Hz when is well below when compared with half-loaded system with same SNR and reaches to the top-right in the figure with sufficiently high iterations. As in this case five iterations are required to the convergence point and where in two iterations are required to reach the same in half-loaded system. As we see the predictions are so tight as like the half-loaded system and only difference is that it take more number of iterations to attain the convergence point. \\ \\
+We now reduce the Signal-to-Noise ratio to \textbf{0dB} and maintain the system load $\beta=1$ to one. We obtain the following characteristic curve as shown in below plot
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_0dB_full.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=0$dB }
+\end{figure*}\\
+The transfer curve of PIC is intersect with the transfer curve of decoder, so the decoding get struck which is shown in \textbf{Figure 5.8}.
+\newpage
+We now increase Signal-to-Noise ratio to \textbf{5dB} and the system load $\beta=1$, the following characteristic curve is shown
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_5dB_full.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=5$dB }
+\end{figure*}\\
+As we compare with the half-loaded system at the same SNR, decoding starts at 0.45 bits/sec/Hz which is well below when compared to the half-loaded system because number of users are more which can contribute more interference in the system, but ends at the point which is more or less the same for half and full loaded system. The number of iterations required to reach the convergence point is more, when compared to the half-loaded system. Since number of iterations required to reach the convergence point is the main criteria when compared to half-loaded system. \\ \\
+We now increase SNR to \textbf{8dB} and see what improvement we can obtain 
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_8dB_full.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=8$dB }
+\end{figure*}\\
+For \textbf{8dB} we see $\bar{I}_a^{PIC}=1$ after three iterations, which means the system is free from interference and reaching to the single-user bound.
+\newpage
+As like the half-loaded system, we now ask what is the minimum signal-to-noise ratio is required for the system to decode the users successfully. After simulating with various SNR's we find the system converging to the top-left point in the figure around \textbf{2.5dB}.
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/exit_trajectories_2p5dB_full.eps} {0.8}}
+\caption{EXIT chart for parallel interference cancellation at $E_s/N_0=2.5$dB }
+\end{figure*}\\
+As we compare with \textbf{Figure 5.9} which the plot for the half-loaded system to converge with minimum signal-to-noise ratio, the number of iterations required in full-loaded system is more. \\ \\
+As we see from \textbf{Figure 5.4} to \textbf{Figure 5.14} mutual information strongly depends on Signal-to-Noise ratio, higher the SNR better is the mutual information at the parallel interference canceler output. For perfect a-priori information i.e., $\bar{I}_a^{PIC}\;=\;1$ the interference is totally suppressed and we obtain single-user AWGN system as in the case of SNR=\textbf{8dB}.\\ \\
+Hence we conclude that the EXIT charts are the appropriate mean to analyze the convergence properties of the coded CDMA system, mutual-information at the components describe the characteristics of the system of whole, we can represent the coded CDMA system with the single-parameter dynamical model. From the EXIT charts we can study the minimum requirements for a system to decode the users successfully.
+\newpage
+\section{Multi-User Efficiency(ME)}
+An another class of analysis tools in which the estimate of Multi-User Interference is obtained from the difference between the true and the estimated data. Once such an estimate is obtained and can be used to subtract on the signal to improve the decoding in the next iteration \cite{GC}.\\ \\
+Since Multiple Access Interference can solely describe the system and hence the theory of Single-Parameter Dynamical model is applicable by which we can characterize the system by very well by tracking the behavior of the estimate of Multiple Access Interference.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/me_rx.eps} {1.0} }
+\caption{Coded CDMA Receiver Block employing Turbo Principle}
+%\label{Coded CDMA}
+\end{figure}\\
+With the system model given in \textbf{Figure 5.10} the soft-output decoder realizes the Max-Log-MAP criterion and delivers the approximate extrinsic information $L_e(b_u)$, which then passed through the shaping function which delivers the soft-estimates of the coded symbols $\tilde{b}$ where
+\begin{equation}
+\tilde{b}=\mathrm{tanh}(L_e/2)
+\end{equation}
+Now the Signal-to-Interference-plus-noise-ratio(SINR) at each branch is given as
+\begin{equation}
+\mathrm{SINR}=2\sigma_d^2/(\sigma_n^2+\sigma_{\mathrm{MUI}}^2)
+\end{equation}
+which represents the amount of interference in the system.\\ \\
+In case of perfect interference cancellation SINR turns into $\mathrm{SNR}\;=\;2E_s/N_0$, which is equivalent to single-user bound \cite{PETRA}.\\ \\
+In (5.10) $\sigma_d^2$ is the variance of the desired signal and $\sigma_{\mathrm{MUI}}^2$ is the variance of the remaining multi-user interference after cancellation and mathematically it is written as
+\begin{equation}
+\sigma_{\mathrm{MUI}}^2=\sigma_d^2\cdot \mu(U-1)/N\hspace{7mm}\mathrm{and}\hspace{7mm}\mu=\mathrm{E}\{\vert\tilde{b}-b\vert^2\}
+\end{equation}
+where $\mu$ is remaining mean squared error of the estimated symbols after decoding.\\ \\
+Now we define Multi-User Efficiency $\eta$ as the ratio between the SINR and SNR.
+\begin{equation}
+\eta=\frac{\hbox{$\mathrm{SINR}$}}{\hbox{$\mathrm{SNR}$}}=\frac{\hbox{$2\sigma_d^2/(\sigma_n^2+\sigma_{\textrm{MUI}}^2)$}}{\hbox{$2\sigma_d^2/\sigma_n^2$}}=\frac{\hbox{$1$}}{\hbox{$1+\beta\,\mu\,E_s/N_0$}}
+\end{equation}
+Interestingly when $\eta\;=\;1$ system is interference free and reaches the Single-User-Bound. \\ \\
+The single-parameter $\eta$ alone describes the system very well and we now plot the behavior of the iterative detection scheme. During the start of the iteration or at the first step we have only the matched filter outputs since, decoders does not deliver any a-priori information. With that variance $\mu\;=\;1$ and the MUE becomes $\eta^{(1)}\;=\;1/(1+\beta\cdot E_s/N_0)$ and it is obvious $^{(1)}$ indicates the iteration. After the decoding of all the user at once, the soft-estimates $\tilde{b}$ of the transmitted symbols are obtained which can be used to cancel the interference during next iteration. \\ \\
+During next iteration $\mu$'s cannot be calculated analytically, since channel decoder is highly non-linear. Hence, it has to be determined from the values of previous iteration. With the convenience of single-parameter dynamical model the output error $\mu^{(m)}$ of the decoder in the $m$-th iteration depends on the SINR of the input or to MUE of the previous iteration.
+\begin{equation}
+\mu^{(m)}=g(\mathrm{SINR})=g\left(\eta^{(m-1)}\mathrm{SNR}\right)
+\end{equation}
+We know that $\eta^{(m)}$ is self-dependent on $\mu^{(m)}$ then the MUE at iteration $m$ can be expressed as the function MUE of previous iteration $m-1$ and it is shown in \textbf{Figure 5.11} 
+\begin{equation}
+\eta^{(m)}=f\left(\eta^{(m-1)}\right)
+\end{equation}
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/dynamical_model_me.eps} {1.0} }
+\caption{Dynamical Model of a coded CDMA systems.}
+%\label{Coded CDMA}
+\end{figure}\\
+Until now we discuss the theory behind the multi-user efficiency and presented a dynamical model in \textbf{Figure 5.16} in which $\eta$ is calculated according to (5.12) and it is exchanged between the components of the coded CDMA system in each and every iteration as shown in (5.14), in which $\eta^{(m)}$ is function of $\eta^{(m-1)}$ where $m$ is the index for the iteration. Then $\eta$ is plotted in a diagram which eventually results in characteristic curves for the coded CDMA system.\newpage
+We start the analysis with users $U=16$ and the spreading factor $N_s=16$, eventually the system load $\beta=1$ and having the signal-to-noise ratio as \textbf{3dB}.
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_1_3dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=3$dB and system load $\beta=1$}
+\end{figure*}\\
+\textbf{Figure 5.17} shows the characteristic curves for load $\beta=1$ and the signal-to-noise ratio 3dB. The continuous running lines are the transfer curves and continuous lines with $\mathrm{x}$ are the trajectories. It starts at the lower-left part of the diagram and moves towards the upper-right and reaches to the point where $\eta=1$ at which interference in the system is totally suppressed. Parallel interference canceler delivers the soft-estimates $\tilde{b}$ of the coded bits and here is the point we calculate the $\eta$ and during the first iteration the variance $\mu=1$ and therefore $\eta$ becomes $1/(1+\beta\cdot E_s/N_0)$. Then soft-decoder decodes the user information bits and delivers soft-estimates, which are then used as an a-priori information for the interference canceler during next iteration. The $\mu$'s in the next iteration can be calculated according to (5.13) and the process is continued for number of iterations util the trajectories reaches to $\eta=1$. \\ \\
+As we see in \textbf{Figure 5.17} trajectories reaches to the point where $\eta=1$ in 3 iterations. We now continue the analysis with various signal-to-noise ratios.
+\newpage
+We now increase signal-to-noise ratio to \textbf{5dB}.
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_1_5dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=5$dB and system load $\beta=1$}
+\end{figure*}
+As we see in \textbf{Figure 5.18} it takes just two iterations to reach the convergence point and further increase in signal-to-noise ratio does not give any further improvements for reaching to the convergence point as shown in \textbf{Figure 5.19}
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_1_8dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=8$dB and system load $\beta=1$}
+\end{figure*}\\
+Next we concentrate on characteristic curves by increasing the system load $\beta=2$.
+\newpage
+For load $\beta=2$ system and SNR=\textbf{3dB},\\
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_2_3dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=3$dB and system load $\beta=2$}
+\end{figure*}\\
+As we see in \textbf{Figure 5.20} the characteristic curves reaching to $\eta=1$ after 6 number of iterations, which in contrast to the full-loaded system requires just three number of iterations. The prediction becomes so tight that theoretical and the simulated curves matches exactly. Thus provides the evidence that multi-user efficiency can characterize the system very well. \\ \\
+Next we concentrate on the behavior of the curves for various signal-to-noise ratios at constant load $\beta$ of 2. \\ \\
+For SNR=\textbf{5dB}
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_2_5dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=5$dB and system load $\beta=2$}
+\end{figure*}\\
+From \textbf{Figure 5.21} we see a slight improvement in number of iterations required to reach the convergence point. Here number of iterations require is reduced to four from six as in the characteristic curves for signal-to-noise ratio of 3dB with same load and number of iteration is increased by two when compared with the curves for the system load $\beta=1$. When further increase in signal-to-noise ratio, we see no improvements in number of iterations required to reach the convergence point as shown in \textbf{Figure 5.22}.
+\newpage
+For SNR=\textbf{8dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_2_8dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=8$dB and system load $\beta=2$}
+\end{figure*}\\
+Next we focus on the increment of system load $\beta$ to three. Since we do not notice any halt in decoding process and see any such behavior takes place for higher loads.
+For SNR=\textbf{3dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_3_3dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=3$dB and system load $\beta=3$}
+\end{figure*}\\
+We notice in \textbf{Figure 5.23} that transfer curves intersect at a point that brings a halt to the decoding process. We now try for different SNR's and see whether same kind of behavior takes places or not, so we increase the SNR to 8dB and the characteristic curve is shown in \textbf{Figure 5.24}.
+\newpage
+For SNR=\textbf{8dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_3_8dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=8$dB and system load $\beta=3$}
+\end{figure*}\\
+We notice that decoding process get stuck again even for higher signal-to-noise ratios. \\ \\
+Now question arises what is the minimum signal-to-noise ratio and minimum signal-to-noise required for a system to converge. After number of simulations with various SNR and $\beta$ we find at $SNR=2.75dB$ with system load $\beta=2.75$ the system can pass through very gap between the transfer function and can decode the users successfully but with penalty of higher number of iterations.
+For SNR=\textbf{2.75dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{ps/load_2p75_2p75dB.eps} {0.8}}
+\caption{Multi-User Efficiency at $E_s/N_0=2.75$dB and system load $\beta=2.75$}
+\end{figure*}\\
+In \textbf{Figure 5.25} number of iterations require to reach the convergence point is sufficiently high as compared to the rest of the characteristic curves. \\ \\
+Here by we conclude that multi-user efficiency is one the mean to analyze the system coded systems. From the results we have seen that it predicts the system very tightly there by we can precisely analyze the system.
+\newpage
+\section{Variance Transfer Characteristics}
+The last in the sequence of analysis tools is the Variance Transfer Characteristic in which the variance of the estimation error is exchanged between the components in a  coded CDMA system.
+The system model shown in \textbf{Figure 5.18}.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/vtc_rx.eps} {1.0} }
+\caption{Coded CDMA Receiver Block employing Turbo principle}
+%\label{Coded CDMA}
+\end{figure}\\
+we write the signal at the spreader as
+\begin{equation}
+\mathrm{\mathbf{x}}=\mathrm{\mathbf{C}}\cdot\mathrm{\mathbf{a}}
+\end{equation}
+where $\mathrm{\mathbf{C}}$ is the spreading matrix and $\mathrm{\mathbf{a}}$ is the vector of symbols with BPSK modulation. The resulting vector $\mathrm{\mathbf{x}}$ is transmitted over an Additive White Gaussian Noise (AWGN) channel.\\ \\
+The received vector which is corrupted by White Gaussian noise is given as
+\begin{equation}
+\mathrm{\mathbf{y}}=\mathrm{\mathbf{H}}\cdot\mathrm{\mathbf{x}}+\mathrm{\mathbf{n}}
+\end{equation}
+Till now we have seen that the received vector is passed through the bank of matched filters first and then to the subsequent processors, rather doing that way we follow a method proposed by \cite{JC} in which canceler is employed at the front end. Then the received vector after the cancellation can be written as
+\begin{equation}
+{{y}}[(n-1)\cdot N_s+\ell]={{a}}_u[n]\cdot{{s}}_u[\ell]+\sum\limits_{\stackrel{m=1}{(m\neq u)}}^U\left({{a}}_m[n]-{{\tilde{a}}}_m[n]\right){{s}}_m[\ell]+\mathrm{\mathbf{n}}
+\end{equation}
+where $\mathrm{\mathbf{\tilde{a}}}$ is the soft estimate of the user obtained from the previous iteration and which is used to cancel the interference partially from users $m \neq u$. Since we use BPSK $a_u[n]\in \{+1,-1\}$ is equivalent to $b_u[n]\in\{0,+1\}$ \cite{K05}.\\ \\
+Partially canceled signal $\mathrm{\mathbf{y}}$ is passed through bank of matched filter which then delivers the sufficient statistics as
+\begin{equation}
+\mathrm{\mathbf{r}}=\mathrm{\mathbf{S}}^H\cdot\mathrm{\mathbf{y}}%=\mathrm{\mathbf{R}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{\tilde{n}}}
+\end{equation}
+which then passed through individual de-interleavers and and to FEC soft-in/soft-out decoders such as BCJR \cite{BCJR}. Then the soft-outputs interleaved and passed through $tanh$ function to limit the amplitudes of the soft-estimates and feed to interference cancelers as an a-priori information for to improve the decoding.\\ \\
+From now we concentrate on (5.17) for the rest of our discussion to lay the foundation for the analysis tool which we define at the beginning of this section.\\ \\
+We now write the part after the first sum in (5.17) which is the estimate of the remaining interference and the noise in the system as
+\begin{equation}
+\gamma=\sum\limits_{\stackrel{m=1}{(m\neq u)}}^{U}\left({{a}}_m[n]-{{\tilde{a}}}_m[n]\right){{s}}_m[\ell]^H{{s}}_m[\ell]+\mathrm{\mathbf{\tilde{n}}}
+\end{equation}
+It is possible to calculate the first and second order statistics from the assumption that the unbiased estimates are independent and identically distributed. Hence, we calculate the first and second order statistics as follows\\ \\
+At first the first order statistics, which is the mean of a random variable can be calculated as
+\begin{equation}
+\mathrm{E}[\gamma]=0
+\end{equation}
+Following the first order statistics we now proceed to calculate the second order statistics which is the variance of the random variable as
+\begin{equation}
+\mathrm{E}[\gamma^2]=\sum\limits_{\stackrel{m=1}{(m\neq u)}}^{U}\mathrm{E}\left[\left({{a}}_m[n]-{{\tilde{a}}}_m[n]\right)^2\right]\mathrm{E}\left[({{s}}_m[\ell]^H{{s}}_m[\ell])\right]+\sigma^2
+\end{equation}
+We know that the random spreading codes which we employed in our system are i.i.d with $P(a=1/\sqrt{N})\;=\;P(a=-1/\sqrt{N})\;=\;1/2$ and the $\mathrm{E}\left[{{s}}_m[\ell]^H{{s}}_m[\ell]\right]\;=\;1/N$
+hence (5.21) becomes
+\begin{equation}
+\sigma^2_k=\mathrm{E}[\gamma^2]=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{\stackrel{m=1}{(m\neq u)}}^{U}\mathrm{E}\left[\left({{a}}_m[n]-{{\tilde{a}}}_m[n]\right)^2\right]+\sigma^2
+\end{equation}
+We now write the effective variance of a user as
+\begin{equation}
+\sigma_{\mathrm{eff}}^2=\frac{\hbox{$K-1$}}{\hbox{$N$}}\sigma_d^2+\sigma^2
+\end{equation}
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/dynamical_model.eps} {1.0} }
+\caption{Dynamical Model of a coded CDMA systems.}
+%\label{Coded CDMA}
+\end{figure}\\
+where $\sigma_d^2\;=\;\mathrm{E}\left[\left({{a}}_m[n]-{{\tilde{a}}}_m[n]\right)^2\right]$ and $\sigma_{\mathrm{eff}}^{-1}$ is the effective signal-to-noise ratio of each after cancellation.\\ \\
+In general, the estimation error $\left(({{a}}-{{\tilde{a}}})^2\right)$ is the function of the input signal-to-noise ratio of each decoder and as well as error control coded used in that system.\\ \\
+The function can be written as
+\begin{equation}
+\mathrm{E}\left[\left({{a}}-{{\tilde{a}}}\right)^2\right]=g\left(\sigma_k^2\right)
+\end{equation}
+where $g(x)$ is the variance transfer characteristic of the code. \\ \\
+Since we use iterative principle equation (5.22) can be written in iterative form using index $v$ as
+\begin{equation}
+\sigma_{k,v}^2=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{\stackrel{m=1}{(m\neq u)}}^{U}g\left(\sigma_{m,v-1}\right)+\sigma^2
+\end{equation}
+Following the derivation for iterative equation (5.25) \cite{VTC} and using the asymptotic negligibility we finally obtain an equation which is fit to represent our system with the single-parameter dynamical model, such an equation is given as
+\begin{equation}
+\sigma_v^2=g\left(\sigma_{v-1}^2\right)+\sigma^2
+\end{equation}
+The dynamical system is shown in \textbf{Figure 5.19}
+\begin{equation}
+\sigma_v^2=f(\sigma^2_{d,v-1}); \hspace{10mm} \sigma^2_{d,v-1}=g(\sigma^2_{v-1})
+\end{equation}
+Thus we end the discussion on variance transfer characteristics and we now describe the behavior of the coded CDMA system using graphical methods. For that we calculate the effective variances, which the cancellation variance $\sigma_{\mathrm{eff}}^2$ and the user a-posteriory probability output variance $\sigma_d^2$ according to the formula given in (5.23). We obtain the dynamical model when we exchange the $\sigma_{\mathrm{eff}}^2$ and $\sigma_d^2$ between the component such as parallel interference cancellation and the soft-output decoder. 
+\newpage
+We now illustrate the characteristic curves for 4 users with spreading factor $N_s=8$ and the convolutional code operating at the rate $R=1/2$. Initially we start with the signal-to-noise ratio as \textbf{3dB} and keep this as reference for the rest of the characteristic curves simulated with various SNR's and make a comparative study in detail. Once we complete our analysis on half-loaded system we keep half-loaded system as reference to the full-load system and a comparative study and finally we conclude about the minimum requirement needed for a system to decoded the users successfully.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_4_8_3dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1/2$ and SNR=3dB}
+\end{figure}\\
+The above characteristic curves are obtain for half-loaded system with SNR=\textbf{3dB}. The running lines in \textbf{Figure 5.25} are the transfer characteristics and the running line with $\mathrm{x}$ are the trajectories.Quite contrasting to the EXIT charts in \textbf{section 5.1}, decoding in variance transfer characteristics starts at the right-top part of the diagram and switches alternatively between the transfer curves of the decoder and the parallel interference canceler and reaches to the bottom-left part of the diagram. As we see the prediction is so tight that the trajectories are touch the transfer characteristic curve. \\ \\
+For such a loaded system as we see that number of iterations required to reach the convergence point is just two, which is the same for the exit charts to reach the convergence point at such a load. We now interested to see what kind of behavior that the characteristic curves show for various SNR values.
+\newpage
+For SNR=\textbf{0dB} and the load of the system $\beta=1/2$, the characteristic curves are shown in the below diagram.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_4_8_0dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1/2$ and SNR=0dB}
+\end{figure}\\
+For low SNR's as we see that the transfer characteristic curve of the decoder intersect to the characteristic curve of the parallel interference canceler before the point of convergence. This is the point where decoder get stuck there by no further decoding is possible hence system do not converge. The similar behavior is also seen in exit charts at SNR=\textbf{0dB} as shown in \textbf{Figure 5.5}\\ \\
+We now concentrate on the behavior of the characteristic curves at higher SNR's. For SNR=\textbf{5dB} we obtain the following characteristic curve
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_4_8_5dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1/2$ and SNR=5dB}
+\end{figure}\\
+A slight variation in the starting point, when compared to the variance transfer characteristic curve for a system with \textbf{3dB} as signal-to-noise ratio and reaching the convergence point after two iterations. 
+\newpage
+For SNR=\textbf{8dB} the system reaching to the noise fixed point \cite{VTC} which is the point of convergence at the bottom-left of the figure, when it is so the system reaching to the single-user performance.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_4_8_8dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1/2$ and SNR=8dB}
+\end{figure}\\
+Before we conclude our discussion on the half-loaded system we must answer the minimum requirements for the system to reach the convergence point. After with couple of simulations with various SNR's we find that at SNR=\textbf{2.5dB} which the minimum requirement for the system to decode the users successfully.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_4_8_2p5dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1/2$ and SNR=2.5dB}
+\end{figure}\\
+We now conclude the discussion on the variance transfer characteristic curves for half-loaded system and we address the issues of the minimum requirements for the system to decode the users successfully and also we show by simulation that the required SNR's for the system to reach the noise limit or the single-user performance. \\ \\
+Next we make the comparative study of full-loaded system and see the requirements for a system to reach the convergence point.
+\newpage
+We start the analysis of the coded CDMA system using variance transfer characteristics from SNR=\textbf{3dB}. Now the number of users in the system $U=8$ and $N_s=8$.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_8_8_3dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1$ and SNR=3dB}
+\end{figure}\\
+One thing is very obvious from the above figure is that when we add more number of users, system needs more number of iterations to reach the convergence point. For a system with $U=8$ and $N_s=8$, it takes minimum of four iterations to reach the convergence point and when compared to the EXIT charts there also require four number of iterations to reach its own convergence point.\\ \\
+Now we vary the SNR to \textbf{0dB}
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_8_8_0dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1$ and SNR=0dB}
+\end{figure}\\
+At very low SNR's system get stuck in the middle and when so successful decoding is not possible. The same kind of behavior is seen n \textbf{Figure 5.11}, which the characteristic curves obtained from the EXIT charts.
+\newpage
+Now we increase the SNR to \textbf{5dB} and see what improvement we get in terms of iterations required for the system to decode the users successfully.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_8_8_5dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1$ and SNR=5dB}
+%\label{Coded CDMA}
+\end{figure}\\
+We see that number of iterations now, reduced roughly to three and the same number of iterations are required for the EXIT charts to reach the convergence point. \\ \\
+Further increasing SNR to \textbf{8dB}.
+For SNR=\textbf{5dB} 
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_8_8_8dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1$ and SNR=8dB}
+%\label{Coded CDMA}
+\end{figure}\\
+From the above figure we that two iterations are required to reach the convergence point and the noise-point. We conclude that roughly \textbf{8dB} is required for a system with $U=8$ and $N_s=8$ to reach the noise point or the single-user bound.
+\newpage
+Now what is the minimum SNR required for a system to convergence or decode the users successfully. After simulating the system with various SNR we find that roughly around \textbf{2.5dB} the system converges and all users can be decoded successfully.
+For SNR=\textbf{2.5dB} 
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/VTC_trajectories_8_8_2p5dB.eps} {0.8} }
+\caption{Variance Transfer Characteristic curves for $\beta=1$ and SNR=2.5dB}
+%\label{Coded CDMA}
+\end{figure}\\
+Variance Transfer Characteristic is one of the appropriate mean to analyze the coded CDMA system and the predicts the behavior very tightly which when compared to EXIT charts shows same kind of behavior for different signal-to-noise ratios. Single parameter, variance alone characterize the system very well hence conforming the theory of single-parameter dynamical model.

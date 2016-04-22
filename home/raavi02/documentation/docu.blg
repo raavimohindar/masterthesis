@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99c (Web2C 7.4.5)
+The top-level auxiliary file: docu.aux
+A level-1 auxiliary file: titel.aux
+A level-1 auxiliary file: chapter1.aux
+A level-1 auxiliary file: chapter2.aux
+A level-1 auxiliary file: chapter3.aux
+A level-1 auxiliary file: chapter4.aux
+A level-1 auxiliary file: chapter5.aux
+A level-1 auxiliary file: chapter6.aux
+A level-1 auxiliary file: conclusion.aux
+The style file: alpha.bst
+Database file #1: docu.bib
+Warning--empty booktitle in MLP
+You've used 12 entries,
+            2543 wiz_defined-function locations,
+            652 strings with 7074 characters,
+and the built_in function-call counts, 4191 in all, are:
+= -- 370
+> -- 220
+< -- 4
++ -- 74
+- -- 74
+* -- 251
+:= -- 708
+add.period$ -- 36
+call.type$ -- 12
+change.case$ -- 71
+chr.to.int$ -- 12
+cite$ -- 13
+duplicate$ -- 201
+empty$ -- 353
+format.name$ -- 90
+if$ -- 857
+int.to.chr$ -- 1
+int.to.str$ -- 0
+missing$ -- 15
+newline$ -- 63
+num.names$ -- 36
+pop$ -- 113
+preamble$ -- 1
+purify$ -- 86
+quote$ -- 0
+skip$ -- 140
+stack$ -- 0
+substring$ -- 84
+swap$ -- 20
+text.length$ -- 4
+text.prefix$ -- 4
+top$ -- 0
+type$ -- 84
+warning$ -- 1
+while$ -- 32
+width$ -- 14
+write$ -- 147
+(There was 1 warning)

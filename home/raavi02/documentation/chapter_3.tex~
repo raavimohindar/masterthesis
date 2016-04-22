@@ -1,0 +1,137 @@
+\chapter{Analysis of Coded CDMA}
+
+In this chapter we present various tools to analyse the coded CDMA which employs iterative joint decoding comprises of interference cancellers at the front-end and the soft-output decoders. This method of decoding is proved to be very powerful decoding method which can realise the significant portion of multi-access channel capacity. Joint iterative decoding block consist of two major blocks, viz, (i) Interference cancellation block and (ii) parallel soft decoding block to decode the single user forward error correction codes. These two blocks are arranged in a manner that they exchange extrinsic information from the interference canceller to the decoder and vise-versa till the sufficiently reliable user data is obtained. \\
+
+The convergence behaviour of such a system was studied elaborately using a density evolution analysis. A considerable work by Boutros and Caire, on presenting a single-parameter dynamical system interpretation of the decoder. With that inspiration we try to analyse the system using single parameter that is common to all the users. Without deviation much from the density evolution and aiming to reduce the complexity we present a analysis based on variance transfer or signal-to-noise ratio transfer. Since, the variance or signal-to-noise ration is common to all the users and we can conveniently analyse the system using the above mentioned parameter. \\
+
+Analysis is nothing but studying the behaviour of the parameter at each an every iteration. We will see the how we obtain the variance and what exact interpretation can be obtained from the transfer of variances between interference canceller and the decoder. \\
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/vtc.eps}{0.8} }
+  \caption{Multiple-Access Communication}
+%  \label{Multiple-Access\\ Communication}
+\end{figure}
+The plot we obtain is called Variance Transfer Characteristics (VTC).
+\section{System Model}
+For simplicity in analysis we assume synchronous CDMA as shown in Figure x.x. We studied the synchronous CDMA model in the previous chapter. For continuity in derivations we present a brief description about the synchronous CDMA. It consist of $K$ transmitters generate independent binary information symbols $u_k\in \{-1,1\},\;k\,=\,1,\dots,K$, where $K$ corresponds to the number of users and each user symbols are encoded by a error control encoders with the rate $R$. Encoded symbols are passed through the random interleaves which then undergoes spreading and modulation. We employ random spreading and BPSK modulation. Now we describe the signal from the $k$th spreader as,
+
+\begin{equation}
+x_k(t)=\sum\limits_{l=0}^{L-1}\sqrt{P_k}\,d_{k,l}\,a_{k,l}(t-lT)
+\end{equation}
+where $L$ is the number of coded symbols of a user in one frame, $d_{k.l}$ is the $l$-th symbols of user $k$, and $P_k$ is the power of user $k$.\\
+
+The spreading waveform of user $k$ during symbol time $l$, $a_{k,l}(t)$ is given by,
+
+\begin{equation}
+a_{k,l}(t)=\sum\limits_{n=0}^{N-1}a_{k,l,n}p_{w}(t-nT_c)
+\end{equation}
+where $N$ is the spreading gain, $T_c$ is the chip interval, $a_{k,l,n}\;\in\;\{-1/\sqrt{N},1/\sqrt{N}\}$ is the $n$-th spreading chip for the $k$-th user at the symbol time $l$, and $p_w(t)$ is the normalised chip waveform.\\
+
+We consider the channel as AWGN, then the received signal is 
+
+\begin{equation}
+y(t)=\sum\limits_{k=1}^{K}x_k(t)+n(t)
+\end{equation}
+where $n(t)$ is zero mean white Gaussian noise with noise power spectral density $\sigma^2\;=\;N_0/2$. \\
+
+The matrix notation of the received signal is given as
+
+\begin{equation}
+\mathrm{\mathbf{y}}=\mathrm{\mathbf{A}}\mathrm{\mathbf{d}}\,+\,\mathrm{\mathbf{n}}
+\end{equation}
+
+
+\section{Iterative Joint Decoding}
+The received sequence $\mathrm{\mathbf{y}}$ is passed through the matched filter, which is at the first stage of the receiver block. For the ideal case matched filter would suppress all the interference and deliver the sufficient statistics to the decoder, but in reality the correlation matrix get corrupted by the additive white Gaussian noise so we receive the correlation matrix with rank....\\
+
+The output of the matched filter is passed through the CDMA interference resolution operation which in turn generates the soft-output of the encoded symbols $d_{k,l}$ and delivers the extrinsic information from the partially cancelled interference, which in turn used as a-priori information by the decoder for the successive decoding. Ideally, the decoder should generate the log-likelihood ratios (LLR) of the encoded symbols $\mathrm{\mathbf{d}}$ of the form $\lambda(d_{k,i})\;=\;\mathrm{log}(\mathrm{Pr}(d_{k,l}=1\vert \mathrm{\mathbf{y}})/\mathrm{Pr}(d_{k,l}=-1\vert \mathrm{\mathbf{y}}))$. As we studied about the complexity in optimum decoding in the previous chapters, from that it is obvious about the choice of the decoders whose complexity is kept linearly with the growth of user $K$. Now, we express the received signal at each and every stage as follows,\\
+
+The signal at the matched filter output is given as
+
+\begin{equation}
+\mathrm{\mathbf{A}}^T\cdot \mathrm{\mathbf{y}}=\mathrm{\mathbf{A}}\cdot\mathrm{\mathbf{d}}\cdot \mathrm{\mathbf{A}}^T\,+\,\mathrm{\mathbf{n}}\cdot \mathrm{\mathbf{A}}^T
+\end{equation}
+and at the output of the interference canceller is partitioned into desired signal of the user and the interfering users in the desired signal, which is expressed in vector notation as
+
+\small
+\begin{eqnarray}
+\begin{array}{llllll}
+a_{k,l}^T\cdot y_{k}&=&\sum\limits_{l=1}^L\sqrt{P_k}\,d_{k,l}\,a_{k,l}\,a_{k,l}^T&+&\sum\limits_{l=1}^{L}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}\sqrt{P_m}(d_{m,l}-\stackrel{\sim}{d}_{m,l})\,a_{m,l}\,a_{k,l}^T+\mathrm{\mathbf{n}} \\ \\
+&=&\sum\limits_{l=1}^L\sqrt{P_k}\,d_{k,l}&+&\eta_{k,l}
+\end{array} 
+\end{eqnarray}
+\normalsize
+Under some general conditions, $\eta_{k,l}$ is well approximated by independent Gaussian random variable. One such condition is that the decoder follows the \textit{extrinsic information exchange principle} and that only extrinsic information is used for interference cancellation. Since $\eta_{k,l}$ is a random variable upon which we can apply the known statistics such a mean and variance to obtain the estimate of the random variable. At first we write the equation as follows
+
+\begin{equation}
+\eta_{k,l}=\sum\limits_{j=1}^{L}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K} \sqrt{P}_m(d_{m,j}-\stackrel{\sim}{d}_{m,j})(a_{k,l}^Ta_{m,j})+n_{k,l}
+\end{equation}
+
+With the assumption of unbiased estimate of the i.i.d. coded symbols $d_{k,l}$, we can calculate the mean and variance as
+
+\begin{eqnarray}
+\begin{array}{rll}
+\mathrm{E}[\eta_{k,l}]&=&0, \\ \\
+\mathrm{E}[\eta_{k,l}^2]&=&\sum\limits_{j=1}^{L}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}P_m\,\mathrm{E}\left[(d_{m,j}-\stackrel{\sim}{d}_{m,j})^2\right] \mathrm{E}\left[(a_{k,l}^T a_{m,j})\right]+\sigma^2
+\end{array}
+\end{eqnarray}
+
+Further, with the assumption of i.i.d. random spreading sequence with \begin{small}$P(a_{k,l,n}\;=\;1/\sqrt{N})\;=\;P(a_{k,l,n}\;=\;-1/\sqrt{N})\;=\;1/2$\end{small} then the 
+
+\begin{equation}
+\mathrm{E\left[\left(a_{k,l}^Ta_{m,j}\right)\right]}\;=\;1/N
+\end{equation}
+applying Equation (1.9) in (1.8) we get the time independent equation.
+\begin{equation}
+\sigma_k^2=\mathrm{E}[\eta_{k,l}^2]=\frac{\hbox{$1$}}{\hbox{$N$}} \sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K} P_m \mathrm{E}\left[(d_m-\stackrel{\sim}{d}_m)^2\right]+\sigma^2
+\end{equation}
+Further for the equal power i.e., $P_k\;=\;P$, the effective variance is independent of user index $k$.
+
+\begin{equation}
+\sigma_{\mathrm{eff}}^2=\frac{\hbox{$\sigma^2$}}{\hbox{$P$}}+\frac{\hbox{$K-1$}}{\hbox{$N$}}\sigma_d^2;\hspace{7mm}\sigma_d^2=\mathrm{E}\left[(d_k-\stackrel{\sim}{d}_k)^2\right]
+\end{equation}
+
+It is interesting to note that $\sigma_{\mathrm{eff}}^{-1}$ is the effective signal-to-noise ration of each user channel after the cancellation step. In general we can write the estimation error as a function of the input signal-to-noise ratio of each decoder. 
+
+\begin{equation}
+\mathrm{E}\left[\left(d_k-\stackrel{\sim}{d}_k\right)^2\right]=g\left(\frac{\hbox{$\sigma_k^2$}}{\hbox{$P_k$}}\right)
+\end{equation}
+where $g(x)$ is the \textit{variance transfer} (VT) characteristics of the code, and we see $g(x)$ is typically a monotonically increasing function with in the range $[0,1]$ for any reasonable error control code. \\
+
+From this and also with the assumption of random codes we can write equation (1.10) iteratively with an iterative index $\nu$ as
+
+\begin{equation}
+\sigma_{k,\nu}^2=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K} P_m\,g\left(\frac{\hbox{$\sigma_{m,\nu-1}^2$}}{\hbox{$P_m$}}\right)+\sigma^2
+\end{equation}
+
+The sequence $\sigma_{k,\nu}^2,\;\nu=0,1,2,\dots$ is monotonically decreasing, which can shown in very simple way. Initially the variance is too high at the first iteration, theoretically speaking $\sigma_{k,0}^2\;=\;\infty$ and we see the steady decrease in the variance. We can formulate the simple chain rule as \begin{small}$\sigma_{k,0}^2\,>\,\sigma_{k,1}^2\,\geq\,\sigma_{k,\nu-1}^2$.\end{small}. The equation (1.13) can be written using monotonic property of the function $g(x)$ as
+
+\small
+\begin{equation}
+\sigma_{k,\nu}^2=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K} P_m\,g\left(\frac{\hbox{$\sigma_{m,\nu-1}^2$}}{\hbox{$P_m$}}\right)+\sigma^2 \leq \sigma_{k,\nu}^2=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K} P_m\,g\left(\frac{\hbox{$\sigma_{m,\nu-2}^2$}}{\hbox{$P_m$}}\right)+\sigma^2=\sigma_{k,\nu-1}^2
+\end{equation}
+\normalsize
+the sequence $\sigma_{k,\nu}^2$ is monotonically decreasing for all users $k$. For a finite $\nu$, $\sigma_{k,\nu}^2\geq 0$. At this point it is interesting to extent the $\nu\rightarrow \infty$ then we obtain the limit variance as follows
+
+\begin{equation}
+\sigma_{k,\infty}^2=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{m=1}^{K}P_m\,g\left(\frac{\hbox{$\sigma_{m,\infty}^2$}}{\hbox{$P_k$}}\right)-\frac{\hbox{$1$}}{\hbox{$N$}}P_k\,g\left(\frac{\hbox{$\sigma_{m,\infty}^2$}}{\hbox{$P_k$}}\right)+\sigma^2
+\end{equation}
+If system is large, i.e., number of users $K\rightarrow \infty$, the powers of the users is obtained by imposing \textit{Lindeberg condition} on asymptotic negligibility, then we obtain
+
+\begin{equation}
+\frac{\hbox{$P_k$}}{\hbox{$\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}P_m$}}\stackrel{K\rightarrow \infty}{\longrightarrow}0;\hspace{7mm}\forall\; k
+\end{equation}
+then the equation (1.13) obtained with the finite number of iterations i.e., $\nu\neq \infty$ and the equation (1.15) with $\nu= \infty$ shows that the iterative process is independent of the user index $k$, and give out the equation show below for all the users
+
+\begin{equation}
+\sigma_{k,\nu}^2=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K} P_m\,g\left(\frac{\hbox{$\sigma_{m,\nu-1}^2$}}{\hbox{$P_m$}}\right)+\sigma^2
+\end{equation}
+
+We conclude for the large systems with random spreading codes the $\sigma_{\infty}^2$ is independent of $l$ and $k$. This enables us to describe such a system by a single-parameter dynamical model. \\
+
+A typical dynamical system is presented in Figure x.x with normalise power levels i.e., $P=1$, then we obtain a simple recursion function
+
+\begin{equation}
+\sigma_{\nu}^2=f(\sigma_{d,\nu-1}^2);\hspace{7mm}\sigma_{d,\nu-1}^2=g(\sigma_{\nu-1}^2)
+\end{equation}
+
+

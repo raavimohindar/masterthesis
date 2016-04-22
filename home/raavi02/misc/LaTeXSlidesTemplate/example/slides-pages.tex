@@ -1,0 +1,202 @@
+%%% Folie 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Inhalt}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+%\hbox{{\bf .} }}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+    \put(10,14){\today}
+    \put(4,12){\Huge \Blue{Quellenseparierung mit dem fastICA-Algorithmus}}
+    \put(10,10){Jürgen Rinas}
+
+    \put(4,5){Inhalt}
+    \put(4,4){$\bullet$ Ansatz $\Longrightarrow$ Algorithmus}
+    \put(4,3){$\bullet$ Leistungsfähigkeit (Vergleich mit JADE)}
+    \put(4,2){$\bullet$ Zusammenfassung, Ausblick}
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Ansatz $\Longrightarrow$ Algorithmus}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{\textbf{Ansatz} $\Longrightarrow$ Algorithmus}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+    \put(0,14){$\bullet$ Übertragungssystem: $\mathbf{x} = \mathbf{H} \mathbf{c} + \mathbf{\nu}$}
+    \put(0,13){\phantom{$\bullet$ Übertragungssystem:} $\mathbf{x}$ \begin{Large}$n_R \times 1$\end{Large} Empfangssignale}
+    \put(0,12){\phantom{$\bullet$ Übertragungssystem:} $\mathbf{H}$ \begin{Large}$n_R \times n_T$\end{Large} Kanalmatrix (Block-Fading, Schmalbandmodell)}
+    \put(0,11){\phantom{$\bullet$ Übertragungssystem:} $\mathbf{c}$ \begin{Large}$n_T \times 1$\end{Large} Sendesignale}
+    \put(0,10){\phantom{$\bullet$ Übertragungssystem:} $\mathbf{\nu}$ \begin{Large}$n_R \times 1$\end{Large} Kanalrauschen}
+
+    \put(0, 8){$\bullet$ Empfänger: $\tilde{c}_t = \mathbf{b}^T_t \overbrace{\mathbf{W} \mathbf{x}}^{=: \mathbf{y}}$}
+    \put(0, 7){\phantom{$\bullet$ Empfänger:}  $\mathbf{W}$ \begin{Large}$n_T \times n_R$\end{Large} Whitening-Matrix (bestimmt durch EVD von $\mathbf{R_{xx}} = \E{\mathbf{x} \mathbf{x}^T}$)}
+    \put(0, 6){\phantom{$\bullet$ Empfänger:}  $\mathbf{b}_t^T$ \begin{Large}$1 \times n_T$\end{Large} Separationsvektor für ein gesendetes Signal $t$}
+    \put(0, 5){\phantom{$\bullet$ Empfänger:}  $\tilde{c}_t$ \begin{Large}Skalar\end{Large} -- ein separiertes Signal}
+
+    \put(0, 4){zur Implementierung werden aus allen Vektoren Matrizen der Signallänge $L$}
+
+    \put(0,3){$\bullet$ Ansatz: Maximierung oder Minimierung der Kurtosis $\mathrm{cum_4}(\tilde{\mathbf{c}}_t) = \mathrm{kurt}(\tilde{\mathbf{c}}_t)$}
+    \put(0,2){$\bullet$ Beispiel: BPSK  $d \in \lbrace -1, 1\rbrace$}
+
+    \put(0,1){\phantom{$\bullet$ Beispiel: BPSK} $\mathrm{cum_1}(d) = 0$, $\mathrm{cum_2}(d) = 1$, $\mathrm{cum_3}(d) = $, $\mathrm{cum_4}(d) = -2$}
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Ansatz $\Longrightarrow$ Algorithmus}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{\textbf{Ansatz} $\Longrightarrow$ Algorithmus}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+    \put(0,15){$\mathrm{kurt}(\tilde{\mathbf{c}}_t)$ = $\mathrm{kurt}(\mathbf{b}^T_t \mathbf{y})$}
+    \put(0,14){\phantom{$\mathrm{kurt}(\tilde{\mathbf{c}}_t)$} $\downarrow$ $\mathrm{kurt}(a) = \E{a^4} - 3(\E{a^2})^2$}
+    \put(0,13){\phantom{$\mathrm{kurt}(\tilde{\mathbf{c}}_t)$} = $\E{(\mathbf{b}^T_t \mathbf{y})^4} - 3(\E{(\mathbf{b}^T_t \mathbf{y})^2})^2$}
+    \put(0,12){\phantom{$\mathrm{kurt}(\tilde{\mathbf{c}}_t)$} $\downarrow$ $\mathbf{y}$ ist weiß}
+    \put(0,11){\phantom{$\mathrm{kurt}(\tilde{\mathbf{c}}_t)$} = $\E{(\mathbf{b}^T_t \mathbf{y})^4} - 3 ||\mathbf{b}_t||^4$}
+    \put(0,10){$\mathbf{b}_t$ soll die Norm $1$ haben (alle $\mathbf{b}_t$ bilden später eine unitäre Matrix $\mathbf{B}$)}
+    \put(0, 9){$\Longrightarrow$ "`penalty term"' einführen}
+    \put(0, 8){\phantom{$\Longrightarrow$} $J(\mathbf{b}_t) = \E{(\mathbf{b}^T_t \mathbf{y})^4} - 3 ||\mathbf{b}_t||^4 + F(||\mathbf{b}_t||^2)  $  $\Leftarrow$ Kostenfunktion $\min\limits_{\mathbf{b}_t}$ oder $\max\limits_{\mathbf{b}_t}$}
+    \put(0, 7){Differenzieren nach $\mathbf{b}_t$:}
+    \put(0, 6){\phantom{$\Longrightarrow$ $J(\mathbf{b}_t) = $} $ \E{\mathbf{y}(\mathbf{b}^T_t \mathbf{y})^3} - 3 ||\mathbf{b}_t||^2 \mathbf{b}_t + f(||\mathbf{b}_t||^2) \mathbf{b}_t = 0  $ }
+    \put(0, 5){Lösen mit gewöhnlichem Iterationsverfahren (\textit{fixed-Point Iteration}) $x=f(x)$}
+    \put(0, 4){\phantom{$\Longrightarrow$ $J(\mathbf{b}_t) = $} $ \mathbf{b}_t = \underbrace{- 1 /f(||\mathbf{b}_t||^2)}_{\mathrm{Skalar}} \left( \E{\mathbf{y}(\mathbf{b}^T_t \mathbf{y})^3} - 3 ||\mathbf{b}_t||^2 \mathbf{b}_t \right)  $ }
+    \put(0, 2){Norm von $\mathbf{b}_t$ hier unwichtig bzw. $||\mathbf{b}_t||^2=1$ sichergestellt}
+    \put(0, 1){\phantom{$\Longrightarrow$ $J(\mathbf{b}_t) = $} $ \mathbf{b}_t =  \E{\mathbf{y}(\mathbf{b}^T_t \mathbf{y})^3} - 3 \mathbf{b}_t$ }
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 4 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Ansatz $\Longrightarrow$ Algorithmus}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{Ansatz $\Longrightarrow$ \textbf{Algorithmus}}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+    \linethickness{1mm}
+    \put(0,14){Separation \textit{eines} Signals $c_t$ -- \textit{fixed point} Iteration bzgl. $\mathbf{b}_t$}
+    \put(0,12){\begin{Large}$n_t \times 1$ Vektor\end{Large} $\mathbf{b}_t(0)^\dagger$ mit Zufallszahlen initialisieren}
+    \put(0, 11){$\mathbf{b}_t(0) = \mathbf{b}_t^\dagger(i+1) / ||\mathbf{b}_t^\dagger(0)|| $ \hspace{2cm} $\Leftarrow$ $||\mathbf{b}_t(0)||^2\stackrel{!}{=}1$}
+    \put(0.5,10){\line(1,0){1}}
+    \put(0.5,10){\line(0,-1){3}}
+    \put(0.5, 7){\line(1,0){1}}
+    \put(2,10){\begin{Large}Iteration $i=0 \dots 9$\end{Large}}
+    \put(1, 9){$\mathbf{b}_t^\dagger(i+1) = \E{\mathbf{y}(\mathbf{b}^T_t(i) \mathbf{y})^3} - 3 \mathbf{b}_t(i)$}
+    \put(1, 8){$\mathbf{b}_t(i+1) = \mathbf{b}_t^\dagger(i+1) / ||\mathbf{b}_t^\dagger(i+1)|| $ \hspace{2cm} $\Leftarrow$ $||\mathbf{b}_t(i+1)||^2\stackrel{!}{=}1$}
+    \put(0, 6){$\tilde{c}_t = \mathbf{b}^T_t \mathbf{y}$}
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 5 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Ansatz $\Longrightarrow$ Algorithmus}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{{Ansatz $\Longrightarrow$ \textbf{Algorithmus}}}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+    \linethickness{1mm}
+    \put(0,14){Separation \textit{aller} Signale $c_t$}
+    \put(0,13){\ANTblau{$\mathbf{B}_0=[\,\,]$}}
+    \put(0.5,12){\line(1,0){1}}
+    \put(0.5,12){\line(0,-1){11}}
+    \put(0.5, 1){\line(1,0){1}}
+    \put(2, 12){\begin{Large}Iteration  $t=0 \dots n_T-1$\end{Large}}
+
+    \put(1,11){\begin{Large}$n_t \times 1$ Vektor\end{Large} $\mathbf{b}_t^\ddagger(0)$ mit Zufallszahlen initialisieren }
+    \put(1,10){\ANTblau{$\mathbf{b}_t^\dagger(0) = \mathbf{b}_t^\ddagger(0) -\mathbf{B}_0\mathbf{B}_0^T\mathbf{b}_t^\ddagger(0)$}}
+    \put(1, 9){$\mathbf{b}_t(0) = \mathbf{b}_t^\dagger(0) / ||\mathbf{b}_t^\dagger(0)|| $ \hspace{2cm} $\Leftarrow$ $||\mathbf{b}_t(0)||^2\stackrel{!}{=}1$}
+    \put(1.5, 8){\line(1,0){1}}
+    \put(1.5, 8){\line(0,-1){4}}
+    \put(1.5, 4){\line(1,0){1}}
+    \put(3, 8){\begin{Large}Iteration  $i=0 \dots 9$\end{Large}}
+    \put(2, 7){$\mathbf{b}_t^\ddagger(i+1) = \E{\mathbf{y}(\mathbf{b}^T_t(i) \mathbf{y})^3} - 3 \mathbf{b}_t(i)$}
+    \put(2, 6){\ANTblau{$\mathbf{b}_t^\dagger(i+1) = \mathbf{b}_t^\ddagger(i+1) -\mathbf{B}_t\mathbf{B}_t^T\mathbf{b}_t^\ddagger(i+1)$}}
+    \put(2, 5){$\mathbf{b}_t(i+1) = \mathbf{b}_t^\dagger(i+1) / ||\mathbf{b}_t^\dagger(i+1)|| $ \hspace{2cm} $\Leftarrow$ $||\mathbf{b}_t(i+1)||^2\stackrel{!}{=}1$}
+    \put(1, 3){\ANTblau{$\mathbf{B}_{t+1} = \left[ \mathbf{B}_t, \, \mathbf{b}_t(9) \right]$}}
+    \put(1, 2){$\tilde{c}_t = \mathbf{b}^T_t \mathbf{y}$}
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 6 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Leistungsfähigkeit}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{{\bf Leistungsfähigkeit}}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+\put(1,15){$2 \times 2$ System, QPSK, $E_b/N_0 = 20 \,\mathrm{dB}$, $L=500$}
+\put(0,13){Mixtur}
+\put(0,4){\psfig{figure=testsigficajade.m.1.eps,angle=0,width=4cm}}
+\put(6,13){fastICA, $i=10$}
+\put(6,4){\psfig{figure=testsigficajade.m.2.eps,angle=0,width=4cm}}
+\put(12,13){JADE}
+\put(12,4){\psfig{figure=testsigficajade.m.3.eps,angle=0,width=4cm}}
+\put(0,2){fastICA benötigt bei einem $8 \times 12$ System ca. 1/5 der {\sc Matlab}-flops von JADE}
+\put(0,1){jedoch: Struktur vom fastICA ist sehr viel einfacher!}
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 7 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Leistungsfähigkeit (Vergleich mit JADE)}
+\vbox to \vsize{\vss
+\vspace*{2cm}
+\hbox{{\bf Leistungsfähigkeit} (Vergleich mit JADE)}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+\put(-1,2){\psfig{figure=pltcfastica8x12.m.eps,angle=0,width=17cm}}
+    \put(16,14){$\bullet$ $8 \times 12$ System}	      
+    \put(16,13){$\bullet$ QPSK}	      
+    \put(16,11){$\bullet$ JADE bei geringem SNR}	      
+    \put(16,10){\phantom{$\bullet$} günstiger}	      
+    \put(17, 9){\phantom{$\bullet$} - fastICA "`sieht"' nur ein}	      
+    \put(17, 8){\phantom{$\bullet$ -} Ausgangssignal}	      
+    \put(17, 7){\phantom{$\bullet$} - JADE berücksichtigt auch}	      
+    \put(17, 6){\phantom{$\bullet$ -} Kreuzkumulanten}	      
+    %\put(0,1){$\bullet$ Umsetzung $P_\mathrm{drop} \rightarrow \mathrm{BER}$ mit Faktor~3}
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+%%% Folie 8 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbox\titelzeile=\hbox{\Large\sc Zusammenfassung, Ausblick}
+\vbox to \vsize{\vss
+\vspace*{1cm}
+\hbox{{\bf Zusammenfassung},  Ausblick}
+\begin{huge}
+  \setlength{\unitlength}{1cm}
+  \begin{picture}(26,16)
+    \put(2,14){$\bullet$ JADE    $\Longleftrightarrow$ Batch-Algorithmus }
+    \put(2,13){$\bullet$ fastICA $\Longleftrightarrow$ \textit{one-unit} Algorithmus}
+    \put(2,12){\phantom{$\bullet$ fastICA $\Longleftrightarrow$} Interference Cancellation? Sortierung?}
+    \put(2,11){\phantom{$\bullet$} Subraumeinschränkung nach jeder Iteration}
+    \put(2,10){$\bullet$ ca. 20\% des Rechenaufwands von JADE,}
+    \put(2, 9){\phantom{$\bullet$} vergleichbare Leistungsfähigkeit bei hohem SNR}
+    \put(2, 8){$\bullet$ Vorteile bei kurzen Blocklängen $L$}
+  \end{picture}
+\end{huge}
+\vfill
+\vss}
+\newpage
+
+%%% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

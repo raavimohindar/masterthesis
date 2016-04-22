@@ -1,0 +1,25 @@
+From: Mohindar Rao Raavi Mohan Rao <raavi02@ant.uni-bremen.de>
+To: garnome-list@gnome.org
+Subject: No Icons on board
+Date: Mon, 19 Sep 2005 19:10:17 +0200
+User-Agent: KMail/1.7.2
+MIME-Version: 1.0
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
+Message-Id: <200509191910.18509.raavi02@ant.uni-bremen.de>
+Status: RO
+X-Status: RS
+X-KMail-EncryptionState:  
+X-KMail-SignatureState:  
+X-KMail-MDN-Sent:  
+
+raavi02@denver:~/garnome/bin$ ./gedit
+
+(gedit:10389): Gtk-WARNING **: Could not find the icon 'gnome-fs-regular'. The 
+'hicolor' theme
+was not found either, perhaps you need to install it.
+You can get a copy from:
+        http://icon-theme.freedesktop.org/releases
+raavi02@denver:~/garnome/bin$                      

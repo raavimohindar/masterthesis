@@ -1,0 +1,114 @@
+\chapter{Coded CDMA Transmission Block}
+In this chapter the single-user transmission model of the Coded CDMA system and we describe each and every block in detail to understand how the information from one end is conveyed to the other end. Later we extend the single-user transmission model to N-user model.
+\section{Single User Transmitter Model}
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/single_user_comm.eps} {1.0} }
+\caption{Single User Communication Model}
+%\label{Coded CDMA}
+\end{figure}
+\subsection{Information Bits}
+Users take part in communication are responsible in generating information bits which are either data or voice. User bits are conveniently represented into 1's and 0's for transmission from one end to other.\\ \\
+Let the user generates the information bit $d[k]\;\in\;[0,1]$ are assumed to be equi-probable i.e., $\mathrm{Pr}\{d=0\}=\mathrm{Pr}\{d=1\}=1/2$ and are independent to each other.
+\begin{equation}
+d[k]\;\in\;[0,1],\hspace{8mm} k\;\in\;\{0,1,\dots,K-1\}
+\end{equation}
+where $K$ is the length of information bits. Such that the user transmits the vector of information bits of length $K$. 
+\begin{equation}
+\mathrm{\mathbf{d}}=[d[0],\,d[1],\dots,d[K-1]]
+\end{equation}
+In un-coded transmission the probability of bits prone to error is too high. Since channel is un-controllable so it requires a certain means to protect the bits prone to errors. Hence information bits are subjected to a process called encoding.
+\subsection{Encoder}
+Encoding is a mean to protect the information bits from channel errors by adding redundancy to the information bits there by the probability of bits prone to error becomes minimum. Encoder is a device which incorporates Forward Error Correction codes (FEC) takes the information bits as input and gives the encoded bits as output. We employ convolutional codes in our system to encode the information bits.
+\subsubsection{Convolutional Codes}
+Convolutional codes are class of codes which are realized through the shift registers by feeding whole sequence of information bits as an input and the output is obtained by convolving information bits with the generator coefficients. 
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/conv_end.eps} {1.0} }
+\caption{Convolutional Encoder}
+%\label{Convolutional Encoder}
+\end{figure}\\
+Let
+\begin{equation}
+b[n]\in[0,1],\;\;\;n\;\in\;\{0,1,\dots,N-1\}
+\end{equation}
+forms the vector of coded bits $\mathrm{\mathbf{b}}$ of the user by convolving the vector of information bits $\mathrm{\mathbf{d}}$ with the generator coefficient $g_{ln}$, where $ln\,\in\,\{1,2,\dots,L_n\}$ are the number of generator coefficients.
+%\begin{equation}
+%\mathrm{\mathbf{b}}=\mathrm{\mathbf{d}}*g
+%\end{equation}
+The vector of coded bits which can be written as
+\begin{equation}
+\mathrm{\mathbf{b}}=[b[0], b[1],\dots,b[N-1]]
+\end{equation}
+where $N$ is the length of the coded bits.\\ \\
+Now we define the code rate $R=K/N$ as the ratio between the number of information bits to coded bits and the constraint length $L$ of the code is equal to $m+1$, where $m$ is the memory of the shift registers.
+\subsection{Modulation}
+Modulator is an interfacing device which maps the coded sequence into appropriate signals, that matches the characteristics of the communication channel. Mapping is performed by taking block of $m=\mathrm{log_2}M$ binary digits at a time from the coded sequence $\mathrm{\mathbf{b}}$ and selecting one of $M=2^m$ deterministic finite energy symbols for transmission over the channel.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/mapping.eps} {1.0} }
+\caption{BPSK Mapping}
+%\label{Convolutional Encoder}
+\end{figure}
+In our system we employ Binary Phase Shift Keying (BPSK) techniques for mapping the coded bits, in which the phase is shifted according to the information bits.
+\subsubsection{Binary Phase Shift Keying} 
+In BPSK the information bits are mapped to two different phases, which results in mapping of 0 to +1 and +1 to -1.
+\begin{eqnarray}
+a[n]=\left \{
+\begin{array}{lllll}
++1&& \mathrm{when}&& (b[n]=0) \\ \\
+-1&& \mathrm{when}&& (b[n]=1) 
+\end{array}
+\right .
+\end{eqnarray}
+now $a[n]\in\{+1,-1\},\;n\in\{0,1,\dots,N-1\}$ forms a vector $\mathrm{\mathbf{a}}$ contains the modulated bits of the user.
+\begin{equation}
+\mathrm{\mathbf{a}} = [a[0],a[1],\dots,a[N-1]]
+\end{equation}
+where $N$ is the length of the modulated bits, since one coded bit is mapped to one symbol, then the length of modulated symbols are same as of coded bits.
+\subsection{Interleaver}
+As we known that encoding on information bits is to protect from channel errors, there by information bits are conveyed to the destined end at very high reliability. For simple Additive White Gaussian Noise (AWGN) channel coding is sufficient enough to protect information bits from errors, but there exist certain channels that can incur bursty errors on the information bits there by corrupting the sequence of bits at once. With that it is impossible for the receiver to recover from the error prone bits. \\ \\
+To mitigate bursty nature of the errors the information bits interleaved before it is transmitted. Interleaving is a process of converting the bursty errors to single errors by permuting the information bits in certain order. Mitigating the bursty nature of the errors can be one of the main function of intereleavers but in our system it is mainly employed to make sure the in-dependency between the variables. We see why and where such an in-dependency are required in few chapters from now. \\ \\
+To understand the underlying principle of interleavers we study very simple convolutional interleaving in detail and later state why such interleavers are not suitable to employ in our system.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/interleaver.eps} {1.0} }
+\caption{Convolutional Interleaver}
+%\label{Convolutional Encoder}
+\end{figure}\\
+A convolutional interleavers formats the encoded bits in a rectangular array of $L_{row}$ rows and $L_{col}$ columns. Modulated symbols of length $N$ are feed to the rows of an interleaver as an input and output are read-out in column wise and transmitted over a channel, by that information bits are permuted in certain way. At the receiver the process is reversed in which it re-permutes the bits to original order. That process is called de-interleaving. When channel incur bursty errors on the transmitted bits and upon de-interleaving, bursty errors are turned into single errors there by detector can detect the error prone bit. \\ \\
+The main disadvantages of convolutional interleavers when applied in concatenated coded scheme is that, they exhibit very week performance due to regular structure of interleavers. Due to this temporal distance between the codes remains same hence results in very poor distance properties. So to imporve the distance properties of the codes, we employ random interleavers. \\ \\
+Random interleavers principally work same as convolutional interleavers, but instead of permuting the bits in a certain order it permutes the bits in a random order. The information about the order of permutation is know at the receiver side for de-interleaving.
+\subsection{Spreading}
+We employ Direct-Sequence spread spectrum techniques in which the output form the modulator $\mathrm{\mathbf{a}}$ is directly multiplied with the spreading code $\mathrm{\mathbf{c}}$.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/spreading.eps} {1.0} }
+\caption{Spreading}
+%\label{Convolutional Encoder}
+\end{figure}
+The spreading code $c[\ell]$ is defined as $c[\ell] \in \{+1,-1\}, 0 \leq \ell \leq N_s-1$ where $N_s$ is the spreading factor.
+\begin{equation}
+\mathrm{\mathbf{c}}=[c[0],c[1],\dots,c[N_s-1]]
+\end{equation}
+The elements in the spreading code is also called as chips. The chips index $\ell$ is $N_s$ times faster then the symbol index $k$. Then each symbol is spreaded by a factor $N_s$, which is often termed as processing gain $G_p$, which is the ratio between the spreading factor $N_s$ and the code rate $R$.
+\begin{equation}
+G_p=\frac{\hbox{$N_s$}}{\hbox{$R$}}
+\end{equation}
+Each symbol from the output of the modulator is multiplied with the spreading code from a vector $\mathrm{\mathbf{x}}$ of length $(N_s\,\cdot\,N)\;\mathrm{x}\;1$
+\begin{eqnarray}
+\mathrm{\mathbf{x}} = \left[
+\begin{array}{lll}
+\mathrm{\mathbf{c}}\cdot a_1 \\
+\mathrm{\mathbf{c}}\cdot a_2 \\
+\;\;\,\vdots \\
+\mathrm{\mathbf{c}} \cdot a_N \\
+\end{array}
+\right]
+\end{eqnarray}
+which are then transmitted over an Additive White Gaussian Noise (AWGN) channel to the destined end. \\ \\
+\section{Multi-User Transmitter Model}
+We now extend the single-user tranmission model to multi-user case. The block diagram of the transmitter part of multi-user communication system is shown in \textbf{Figure 3.6}
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/multi_user.eps} {1.0} }
+\caption{Multi User Transmitter Model}
+%\label{Convolutional Encoder}
+\end{figure}\\
+Let $1\leq u \leq U$ be user generates the vector of information bits $\mathrm{\mathbf{d}}_u$ of length $K$ which of the form $\mathrm{\mathbf{d}}_u=[d_u[0],\dots,d_u[K-1]]$ is encoded with convolutional codes, into vector of coded bits $\mathrm{\mathbf{b}}_u=[b_u[0],\dots,b_u[N-1]]$ which are then modulated by BPSK to obtain the sequence of symbols $\mathrm{\mathbf{a}}_u=[a_u[0],\dots,a_u[N-1]]$ and each element in the vector $\mathrm{\mathbf{a}}_u$ is spread with the spreading code $\mathrm{\mathbf{c}}_u=[c_u[0],\dots,c_u[N_s-1]]$ to obtain the sequence $\mathrm{\mathbf{x}}_u$ which are then transmitted over a channel with channel impulse response $\mathrm{\mathbf{h}}_u$ which then superimposed to form the vector $\mathrm{\mathbf{y}}$. \\ \\
+We conclude our discussion on the transmitter side of our communication system and in the next chapter we focus on the receiver side and see which joint-detection scheme is more suitable to implement in our communication system.\\ \\
+The following discussion in on coming chapters are mainly from the habilitationsschrift \cite{K05} of Dr.-Ing. Volker Kuehn.

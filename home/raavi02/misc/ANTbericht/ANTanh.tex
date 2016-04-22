@@ -1,0 +1,43 @@
+\begin{appendix}
+\chapter{Einbinden von ASCII-Dateien} \label{CPTapp}
+\thispagestyle{fancyplain}
+%
+Eine h"aufig auftretende Aufgabe bei der Dokumentation von studentischen
+Ausarbeitungen ist das Aufnehmen von Programmlistings in das Dokument.
+Solche als ASCII-Dateien vorliegenden Texte k"onnen komfortabel in 
+\LaTeX-Dokumente eingebunden werden und m"ussen nicht etwa losgel"ost 
+vom "ubrigen Text als Kopien beigelegt werden! Die Problematik um
+dieses Thema wird h"aufig auch als ``Simulieren getippter Texte'' 
+bezeichnet.
+
+Folgenderma"sen bindet man ASCII-Dateien, z.B.\ {\sc Matlab}-m-Files oder 
+auch diese Datei selbst, als reinen Text in \LaTeX\ ein: \verb+\getASCII{ANTanh.tex}+
+
+Die Wirkung ist dann folgende:
+\getASCII{ANTanh.tex}
+
+
+\chapter{Die Datei {\tt mathe.tex}} \label{CPTmehrascii}
+%
+Ein weiteres Beispiel einer eingebundenen ASCII-Datei zeigt die 
+z.Z.\ aktuelle, (hoffentlich) ber"uhmte Datei {\tt mathe.tex}:
+\getASCII{mathe.tex}
+
+\chapter{Zum Einbinden kurzer ASCII-Textstellen}
+%
+Ein alternative Methode des Einbindens besteht in der {\tt verbatim}-Umgebung.
+Setzt man den folgenden Text zwischen \verb+\begin{verbatim}+ und
+\verb+\end{verbatim}+, so erscheint er wie folgt:
+%
+\begin{verbatim}
+Ein Satz, wie er 1:1 erscheint.
+  Ein Satz, wie er 1:1 erscheint.
+    Ein Satz, wie er 1:1 erscheint.
+ Alle Leerzeichen tauchen also auf.
+Alle  Leerzeichen tauchen also auf.
+Alle Leerzeichen  tauchen also auf.
+
+Sonderzeichen sind hier kein Problem: # $ ^ \ \\ " @  (u.v.m.)
+\end{verbatim}
+
+\end{appendix}

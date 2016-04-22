@@ -1,0 +1,240 @@
+\chapter{Prinzipielles} \label{CPTerst}
+%
+\section{Deutsche Umlaute und G"ansef"u"schen}
+%
+Sofern man keine Umlaute auf der Tastatur hat, m"ussen Umlaute in \LaTeX\ so 
+eingegeben werden:
+
+\qquad "a durch \verb+"a+,\quad "o durch \verb+"o+,\quad "u durch \verb+"u+,\quad "s durch \verb+"s+.
+
+Die gro"sen Umlaute funktionieren entsprechend. Damit dies alles so klappt,
+mu"s "ubrigens der {\tt german} style eingebunden worden sein (was hier der Fall ist).
+
+Verwendet man die Umlaute auf der deutschen Tastatur(in Latin-1 Codierung), so
+muß übrigens das Paket \verb+inputenc+ mit der Option \verb+latin1+
+eingebunden werden.\\
+\verb+\usepackage[latin1]{inputenc}+
+
+
+Was die G"ansef"u"schen angeht, so stellt sich zun"achst die Frage, wie man sie gerne haben will.
+Zieht man ``diese'' Form vor (d.h.\ vorne die 66er-, hinten die 99er-Gestalt),
+so mu"s man das in \LaTeX\ mit dem doppelten {\em accent grave} bzw.\ Apostroph formulieren: \verb+``Zitat''+.
+
+Die "`richtigen"' deutschen G"ansehaxen (vorne unten die 99er-, hinten oben die 66er-Gestalt)
+sehen allerdings "`so"' aus und sind noch komplizierter einzutippen: \verb+"`Zitat"'+ .
+
+A vous de choisir! Nur von den doppelten Anf"uhrungszeichen auf der Tastatur ist abzuraten, 
+da sie mit der oben erw"ahnten Umlaut-Konstruktion kollidieren und au"serdem vorne und hinten die 
+gleiche Gestalt produzieren.
+
+
+\section{Schriftstile und -gr"o"sen}
+%
+{\bf Fettdruck} erreicht man mittels des \verb+\bf+-Kommandos (engl.\ {\em boldface}):
+\verb+{\bf Fettdruck}+. Analog dazu kann man Text auch durch
+{\em Kursivschrift} hervorheben: \verb+{\em Kursivschrift}+.
+Mit \verb+\tt+ wie {\em teletype} erreicht man die 
+{\tt Schreibmaschinenschrift} und mit \verb+\sc+ eine Schriftart, die
+sich {\sc Small Capitals} nennt.
+Diese (und weitere) Schriftstile stehen allerdings nur im ``Textmodus''
+zur Verf"ugung, nicht aber im ``Mathemodus'' (s.~Abschnitt~\ref{CPTmath}).
+
+L"angere Textpassagen kann man z.B.\ durch
+%
+\begin{verbatim}
+\begin{bf}
+Lange Textpassage im Fettdruck ...
+\end{bf}
+\end{verbatim}
+%
+in den gew"unschten Stil bringen.
+
+Die Schrift{\em gr"o"sen} lauten --~in kleinerwerdender Reihenfolge: 
+{\tt Huge, huge, LARGE, Large, large, normalsize, small, footnotesize, tiny}.
+Auch sie sind in der Form \verb+{\large xxx}+ sowie mit \verb+\begin{large}+
+und \verb+\end{large}+ anzusprechen.
+
+\section{Leerzeichen (Spaces), Abst"ande zwischen Worten}
+%
+\LaTeX\ behandelt 10 aufeinanderfolgende Leerzeichen im ``\verb+*.tex+''-File 
+genauso, als ob man nur ein einziges getippt h"atte. Will man l"angere horizonale 
+Abst"ande erzwingen, so stehen dazu die Befehle \verb+\hspace{...}+, \verb+\quad+,
+\verb+\qquad+ etc.\ zur Verf"ugung.
+
+Innerhalb eines Absatzes generiert \LaTeX\ einen sch"onen rechten Rand (Blocksatz),
+indem die Abst"ande zwischen den Worten k"unstlich gestreckt oder gestaucht 
+werden.
+Dabei streckt \LaTeX\ die Zwischenr"aume nach Satzzeichen mehr als die anderen, so
+da"s sich z.B.~nach einem Punkt ein l"angerer Zwischenraum ergibt. Allerdings kann
+\LaTeX\ nicht wissen, welcher Punkt ein Satzende darstellt und welcher nicht.
+Deshalb mu"s man \LaTeX\ mitteilen, welche Zwischenr"aume nicht gestreckt werden d"urfen.
+Dies kann dadurch geschehen, da"s man ein normales Leerzeichen ersetzt durch
+``\verb+\ +'' (Backslash, Space) oder ``\verb+~+'' (Tilde). Beide Befehle bewirken, da"s 
+dieses Leerzeichen wie ein Abstand zwischen Worten ohne Satzzeichen behandelt wird.
+Die Tilde verhindert au"serdem, da"s ein Zeilenumbruch an diese Stelle gelegt wird
+und ist deshalb in Konstruktionen wie \verb+siehe Kap.~5+ oder \verb+Dr.~Mustermann+ anzuraten.
+
+N.B.: Am besten, man merkt sich {\em ein f"ur allemal}, bestimmte Konstruktionen so
+einzutippen:
+%
+  \begin{center}
+  \begin{tabular}{|c|c|}
+    \hline
+    Gew"unschter Output & Optimale \LaTeX-Notation \\
+    \hline
+    \hline
+    d.h.\ blabla & \verb+d.h.\ blabla+ \\
+    z.B.\ blabla & \verb+z.B.\ blabla+ \\
+    bzw.\ blabla & \verb+bzw.\ blabla+ \\
+    \hline
+  \end{tabular}
+  \end{center}
+%
+Auch im Zusammenhang mit Referenzen (s.~Kap.~\ref{SECverw}) sollte man prinzipiell 
+folgende Notation w"ahlen:
+\verb+aus Kap.~\ref{label1} folgt...+\ oder:\ 
+\verb+wie in Gl.~(\ref{label2}) gezeigt...+
+
+
+\section{Strukturierung eines Dokumentes} \label{SECunter}
+%
+Die "Uberschrift zu Kapitel~\ref{CPTerst} wurde durch den Befehl
+\verb+\chapter{Prinzipielles}+ erzeugt. Dieser Befehl erzeugt auch
+die automatische fortlaufende Kapitel-Numerierung. Abschnitte und Unterabschnitte
+kommen durch die Verwendung der Befehle \verb+\section{...}+ (s.\ z.B.\ Abschnitt~\ref{SECunter}), 
+\verb+\subsection{...}+ und \verb+\subsubsection{...}+ zustande.
+Die Eintr"age aller dieser Strukturkommandos werden automatisch ins
+Inhaltsverzeichnis "ubernommen.
+
+\section{Aufz"ahlungen} \label{SECaufz}
+%
+Aufz"ahlung in der folgenden Form,
+%
+\begin{itemize}
+\item d.h.\ mit einer Einr"uckung und kleinen P"unktchen am Anfang ...
+\item ... jedes Eintrages
+\end{itemize}
+%
+k"onnen mit der \verb+itemize+-Umgebung erreicht werden:
+%
+\begin{verbatim}
+\begin{itemize}
+\item d.h.\ mit einer Einr"uckung und kleinen P"unktchen am Anfang ...
+\item ... jedes Eintrages
+\end{itemize}
+\end{verbatim}
+%
+Auch innerhalb eines \verb+\item+ darf wieder eine \verb+itemize+-Umgebung
+stehen, wobei dann kleine Striche statt P"unktchen erscheinen.
+
+Will man die einzelnen Eintr"age mit laufenden Nummern statt mit P"unktchen
+versehen, so ist die \verb+enumerate+-Umgebung zu verwenden.
+
+\section{Tabellen} \label{SECtab}
+%
+Tabelle~\ref{TABsuper} zeigt ein paar wesentliche Elemente, mit
+denen man einfache Tabellen produzieren kann. Die {\tt tabular}-Umgebung
+erh"alt dabei das Argument \verb+|l|rc|+, was bedeutet, da"s die Tabelle
+drei Spalten haben soll, wobei die Inhalte in der ersten Spalte linksb"undig,
+in der zweiten rechtsb"undig und in der dritten Spalte zentriert erscheinen 
+sollen. Die senkrechten Striche deuten an, welche Spalten durch Striche
+voneinander getrennt werden sollen.
+%
+\begin{verbatim}
+\begin{table}[htb]
+  \begin{center}
+  \begin{tabular}{|l|rc|}
+    \hline
+    aa   & bb    & cc \\
+    \hline
+    \hline
+    a    & b     & c  \\
+    left & right & center \\
+    aa   & !!    & ?? \\
+    \hline
+  \end{tabular}
+  \end{center}
+  \caption{Mustertabelle} \label{TABsuper}
+\end{table}
+\end{verbatim}
+%
+\begin{table}[htb]
+  \begin{center}
+  \begin{tabular}{|l|rc|}  % 1. Spalte linksbuendig, 2. rechtsbuendig, 3. Spalte zentriert
+    \hline
+    aa   & bb    & cc \\
+    \hline
+    \hline
+    a    & b     & c  \\
+    left & right & center \\
+    aa   & !!    & ?? \\
+    \hline
+  \end{tabular}
+  \end{center}
+  \caption{Mustertabelle} \label{TABsuper}
+\end{table}
+
+In den Tabelleneintr"agen selbst trennt das Kaufmanns-Und (``\verb+&+'')
+die Spalten voneinander. Jede Zeile mit Eintr"agen
+mu"s mit einem Zeilenumbruch (``\verb+\\+'') abgeschlossen werden.
+
+{\bf Tabellen-Plazierung:} Da die {\tt table}-Umgebung ein {\em floating object} 
+definiert\footnote{Genau so wie die {\tt figure}-Umgebung, s.\ Abschnitt~\ref{SUBSECbilder}.},
+das frei beweglich im Text ``schwimmt''\footnote{L"a"st man im \LaTeX-File direkt vor und
+nach der {\tt table}-Umgebung keine Leerzeile, so ``scrollt'' der Text um die Tabelle herum.} 
+und je nach aktueller Lage der Seitenumbr"uche an einer anderen Stelle landen kann, kann man der 
+{\tt table}-Umgebung einen Plazierungswunsch mitgeben: \verb+[htb]+ bedeutet, da"s die Tabelle
+vorzugsweise da erscheinen soll, wo sie im \LaTeX-File auftritt ({\tt `h'} wie {\em here}),
+andernfalls oben {\em (top)} auf der Seite, notfalls unten {\em (bottom)}.
+Allerdings haben schon viele Leute dar"uber geflucht, da"s \LaTeX\ sich ziemlich
+oft "uber die W"unsche seiner User hinwegsetzt, insbesondere bei gro"sen Gleitobjekten. 
+
+An dieser Stelle sei angemerkt, da"s es sich als sehr vorteilhaft erweisen
+wird, auch das \LaTeX-File einigerma"sen sauber zu formatieren.
+Obwohl es \LaTeX\ ``egal'' ist, wie man den Text in die Datei hackt, 
+sollten die folgenden Beispiele f"ur sich sprechen. Sowohl der folgende
+Ausschnitt
+%
+\begin{verbatim}
+ \begin{table}[htb]\begin{center}\begin{tabular}{|l|r|}\hline links
+&rechts     \\\hline        \hline 12    &  13  \\$  \pi  $   &   $
+\pi/2$           \\  \hline        \end{tabular}       \end{center}
+\caption{Mustertabelle}\end{table}
+\end{verbatim}
+%
+als auch die besser formatierte Version
+%
+\begin{verbatim}
+\begin{table}[htb]
+  \begin{center}
+  \begin{tabular}{|l|r|}
+    \hline
+    links & rechts  \\
+    \hline
+    \hline
+    12    & 13      \\
+    $\pi$ & $\pi/2$ \\
+    \hline
+  \end{tabular}
+  \end{center}
+\caption{Mustertabelle}
+\end{table}
+\end{verbatim}
+%
+liefern die folgende Tabelle:
+%
+\begin{table}[htb]
+  \begin{center}
+  \begin{tabular}{|l|r|} \hline
+    links & rechts  \\   \hline \hline
+    12    & 13      \\
+    $\pi$ & $\pi/2$ \\   \hline
+  \end{tabular}
+  \end{center}
+\caption{Mustertabelle}
+\end{table}
+
+Nur, wehe in der ersten Version hat man sich mit den Tabulatorzeichen (``\verb+&+'')
+verz"ahlt \dots
+
+

@@ -1,0 +1,82 @@
+\chapter{Introduction}
+\section{The Multi-Access Channel}
+The idea of sending information from several users through a common channel is not new. Centuries ago such an idea was realized through telegraphic systems. In which common channel is used for transmitting and receiving the information. \\ \\
+In order to utilize the available channel resource at maximum efficiency and with zero or tolerable interference among the users who share the common channel, several channel access schemes are proposed. \\ \\
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/multiple_access.eps}{0.8} }
+  \caption{Multiple-Access Communication}
+%  \label{Multiple-Access\\ Communication}
+\end{figure}
+In \textbf{Figure 2.1} we try to show the miniaturized scenario of multi-user communication in which several users share the common channel to transmit the information from one end to another end. \\ \\
+To realize the efficient use of the available channel resource, we propose some of the channel access schemes such as (Frequency Division Multiple Access) FDMA, (Time Division Multiple Access) TDMA and (Code Division Multiple Access) CDMA and state the reasons why access schemes such as FDMA and TDMA are not fully suitable to employ in multi-user communication environment. 
+\section{Frequency Division Multiple Access}
+Frequency Division Multiple Access (FDMA) is an analogue transmission techniques as shown in \textbf{Figure 2.2}, in which the available bandwidth is divided into sub-bands of frequencies or channel. \\ \\
+Each frequency channel is allotted to one or more users to carry either voice conversation or digital data. Using FDMA in this way, several users can share the available band without the risk of interference between them. \\ \\
+FDMA is the primary access scheme used in 1G (first-generation) analogue systems such as AMPS (Advanced Mobile Phone Systems).
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/fdma.eps}{0.8} }
+  \caption{Frequency Division Multiple Access}
+%  \label{FIGmust}
+\end{figure}
+We now list out the advantages and disadvantages of Frequency Division Multiple Access,
+\subsection{Advantages of FDMA}
+\begin{itemize}
+\item Channels can be assigned on-demand when a user needs to communicate from one end to another.
+\item Due to large symbol duration when compared to average delay spread leads to low Inter Symbol Interference (ISI).
+\item Since transmission is continuous, little synchronization required.
+\end{itemize}
+\subsection{Disadvantages of FDMA}
+\begin{itemize}
+\item Each channel must contain guard bands. In a bandwidth constrained channels guard bands occupies the considerable amount of bandwidth, resulting in waste of available resources.
+\item Each user is assigned to one or more bands, when users has got nothing to transmit those bands remain un-used and that leads to limited amount of spectral efficiency.
+\item FDMA can be used only in a narrow-band systems (e.g., 30 KHz frequency bands).
+\item It requires expensive filters to reduce adjacent channel interference.
+\item Inter-modulation leads to undesired RF radiation that leaks into other channel in FDMA systems.
+\item Generation of undesirable harmonics due to Inter-modulation that cause interference to other users in multi-user systems. 
+\end{itemize}
+\section{Time-Division Multiple Access}
+With the growth in complexity of the transmission schemes and increase in number of services, FDMA shows some in-consistency to adopt to the requirements. So the resulting access scheme is modified in way that available resource is divided into time-slices rather then sub-bands of frequency as shown in \textbf{Figure 2.3}.
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/tdma.eps}{0.8} }
+  \caption{Frequency Division Multiple Access}
+%  \label{FIGmust}
+\end{figure}
+One or more time slots are assigned to each user depends upon the demand. Each user is served either in a round-robin fashion or with certain scheduling when the priority of certain user is higher then the others. 
+\subsection{Advantages of TDMA}
+\begin{itemize}
+\item TDMA substantially improves the efficiency of analog cellular.
+\item The most obvious advantage is that it can be easily adopted to the transmission of data as well as voice communication. 
+\item TDMA offers the ability to carry data rates of 64 kbps to 120 Mbps, which is the multiple of 64 kbps. This enables to offer services like fax, data and SMS as well as bandwidth-intensive applications such as multimedia and videoconferencing. 
+\item TDMA separates users in time, which ensures that they will not interfere with other users from simultaneous transmissions.
+\end{itemize}
+\subsection{Disadvantages of TDMA}
+\begin{itemize}
+\item Requires careful time synchronization.
+\item One of the primary disadvantages of TDMA is that each user has a pre-assigned time slot. When user has got nothing transmit during its turn, those time-slots cannot be utilized and leads to possible wasting of bandwidth. 
+\item During roaming from one cell to another cell, users are not allotted to a particular time-slot on one cell to a particular time-slot of another cell. When all the time-slots are occupied in the another cell there is possibility that a call might be dropped.
+\end{itemize}
+\section{Code Division Multiple Access}
+The channel-sharing approaches which we discuss in \textbf{section 2.2} and \textbf{section 2.3} are based on the philosophy that only one user can occupy the time/frequency slot at a given time, if this condition is violated then the receiver could not able to demodulate the user successfully.\\ \\
+The multiple-access schemes in \textbf{section 2.2} and \textbf{section 2.3} fall into a drawback particularly when applied in mobile communication environment, where all users have to transmit simultaneously over a common channel. \\ \\
+Now the question arises, how users co-exist in time/frequency without interfering with each other? \\ \\
+Answer is to use codes or signals to separate users as shown in \textbf{Figure 2.4}. The codes assigned to one user is orthogonal to the codes assigned to other users. If the orthogonality is maintained the separation of users become very simple at the receiver side.
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/cdma.eps}{0.8} }
+  \caption{Code Division Multiple Access}
+%  \label{FIGmust}
+\end{figure}
+We now have to introduce an inherent component in CDMA is spreading. \\ \\
+Spreading is the process of extending the bandwidth of the information signals much beyond the information rate thereby signal energy is kept below the noise levels. \\ \\
+By doing so, it has an obvious advantage that if any interference affect the signal and it affects only the small part of the spread spectrum.\\ \\
+At the receiver side we recover the information by de-spreading the signal.\\ \\
+Systems which employs CDMA as access schemes can use either frequency hopping or direct-sequence techniques to spread the signals. \\ \\
+Since the type of spread spectrum to employ in a communication system solely depends upon the type of modulation used in that system, we use BPSK to modulate the signals and our obvious choice is to choose direct-sequence spread spectrum techniques to spread the information signals.
+\subsection{Direct-Sequence Spread Spectrum}
+In this section we will give a short introduction to Direct-Sequence (DS) spread spectrum technique. In which the information bits are directly multiplied with the spreading sequence. As we know that spreading sequence used in DS spread spectrum are like those of pseudo-noise, then the signals after spreading looks like a pseudo-noise to the un-intended user. So demodulation is not possible unless the user knows the spreading sequence.\\ \\
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/cdma.eps}{0.8} }
+  \caption{Code Division Multiple Access}
+%  \label{FIGmust}
+\end{figure}
+The feature such as pseudo-noise appearance of information signals to the unintended users are the ideal requirements for an access scheme to be employed in multi-user communication environment. \\ \\
+We will illustrate the process of spreading with very simple example as shown in \textbf{Figure 2.5}, in which the information bits are directly multiplied with the spreading sequence resulting in a spread spectrum.

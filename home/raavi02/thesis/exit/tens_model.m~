@@ -1,0 +1,24 @@
+clear all;
+close all;
+N_samples=1e5;
+I_a   = [0.001 0.05:0.05:0.95 0.999].'; %ten Brink's spacing
+sigma2_a = [0.001 0.01:0.002:50].';
+sigma_a  = sqrt(sigma2_a);
+tmp      = zeros(length(sigma2_a),1);
+for run2=1:length(sigma2_a)
+    delta = 10*sigma_a(run2)/N_samples;
+    x     = -10*sigma_a(run2):delta:20*sigma_a(run2);  
+    tmp(run2) = sum(exp(-(x-sigma2_a(run2)/2).^2/2/sigma2_a(run2)).*(1-log2(1+exp(-x))))...
+        / sqrt(2*pi*sigma2_a(run2)) * delta;
+end
+sigma2_aa = interp1(tmp,sigma2_a,I_a);
+sigma_a  = sqrt(sigma2_aa);
+
+title('t');
+xlabel('x');
+ylabel('y');
+
+set(gcf,'paperposition',[0 0 4.5 3.0]);
+set(gca,'fontname','times','fontsize',10);
+plot(sigma2_aa,I_a);
+print -deps tens_model_psfrag.eps

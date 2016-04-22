@@ -1,0 +1,169 @@
+\chapter{Mathematisches} \label{CPTmath}
+%
+In kaum einem im Arbeitsbereich Nachrichtentechnik verfa"sten Dokument 
+wird man wohl um die Darstellung von mathematischen Zusammenh"angen 
+herumkommen. Deshalb geht es in diesem Kapitel um die Darstellung von
+Formeln, Gleichungen, Matrizen etc. Auf diesem Gebiet zeigen sich viele
+St"arken von \LaTeX. So hat es einen speziellen {\em Mathemodus}, in den
+man durch ein Dollarzeichen (``\verb+$+'') oder eine der Gleichungsumgebungen
+kommt. Im Mathemodus sind dann unz"ahlige Kommandos verf"ugbar, die man
+f"ur mathematische Darstellungen unbedingt ben"otigt. 
+
+\section{Mathemodus im Flie"stext} \label{SECfliess}
+
+Variablen, Formelzeichen und kurze Formeln mitten im Satz werden einfach in 
+{\tt \$}'s eingeschlossen. So erzeugt zum Beispiel \verb+$12x - y = \sqrt{\pi}$+
+die Gleichung $12x - y = \sqrt{\pi}$. 
+
+Allerdings sollte man nicht versuchen,
+beliebig gro"se Konstrukte in den Flie"stext einzubauen: insbesondere Br"uche
+sollten besser mittels \verb+$1/2$+ als druch \verb+$\frac{1}{2}$+ dargestellt werden, 
+da ersteres den lesbaren Output $1/2$ liefert, wogegen die \verb+\frac+-Konstruktion 
+mickrig wird: $\frac{1}{2}$.
+
+Man beachte, da"s auch einzelne Buchstaben
+(sprich: Variablennamen) im Textmodus anders aussehen als im Mathemodus. Bsp.:
+N im Textmodus und $N$ im Mathemodus (\verb+$N$+).
+
+\section{Einfache Gleichungen} \label{SECeinfg}
+
+Komplexere Formeln m"ussen h"aufig {\em abgesetzt} vom Rest des Textes erscheinen, 
+wobei man eine Variante {\em ohne} und eine {\em mit} fortlaufender 
+Gleichungsnumerierung unterscheidet. Die Zeilen 
+%
+\begin{verbatim}
+\begin{displaymath}
+  \sum_{i=0}^{n} |x_i| \neq \int_{-\alpha}^{\infty} \eta \, d\eta
+\end{displaymath}
+\end{verbatim}
+%
+ergeben die folgende Gleichung ohne Nummer:
+%
+\begin{displaymath}
+  \sum_{i=0}^{n} |x_i| \neq \int_{-\alpha}^{\infty} \eta \, d\eta
+\end{displaymath}
+%
+Tippm"ude Leute k"onnen statt \verb+\begin{displaymath}+ und \verb+\end{displaymath}+
+auch einfach \verb+\[+ bzw.\ \verb+\]+ oder auch \verb+$$+ verwenden.
+
+Die folgende Gleichung mit fortlaufender Numerierung
+%
+\begin{equation} \label{EQmit}
+  \sum_{i=0}^{n-1} x_{ij}^2 \approx 
+    2\Delta \cdot \left(\int_{-\pi}^{\pi} \frac{\Omega}{2} \, d\Omega \right)
+\end{equation}
+%
+wurde durch 
+%
+\begin{verbatim}
+\begin{equation} \label{EQmit}
+  \sum_{i=0}^{n-1} x_{ij}^2 \approx 
+    2\Delta \cdot \left(\int_{-\pi}^{\pi} \frac{\Omega}{2} \, d\Omega \right)
+\end{equation}
+\end{verbatim}
+%
+erzielt. Dabei kann mit \verb+\ref{EQmit}+ auf die Gleichungsnummer zugegriffen
+werden (s.~Abschnitt~\ref{SECverw}).
+
+\section{Mehrzeilige Gleichungen} \label{SECmehrg}
+
+Mehrzeilige Formeln werden dann verwendet, wenn die Formel ganz einfach zu lang ist
+oder mehrere separate Gleichungen an ihren Gleichheitszeichen horizontal ausgerichtet
+werden sollen. Dazu verwendet man die {\tt eqnarray}-Umgebung. 
+Auch hier kann entweder die automatische Gleichungsnumerierung benutzt 
+werden oder auch nicht.
+Die Zeilen
+%
+\begin{verbatim}
+\begin{eqnarray*}
+a &=& A \times B\\
+  &=& \prod_{j=1}^{n} C_j \equiv \prod_{j=1}^{n} A_j  
+           \quad \mbox{f"ur}\quad C_j = A_j\quad ,  
+\end{eqnarray*}
+\end{verbatim}
+%
+erzeugen die folgende nichtnumerierte Gleichung
+%
+\begin{eqnarray*}
+a &=& A \times B\\
+  &=& \prod_{j=1}^{n} C_j \equiv \prod_{j=1}^{n} A_j  
+           \quad \mbox{f"ur}\quad C_j = A_j\quad ,  
+\end{eqnarray*}
+%
+w"ahrend mit Numerierung sogar einzelne Zeilen von derselben einzeln 
+ausgenommen werden k"onnen, wie die folgende Gleichung zeigt:
+%
+\begin{verbatim}
+\begin{eqnarray} 
+a &=&       b + \nu + \mu      \label{EQbnumu}\\
+  &=&       3 + 4   + 5        \nonumber\\
+A &\neq&    \beta + \nu + \mu  \\
+  &\approx& 3.14  + 4.1 + 5.2  \nonumber\\
+  &=&       1244\cdot 10^{-2}  \nonumber   \quad .
+\end{eqnarray}
+\end{verbatim}
+%
+\begin{eqnarray} 
+a &=&       b + \nu + \mu      \label{EQbnumu}\\
+  &=&       3 + 4   + 5        \nonumber\\
+A &\neq&    \beta + \nu + \mu  \\
+  &\approx& 3.14  + 4.1 + 5.2  \nonumber\\
+  &=&       1244\cdot 10^{-2}  \nonumber   \quad .
+\end{eqnarray}
+%
+Alle bisherigen Gleichungsformel haben ein gemeinsames Kennzeichen.
+Sie setzen \LaTeX\ in den {\em Mathemodus}. Viele der oben gezeigten Befehle
+(z.B.\ alle griechischen Buchstaben, die Hoch- und Tiefstellung mit ``\verb+^+'' 
+bzw.\ ``\verb+_+'', das Integral-, Summen- und Produktzeichen etc).
+sind nur im Mathemodus zul"assig und f"uhren zu Fehlern, wenn man versucht,
+sie im Textmodus anzuwenden.
+
+\section{Weitere Befehle im Mathemodus} \label{SECbeisp}
+%
+\begin{itemize}
+\item Vergleichssymbole: $3<2$ (\verb+$3<2$+);\quad  $x \leq y$ (\verb+$x \leq y$+);\quad $a \gg b$ (\verb+$a \gg b$+).
+\item Funktionen sind \underline{keine} Variablen, werden also 
+      nicht etwa kursiv, sondern als normaler Text dargestellt.
+      Dazu stehen die Befehle \verb+\sin, \log, \lim, \max, \det+ im Mathemodus zur Verf"ugung. 
+      $$
+      \sin{x}\neq sin x, \ \log(10), \ \lim_{t\rightarrow\infty} y(t)=0, \
+            \max_{j\neq i} V_j, \ \det{A}, \quad \ldots
+      $$
+\item Br"uche: \verb+$\frac{\pi^2}{2}$+ erzeugt im Flie"stext den kleinen Output $\frac{\pi^2}{2}$,
+      in der Gleichungsumgebung dagegen:
+$$\frac{\pi^2}{2}$$
+\item Die folgende $(m \times n)$ Matrix ${\bfm A}$ 
+%
+$$
+{\bfm A} := 
+\left(\begin{array}{cccc}   % Vier Spalten mit zentrierten ("c") Elementen
+  a_{11} & a_{12} & \cdots & a_{1n}\\
+  a_{21} & a_{22} & \cdots & a_{2n}\\
+  \vdots & \vdots & \ddots & \vdots\\
+  a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{array}\right)
+$$
+%
+wurde mit Hilfe der {\tt array}-Umgebung dargestellt.
+%
+\begin{verbatim}
+$$
+{\bfm A} := 
+\left(\begin{array}{cccc}   % Vier Spalten mit zentrierten ("c") Elementen
+  a_{11} & a_{12} & \cdots & a_{1n}\\
+  a_{21} & a_{22} & \cdots & a_{2n}\\
+  \vdots & \vdots & \ddots & \vdots\\
+  a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{array}\right)
+$$
+\end{verbatim}
+\item Faltung: \verb+$y(t)=h(t)\ast x(t)$+ erzeugt das Resultat $y(t)=h(t)\ast x(t)$.
+\item Punkte: $\cdot$  (\verb+$\cdot$+); \quad  $\ldots$ (\verb+$\ldots$+);\quad   
+              $\cdots$ (\verb+$\cdots$+);\quad  $\vdots$ (\verb+$\vdots$+);\quad
+              $\ddots$ (\verb+$\ddots$+)
+\item Folgepfeile: so $U \rightarrow X$ (mit \verb+\rightarrow+) oder so: $U \Rightarrow X$ (mit \verb+\Rightarrow+)
+%
+\end{itemize}
+
+
+% EOF

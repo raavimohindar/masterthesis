@@ -1,0 +1,43 @@
+This is C:\texmf\miktex\bin\makeindex.EXE, version 2.14 [02-Oct-2002] (with Thai support).
+Scanning input file dummy...
+!! Input index error (file = dummy, line = 1):
+   -- Unknown index keyword \documentclass.
+!! Input index error (file = dummy, line = 2):
+   -- Unknown index keyword \renewcommand.
+!! Input index error (file = dummy, line = 3):
+   -- Unknown index keyword \input.
+!! Input index error (file = dummy, line = 4):
+   -- Unknown index keyword \input.
+!! Input index error (file = dummy, line = 5):
+   -- Unknown index keyword \usepackage.
+!! Input index error (file = dummy, line = 6):
+   -- Unknown index keyword \begin.
+!! Input index error (file = dummy, line = 7):
+   -- Unknown index keyword \begin.
+!! Input index error (file = dummy, line = 8):
+   -- Unknown index keyword \begin.
+!! Input index error (file = dummy, line = 10):
+   -- Unknown index keyword \psfrag.
+!! Input index error (file = dummy, line = 11):
+   -- Unknown index keyword \psfrag.
+!! Input index error (file = dummy, line = 12):
+   -- Unknown index keyword \psfrag.
+!! Input index error (file = dummy, line = 13):
+   -- Unknown index keyword \psfrag.
+!! Input index error (file = dummy, line = 14):
+   -- Unknown index keyword \psfrag.
+!! Input index error (file = dummy, line = 15):
+   -- Unknown index keyword \psfrag.
+!! Input index error (file = dummy, line = 16):
+   -- Unknown index keyword \psfrag.
+!! Input index error (file = dummy, line = 19):
+   -- Unknown index keyword \includegraphics.
+!! Input index error (file = dummy, line = 20):
+   -- Unknown index keyword \end.
+!! Input index error (file = dummy, line = 21):
+   -- Unknown index keyword \end.
+!! Input index error (file = dummy, line = 22):
+   -- Unknown index keyword \end.
+done (0 entries accepted, 19 rejected).
+Nothing written in dummy.ind.
+Transcript written in dummy.ilg.

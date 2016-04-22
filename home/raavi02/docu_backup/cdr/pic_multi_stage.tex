@@ -1,0 +1,40 @@
+\documentclass{article}
+\renewcommand{\thepage}{}
+\input{latex2e}
+\input{mathe}
+\usepackage{psfrag}
+\begin{document}
+\begin{figure}[htb]
+  \begin{center}
+
+
+        \psfrag{Y}[c][c]{$\mathbf{\mathrm{y}}$}
+        \psfrag{R1}[c][c]{$r_1$}
+        \psfrag{R2}[c][c]{$r_U$}
+\small
+        \psfrag{M1}[c][c]{\small$M_{1,1}^{-1}$}
+        \psfrag{M2}[c][c]{\footnotesize$M_{U,U}^{-1}$}
+        \psfrag{M3}[c][c]{\footnotesize$M_{1,1}^{-1}$}
+        \psfrag{M4}[c][c]{\footnotesize$M_{U,U}^{-1}$}
+        \psfrag{M5}[c][c]{\footnotesize$M_{1,1}^{-1}$}
+        \psfrag{M6}[c][c]{\footnotesize$M_{U,U}^{-1}$}
+
+        \psfrag{A1}[c][c]{\footnotesize$\hat{a}_1^{(0)}$}
+        \psfrag{A2}[c][c]{\footnotesize$\hat{a}_U^{(0)}$}
+        \psfrag{A3}[c][c]{\footnotesize$\hat{a}_1^{(1)}$}
+        \psfrag{A4}[c][c]{\footnotesize$\hat{a}_U^{(1)}$}
+        \psfrag{A5}[c][c]{\footnotesize$\hat{a}_1^{(2)}$}
+        \psfrag{A6}[c][c]{\footnotesize$\hat{a}_U^{(2)}$}
+
+        \psfrag{X1}[c][c]{\footnotesize$\sum\limits_{u=2}^{U}M_{1,u}\hat{a}_u^{(0)}$}
+        \psfrag{X2}[c][c]{\footnotesize$\sum\limits_{u=1}^{U-1}M_{U,u}\hat{a}_u^{(0)}$}
+        \psfrag{X3}[c][c]{\footnotesize$\sum\limits_{u=2}^{U}M_{1,u}\hat{a}_u^{(1)}$}
+        \psfrag{X4}[c][c]{\footnotesize$\sum\limits_{u=1}^{U-1}M_{U,u}\hat{a}_u^{(1)}$}
+\normalsize
+
+
+
+    \includegraphics{pic_multi_stage_psfrag.eps}
+    \end{center}
+\end{figure}
+\end{document}

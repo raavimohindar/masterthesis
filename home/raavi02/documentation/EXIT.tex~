@@ -1,0 +1,17 @@
+\documentclass{article}
+\renewcommand{\thepage}{}
+\input{latex2e}
+\input{mathe}
+\usepackage{psfrag}
+\begin{document}
+\begin{figure}[htb]
+  \begin{center}
+
+    	\psfrag{t}[c][c]{$$}
+        \psfrag{x}[c][c]{$\bar{I}_a^{jp}=I_t^D\rightarrow$}
+        \psfrag{y}[c][c]{$\bar{I}_e^{jp}=I_a^D\rightarrow$}
+
+    \includegraphics{exit_trajectories_3dB_pic_fl_psfrag.eps}
+    \end{center}
+\end{figure}
+\end{document}

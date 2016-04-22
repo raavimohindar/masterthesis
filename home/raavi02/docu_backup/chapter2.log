@@ -1,0 +1,21 @@
+This is e-TeX, Version 3.141592-2.2 (MiKTeX 2.4) (preloaded format=latex 2005.9.24)  13 OCT 2005 13:05
+entering extended mode
+**chapter2.tex
+(chapter2.tex
+LaTeX2e <2003/12/01>
+Babel <v3.8a> and hyphenation patterns for english, french, german, ngerman, du
+mylang, nohyphenation, loaded.
+! Undefined control sequence.
+l.1 \chapter
+            {Introduction}
+? x
+ 
+Here is how much of TeX's memory you used:
+ 6 strings out of 95898
+ 56 string characters out of 1195288
+ 44800 words of memory out of 1048577
+ 3142 multiletter control sequences out of 60000
+ 3640 words of font info for 14 fonts, out of 500000 for 1000
+ 14 hyphenation exceptions out of 607
+ 5i,0n,1p,40b,8s stack positions out of 1500i,500n,5000p,200000b,32768s
+No pages of output.

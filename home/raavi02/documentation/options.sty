@@ -1,0 +1,13 @@
+\def\BaseBlock#1#2#3#4#5{%    #1 = offset of vertical rule
+   \vbox{%                    #2 = thickness of vertical rule
+     \setbox0=\hbox{#5}%      #3 = offset of horizontal rule
+     \offinterlineskip%       #4 = thickness of horizontal rule
+     \hbox{%                  #5 = information
+        \copy0%
+        \dimen0=\ht0
+        \advance\dimen0 by -#1
+        \vrule height\dimen0 width#2}%
+        \hbox{\hskip#3\dimen0=\wd0\advance\dimen0 by -#3
+        \advance\dimen0 by #2 \vrule height#4 width\dimen0}}}
+\def\shadow#1{\BaseBlock{4pt}{3pt}{4pt}{3pt}{{\fboxsep=10pt\fbox{#1}}}}
+

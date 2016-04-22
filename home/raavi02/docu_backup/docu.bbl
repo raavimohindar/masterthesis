@@ -1,0 +1,38 @@
+\begin{thebibliography}{1}
+
+\bibitem{GC}
+Marco~Hernandez Alessandro~Nordio and Giuseppe Caire.
+\newblock {D}esign and {P}erformance of a {L}ow-{C}omplexity {I}terative
+  {M}ultiuser {J}oint {D}ecoder {B}ased on {V}iterbi {D}ecoding and {P}arallel
+  {I}nterference {C}ancellation.
+\newblock In {\em Proc. IEEE International Conference on Communications},
+  April, 2002.
+
+\bibitem{TC91}
+T.M. Cover and J.A. Thomas.
+\newblock {\em {E}lements of {I}formation {T}heory}.
+\newblock Wiley-Interscience, {N}ew {J}ersey, 1991.
+
+\bibitem{Kam04}
+K.-D. Kammeyer.
+\newblock {\em {N}achrichtenuebertragung}.
+\newblock {B}.{G}.{T}eubner {V}erlag, {S}tuttgart, 2004.
+
+\bibitem{Kuehn}
+Volker Kuehn.
+\newblock {A}nalysis of {I}terative {M}ulti-user {D}etection {S}chemes.
+\newblock In {\em IEEE International Symposium on Spread Spectrum Techniques
+  and Applications (ISSSTA) Sydney, Australia}, 30.8.2004.
+
+\bibitem{Pro01}
+J.G. Proakis.
+\newblock {\em {Digital Communication}}.
+\newblock McGraw-Hill Higher Education, {S}ingapore, 2001.
+
+\bibitem{VTC}
+Christian Schlegel and Zhenning Shi.
+\newblock {O}ptimal {P}ower {A}llocation and {C}ode {S}election in {I}terative
+  {D}etection of {R}andom {CDMA}.
+\newblock In {\em Seminar on Digital Communication, Zurich}, 2004.
+
+\end{thebibliography}

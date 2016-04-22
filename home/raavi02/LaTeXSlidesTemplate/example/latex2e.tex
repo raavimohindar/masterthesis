@@ -1,0 +1,45 @@
+% #####################################################################################
+% ##       latex2e.tex - LaTeX 2e-specific Definitions  by  Dieter Boss, 01/96       ##
+% ##  -----------------------------------------------------------------------------  ##
+% ##  The following commands are defined appropriately:                              ##
+% ##  - \comment{}      : Multiple line comments                                     ##
+% ##  - \bild{file}{1.0}: Include graphics and scale in multiples of "\textwidth"    ##
+% ##  - \centerbild{...}: Include centered graphics                                  ##
+% ##  - \bfm            : Bold face in math mode                                     ##
+% ##  - \bf, \sf ...    : can be applied simultaneously (and work together!)         ##
+% ##  -----------------------------------------------------------------------------  ##
+% ##  Example of a LaTeX2e document header:                                          ##
+% ##    \documentclass[twocolumn]{article}                                           ##
+% ##    \usepackage{rotate,colordvi}  % Swap "colordvi" for "blackdvi" when printing ##
+% ##    \usepackage[english]{babel}   %     a color LaTeX document on a B/W printer. ##
+% ##    \usepackage{options,my9pt}    % ... and "showkeys" to view names of labels.  ##
+% ##    \input{latex2e.tex}           % Include this file.                           ##
+% ##    \input{mathe.tex}             % Must be included AFTER this file!            ##
+% #####################################################################################
+
+% Komfortables Auskommentieren ganzer LaTeX-Passagen
+\newcommand{\comment}[1]{}
+
+% Grafikeinbindung
+\usepackage[dvips]{graphicx}
+\newcommand{\bildwi}[2]{\includegraphics[width=#2\textwidth]{#1}}
+\newcommand{\bildsc}[2]{\includegraphics[scale=#2]{#1}}
+\newcommand{\bild}[2]{\includegraphics[width=#2\textwidth]{#1}}  % for compatibility
+\newcommand{\centerbild}[1]{\centerline{#1}}                     % for compatibility
+
+% Fettschrift im Mathemodus
+\newcommand{\bfm}[1]{\mathbf{#1}}
+
+% Definiere \bf, \sf etc. so um, dass sie sich bei gleichzeitiger Anwendung 
+% sich nicht gegenseitig unwirksam machen.
+\renewcommand{\rm}{\rmfamily}
+\renewcommand{\sf}{\sffamily}
+\renewcommand{\tt}{\ttfamily}
+\renewcommand{\bf}{\bfseries}
+\renewcommand{\it}{\itshape}
+\renewcommand{\sl}{\slshape}
+\renewcommand{\sc}{\scshape}
+\newcommand{\md}{\mdseries}
+\newcommand{\up}{\upshape}
+
+% ###############  EOF  ###############

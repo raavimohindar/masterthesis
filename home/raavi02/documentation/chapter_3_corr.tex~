@@ -1,0 +1,284 @@
+\chapter{Analysis of Coded CDMA}
+In this chapter we built a coded CDMA systems to accommodate $U$ users to take part in communication. The information bits $\mathrm{\mathbf{d}}_u$ of user $u$, $1\leq u \leq U$ are encoded by convolutional codes with rate $1/n$, $1\leq n \leq N$ is the number of coded bits. BPSK technique is used to map the coded bits to $\mathrm{\mathbf{a}}_u\;=\;\left[a_u[0],\dots,a_u[N-1]\right]$.\\ \\
+Mapped symbols are interleaved by random-interleavers $\Pi_u$ of length $L_\pi$, which then spreaded by pseudo random spreading codes $\mathrm{\mathbf{c}}_u\;=\;\left[c_{u,1},\dots,c_{u,N_s}\right]$ with $N_s$ as the spreading factor. Then the resultant signal is and transmitted over an AWGN channel.\\ \\
+At the receiver, upon receiving the superposition of all transmitted signals $\mathrm{\mathbf{x}}$ which are corrupted by additive white Gaussian noise $\mathrm{\mathbf{n}}$ with power $\sigma^2_n$. \\ \\
+Now for the convenient in analysis point of view, we express spreading codes into a matrix and we write the received vector as follows
+\begin{equation}
+\mathrm{\mathbf{y}}=\mathrm{\mathbf{H}}\cdot\mathrm{\mathbf{x}}+\mathrm{\mathbf{n}}=\mathrm{\mathbf{S}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{n}}
+\end{equation}
+The received vector $\mathrm{\mathbf{y}}$ is feed to bank of matched filters which de-spreads the signal and delivers the sufficient statistics, which are given as
+\begin{equation}
+\mathrm{\mathbf{r}}=\mathrm{\mathbf{S}}^H\cdot \mathrm{\mathbf{y}}=\mathrm{\mathbf{R}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{\tilde{n}}}
+\end{equation}
+where $\mathrm{\mathbf{R}}\;=\;\mathrm{\mathbf{S}}^H\cdot\mathrm{\mathbf{S}}$ is the correlation matrix and modified noise vector denoted by $\mathrm{\mathbf{\tilde{n}}}\;=\;\mathrm{\mathbf{S}}^H\cdot\mathrm{\mathbf{n}}[k]$ with instantaneous covariance matrix $\Phi_{\tilde{n}\tilde{n}}[k]\;=\;E\{\tilde{n}[k]\tilde{n}^H\}\;=\;\sigma^2_n\cdot\mathrm{\mathbf{R}}$.\\ \\
+Having the sufficient statistics of all the users and applying optimum maximum likelihood detection of user information bits $d_u[i]$ is likely infeasible because the computation complexity grows exponentially with the growth of users. Hence we apply the scheme discussed in \textit{Chapter 4} where it employs Turbo principle for detecting user information bits more reliably.\\ \\
+In order to have continuation in our discussion, we briefly revisit the working principle of the scheme which employs the Turbo principle.\\ \\
+We start the process by feeding matched filter output to joint processor which then delivers the soft-output estimates of each user symbol $b_u[k]$. These estimates are de-interleaved and passed into soft-in/soft-out decoders. \\ \\
+Decoder delivers the estimates of $\hat{d}_u[i]$ for the information bit $d_u[i]$ and as well as likelihood values $L(\hat{b}_u[k])$ of the coded bits $b_u[k]$. When using Turbo principle the likelihood values $L(\hat{b}_u[k])$ are interleaved and passed through the non-linear function $tanh()$ which then joint processor use as a-priori information for subsequent processing to improve the estimates.\\ \\ This process is repeated until high reliability to make decision is obtained.\\ \\
+Such a system is shown in \textbf{Figure 5.1}.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/f1_2_1_conv_enc.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+Analyzing the convergence behavior such a system is an interesting challenge, since it require a common parameter that holds for all users. With that parameter such an analysis can be made possible. So our next quest is to find whether it is possible to analyze entire system with single parameter or not. It is not that long, a publication made by Joseph Boutros and Ciuseppe Caire under the title "Iterative Multiuser Joint Decoding: Unified Framework and Asymptotic Analysis" actually showed the single parameter dynamical model of the decoder. \\ \\
+This work has become a foundation for many analysis tools which were later came in and shed light on the study of convergence behavior of coded CDMA system.\\ \\
+In our work we study some of those tools and analyze the system with the results obtained from the simulations. Interestingly all the results are shown when parallel interference cancellation technique is employed in the system. Since, analyzing the system with serial interference cancellation poses N-dimensional problem. So, till today no publications in regard to that has been registered. \\ \\
+Keep in mind the N-dimensional problem and we approach in a slight different way has actually lead to a physical model which can efficiently analyze the system with serial interference cancellation. We discuss those approaches very soon in this chapter once we finish our discussion on various analysis tools for parallel interference cancellation. \\ \\
+Till today we have three different parameters based on which we analyze the coded CDMA systems by expression it into single-parameter dynamical model and those later emerges as three different analysis tools.\\ \\
+One concentrates on the mutual information between encoder input to the decoder input and the mutual information between the encoder output to the decoder output which eventually leads to very famous Extrinsic Information Transfer Characteristics (EXIT) charts. \\ \\
+Second one, even though there is no standard sequencing and we sequence just for our convenience, concentrates on amount of interference exit in the system during each and every iteration. Since interference is a one parameter common to all the users which is enough to characterize the system. Hence single parameter dynamical model can be obtained. We name, rather it was named as Multi-User Efficiency (ME). \\ \\
+Last but not the least, or till this time we consider this as last one concentrates on the variance or actually the statistical difference between the true data and the estimated date. Since, such an estimate is valid for all the users and it can stand as single parameter to characterize the whole system. Since, it involves variance and their transfers this analysis scheme is named as Varaince Transfer Characteristics (VTC). \\ \\
+For brevity we skip the description about the joint pre-processor and the soft-in/soft-out decoder, since it is well discussed in previous chapters. We directly start describing the analysis tools in detail. To remain all the analysis tools we are going to discuss in next three sections so to call as, employs parallel interference cancellation technique.
+\section{Extrinsic Information Transfer Characteristic (EXIT) Charts}
+Basic idea behind the EXIT charts are very simple, in which the mutual information between the components of the concatenated system are exchanged. For our understanding, what mutual information means we must give a generic formula and see what is calculated in that.\\  \\
+Let us illustrate with very simple example, that there exit binary signal $x$ and a continuously distributed signal $y$. Then the mutual information between $x$ and $y$ is given by a formula
+\begin{equation}
+I(x;y)=1+\frac{\hbox{$1$}}{\hbox{$2$}}\cdot \sum\limits_{d=\pm 1}\;\int\limits_{-\infty}^{\infty}p(y\vert x = d)\cdot \mathrm{log}\frac{\hbox{$p(y\vert x = d)$}}{\hbox{$p(y\vert x= 1)+p(y\vert x =-1)$}}dy
+\end{equation}
+There are very interesting properties about the mutual information which are well discussed in [Ref: Thomas and Cover], nevertheless mutual information tells how much the commonalities between the continuously distributed variable $y$ and the discrete information bits $x$. \\ \\ In reality, let $y$ is the received vector which is corrupted by additive white Gaussian noise and $x$ be the transmitted symbols and the mutual information between the both will tell how bad the channel or how high is the Signal-to-Noise ratio. \\ \\
+So, mutual information strongly depends upon Signal-to-Noise ratio (SNR). One simple property to conclude the discussion about the definition of mutual information. \\ \\
+Focusing on our main theme, we further proceed by addressing the main issue on modeling a-priori LLR's $L_a(\hat{b}_u)$.\\ \\
+An interesting approach adapted by Stephan ten Brink with regard to modeling is by superposition of transmitted data symbols $b_u$ and the white Gaussian noise which yields
+\begin{equation}
+L_a(\hat{b}_u)=\bar{n}_u b_u + n_u
+\end{equation}
+and we describe $n_u$ as white Gaussian noise with variance $\sigma_a^2$ and $\bar{n}_u\;=\;\sigma_a^2/2$. Now the mutual information information between $L_a(\hat{b}_u)$ and the true bits $b_u\;=\;\pm 1$ can be calculated by using (5.3) as follows
+\begin{equation}
+I(L_a(\hat{b}_u);b_u)=1-\frac{\hbox{$1$}}{\hbox{$\sqrt{2\pi\sigma_a^2}$}}\cdot\int\limits_{-\infty}^{\infty}e^{-\frac{(\xi-\sigma_a^2/2)^2}{2\sigma_a^2}}\cdot \mathrm{log}(1+e^{-\xi})d\xi
+\end{equation}
+as we see in the (5.5), such a modeling depends only on the variance $\sigma_a^2$.\\ \\
+Such a dependency is shown in \textbf{Figure 5.2}.
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/f1_2_1_conv_enc.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+We now depict the receiver structure in a separate \textbf{Figure 5.3} diagram for to get an idea for computation of mutual information between the components. 
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/f1_2_1_conv_enc.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+The mutual information at the input of each component can be modeled according to (5.4) which is quite an approximation which simplifies the requirement for the computations. A slightly different approach is adopted in calculating mutual information between $b_u$ and the output of the device is by calculating the histograms $\hat{p}(y\vert x)$ to estimate the probability densities $p(y\vert x)$.\\ \\
+Once the calculation is done and we see our-self having four different mutual information. Nothing to worry about the total since the information at the Joint Processor can be expressed as total information and the extrinsic information and as the same for the Decoder, hence the total four. \\ \\
+For simplicity we enlist those mutual information 
+\begin{eqnarray*}
+\begin{array}{lll}
+I_{a,u}^{jp}&=&I(L_a(\hat{b}_u);b_u) \\ \\
+I_{e,u}^{jp}&=&I(L(\hat{b}_u\vert \mathbf{\mathrm{r}})-L_a(\hat{b}_i);b_u) \\ \\
+I_{a,u}^D&=&I_{e,u}^{jp} \\ \\
+I_{t,u}^D&=&I_{a,u}^{jp} \\ \\
+\end{array}
+\end{eqnarray*}
+where $I_{a,u}^{jp}$ describes the mutual information of the $u$-th joint processor as a whole and $I_{e,u}^{jp}$ is the extrinsic part. $I_{a,u}^{D}$ describes the a-priori mutual information and $I_{t,u}^{D}$ is the total information. As we see in the later part in the enlist of equations that information at the output of the Joint Processor will act as a-priori information for the decoder and the vise-versa, thus obeying the turbo principle. \\ \\
+We now express the total a-priori mutual information as 
+\begin{equation}
+I_a^{jp}=\sum\limits_{u=1}^{U}I(L_a(\hat{b}_u);b_u)
+\end{equation}
+since user specific interleavers ensures the in-dependence between the signals of different users when so and from the properties of mutual information allows to sum up all the mutual information.\\ \\
+Till now we talk in general about the system but nothing in specific. For to obtain results we need to specify the parameters based on which we simulate the system. We choose an half-rated convolutional code with constraint length $L_c\;=\;3$ and the generators $g_1\;=\;5_8$ and $g_2\;=\;7_8$ to encode the information bits and then interleaved by random interleaver. We used pseudo random spreading codes with spreading factor $N_s\;=\;4$ and vary users $U\;=\;4$ or $U\;=\;8$ just to see how system behaves for load $\beta\;=\;1/2$ and $\beta\;=\;1$. \\ \\
+Since we use parallel interference cancellation and all users are affected by interference and noise by same way then we have perfect symmetry in the system. And also the a-priori and extrinsic mutual information are identical then we can average the mutual information as
+\begin{equation}
+\bar{I}_a^{jp}=\frac{\hbox{$1$}}{\hbox{$U$}}\cdot I_a^{jp}=\frac{\hbox{$1$}}{\hbox{$U$}}\cdot \sum\limits_{u=1}^{U}I(L_a(\hat{b}_u);b_u)
+\end{equation}
+and the extrinsic part is given as 
+\begin{equation}
+\bar{I}_e^{jp}=\frac{\hbox{$1$}}{\hbox{$U$}}\cdot \sum\limits_{u=1}^{U}I_{e,u}^{jp}
+\end{equation}
+\subsection{Transfer characteristics with Parallel Interference Canceler}
+In order to study the convergence properties of the whole system, we must at first study the transfer characteristics of the individual components. With the specified system parameters we present the transfer characteristics of the PIC in \textbf{Figure 5.4} \\
+We start our EXIT charts for half loaded system, i.e., $U=4$ and $N_s=4$ with SNR=0dB.
+\begin{figure*}[htb]
+\centerline{ \bildsc{exit_trajectories_0dB_pic.eps}{0.8}}
+\caption{EXIT chart for parallel interfernce cancellation at $E_s/N_0=0$dB}
+\end{figure*} 
+\newpage
+We now show series of plots with varying in SNR. \\ \\
+For SNR=\textbf{3dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{exit_trajectories_3dB_pic.eps}{0.8}}
+\caption{EXIT chart for parallel interfernce cancellation at $E_s/N_0=3$dB}
+\end{figure*}\\
+For SNR=\textbf{5dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{exit_trajectories_5dB_pic.eps}{0.8}}
+\caption{EXIT chart for parallel interfernce cancellation at $E_s/N_0=5$dB}
+\end{figure*}
+\newpage
+Now for the full-loaded system.\\\\
+For SNR=\textbf{0dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{exit_trajectories_0dB_fl_pic.eps}{0.8}}
+\caption{EXIT chart for PIC at $E_s/N_0=0$dB and $\beta=1$}
+\end{figure*}\\
+For SNR=\textbf{3dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{exit_trajectories_3dB_fl_pic.eps}{0.8}}
+\caption{EXIT chart for PIC at $E_s/N_0=3$dB and $\beta=1$}
+\end{figure*}\\
+\newpage
+For SNR=\textbf{5dB},
+\begin{figure*}[htb]
+\centerline{ \bildsc{exit_trajectories_5dB_fl_pic.eps}{0.8}}
+\caption{EXIT chart for PIC at $E_s/N_0=5$dB and $\beta=1$}
+\end{figure*}\\
+As we see in \textbf{Figure 5.4} mutual information strongly depends on Signal-to-Noise ratio, higher the SNR better is the mutual information at the Joint Processor output. For perfect a-priori information i.e., $\bar{I}_a^{jp}\;=\;1$ the interference is totally suppressed and we obtain single-user AWGN system.\\ \\
+As we know maximizing the mutual information leads to channel capacity, hence the extrinsic mutual information at the output equals the channel capacity $C(E_s/N_0)$. Any further iterations does not lead to any improvements.
+The convolutional code used in our system are also shown in \textbf{Figure 5.4}
+\newpage
+\section{Multi-User Efficiency(ME)}
+An another class of analysis tools in which the estimate of Multiple Access Interference (MAI) is obtained from the difference between the true and the estimated data. Once such an estimate is obtained and can be used to subtract on the signal to improve the decoding in the next iteration.\\ \\
+Since Multiple Access Interference can solely describe the system and hence the theory of Single-Parameter Dynamical model is applicable by which we can characterize the system by tracking the behavior of the estimates of Multiple Access Interference.\\ \\
+After a very simple introduction about what is Multi-User Efficiency we need to go bit more in detail with the help of mathematical tools and represent it in equations to make more convenient for analysis. \\ \\
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/f1_2_1_conv_enc.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+With the system model given in \textbf{Figure 5.5} we see the soft-output decoder realizes the Max-Log-MAP criterion and delivers the approximate estrinsic information $L_e(b_u)$, which then passed through the shaping function which delivers the soft-estimates of the coded symbols $\bar{b}$ where
+\begin{equation}
+\bar{b}=\mathrm{tanh}(L_e/2)
+\end{equation}br
+Now the basic parameters such as Signal-to-Interference-plus-noise-ratio(SINR) of each branch is given as
+\begin{equation}
+\mathrm{SINR}=2\sigma_d^2/(\sigma_n^2+\sigma_{\mathrm{MUI}}^2)
+\end{equation}
+which represents the amount of interference present in the system.\\ \\
+In case of perfect interference cancellation SINR turns into $\mathrm{SNR}\;=\;2E_s/N_0$, which is equivalent to single-user bound.\\ \\
+In (5.10) $\sigma_d^2$ is the variance of the desired signal and $\sigma_{\mathrm{MUI}}^2$ is the variance of the remaining multi-user interference after cancellation and mathematically it is written as
+\begin{equation}
+\sigma_{\mathrm{MUI}}^2=\sigma_d^2\cdot \mu(U-1)/N\hspace{7mm}\mathrm{and}\hspace{7mm}\mu=\mathrm{E}\{\vert\bar{b}-b\vert^2\}
+\end{equation}
+where $\mu$ is remaining mean squared error of the estimated symbols after decoding.\\ \\
+Now we define Multi-User Efficiency $\eta$ as the ratio between the SINR and SNR.
+\begin{equation}
+\eta=\frac{\hbox{$\mathrm{SINR}$}}{\hbox{$\mathrm{SNR}$}}=\frac{\hbox{$2\sigma_d^2/(\sigma_n^2+\sigma_{\textrm{MUI}}^2)$}}{\hbox{$2\sigma_d^2/\sigma_n^2$}}=\frac{\hbox{$1$}}{\hbox{$1+\beta\,\mu\,E_s/N_0$}}
+\end{equation}
+Interestingly when $\eta\;=\;1$ system is interference free and reaches the Single-User-Bound. \\ \\
+The single-parameter $\eta$ alone describes the system very well and we now plot the behavior of the iterative detection scheme. During the start of the iteration or at the first step we have only the matched filter outputs since, decoders does not deliver any a-priori information. \\ \\
+With that variance $\mu\;=\;1$ and the MUE becomes $\eta^{(1)}\;=\;1/(1+\beta\cdot E_s/N_0)$ and it is obvious $^{(1)}$ indicates the iteration.\\ \\
+After the decoding of all the user at once, the soft-estimates $\bar{b}$ of the transmitted symbols are obtained which can be used to cancel the interference during next iteration. \\ \\
+Now a slight ambiguity arises due to non-linear behavior of the decoder that $\mu$'s cannot be calculated. Hence, it has to be determined. With the convenience of single-parameter dynamical model the output error $\mu^{(m)}$ of the decoder in the $m$-th iteration depends on the SINR of the input or to MUE of the previous iteration.
+\begin{equation}
+\mu^{(m)}=g(\mathrm{SINR})=g\left(\eta^{(m-1)}\mathrm{SNR}\right)
+\end{equation}
+We see know that $\eta^{(m)}$ is self-dependent on $\mu^{(m)}$ then the MUE at iteration $m$ can be expressed as the function MUE of previous iteration $m-1$. \\ \\
+\begin{equation}
+\eta^{(m)}=f\left(\eta^{(m-1)}\right)
+\end{equation}
+Hence we plot the behavior of single-parameter dynamical model in \textbf{Figure 5.6}
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/f1_2_1_conv_enc.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+The transfer function in the plot describes the theoretical behavior and the trajectories are the measured ones. As we see that the detections starts the lower left corner and grows toward the upper right corner in the two-dimensional space. When perfect cancellation is obtained when $\eta\;=\;1$.
+\newpage
+\section{Variance Transfer Characteristics}
+The last in the sequence of estimation tools to analyze coded CDMA systems which employs iterative detection scheme with parallel interference cancellation is Variance Transfer Characteristics, in which the variance of the estimation error is exchanged in order to improve the estimates of the data during next iteration. \\ \\
+The principally the system model remains same but it changes a bit with notations and with that we present the model in the below \textbf{Figure 5.7}
+\begin{figure}[htb]
+\centerline{ \bildsc{ps/f1_2_1_conv_enc.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+we directly write the signal at the $k$-th spreader as
+\begin{equation}
+\mathrm{\mathbf{x}}_u[k]=\sqrt{P_u}\mathrm{\mathbf{C}}[k]\cdot\mathrm{\mathbf{a}}[k]
+\end{equation}
+where $P_u$ is the power of user $u$, $\mathrm{\mathbf{C}}[k]$ is the spreading matrix given in (3.9) and $\mathrm{\mathbf{a}}[k]$ is the vector of mapped bits mapped with BPSK modulation. The resulting vector $\mathrm{\mathbf{x}}[k]$ is transmitted over an Additive White Gaussian Noise (AWGN) channel results in addition of white noise. The received vector is given as
+\begin{equation}
+\mathrm{\mathbf{y}}=\mathrm{\mathbf{C}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{n}}
+\end{equation}
+Till now we have seen that the received vector is passed through the bank of matched filters, rather doing that way we follow a method proposed by Boutros and Caire to use cancellation at the front end. Then the received vector after the cancellation can be written as
+\begin{equation}
+\mathrm{\mathbf{y}}[k]=\sqrt{P_k}\,\mathrm{\mathbf{a}}[k]\mathrm{\mathbf{C}}[k]+\sum\limits_{\stackrel{m=1}{(m\neq k)}}^K\sqrt{P_m}\left(\mathrm{\mathbf{a}}[k]-\mathrm{\mathbf{\tilde{a}}}[k]\right)\mathrm{\mathbf{C}}[m]+\mathrm{\mathbf{n}}[k]
+\end{equation}
+where $\mathrm{\mathbf{\tilde{a}}}[m]$ is the soft estimate of the user obtained from the previous iteration and which is used to cancel the interference partially from users $m\neq k$.\\ \\
+Partially canceled signal $\mathrm{\mathbf{y}}[k]$ is passed through bank of matched filter which then delivers the sufficient statistics as
+\begin{equation}
+\mathrm{\mathbf{r}}[k]=\mathrm{\mathbf{C}}^H[k]\cdot\mathrm{\mathbf{y}}[k]=\mathrm{\mathbf{R}}[k]\cdot\mathrm{\mathbf{a}}[k]+\mathrm{\mathbf{\tilde{n}}}[k]
+\end{equation}
+which then passed through individual interleavers and sub-sequent FEC soft-in/soft-out decoders. Then the soft-outputs are feed as an a-priori information for the interference cancelers for to improve the decoding. This is exactly the turbo principle and it is well known for us.\\ \\
+From now we concentrate on (5.17) for the rest of the discussion to lay the foundation for the analysis tool which we define at the beginning of this section.\\ \\
+We now write the part of the equation (5.17) which tells the remaining interference or the interference affecting the user we concentrate as
+\begin{equation}
+\eta[k]=\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}\sqrt{P_m}\left(\mathrm{\mathbf{a}}[k]-\mathrm{\mathbf{\tilde{a}}}[k]\right)\mathrm{\mathbf{R}}[k]+\mathrm{\mathbf{\tilde{n}}}[k]
+\end{equation}
+Actually the above equation is an estimate of a random variable in general, so from the theory of random variable it is possible to assume such as estimate is unbiased with i.i.d of coded symbols makes us to calculate the first and second order statistics. \\ \\
+At first the first order statistics which is the mean of a random variable can be calculated as
+\begin{equation}
+\mathrm{E}[\eta[k]]=0
+\end{equation}
+since, mean of a random variable with the above given conditions is always zero. \\ \\
+Following the first order statistics we now proceed to calculate the second order statistics which is the variance of the random variable as
+\begin{equation}
+\mathrm{E}[\eta^2[k]]=\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}P_m\mathrm{E}\left[\left(\mathrm{\mathbf{a}}[k]-\mathrm{\mathbf{\tilde{a}}}[k]\right)^2\right]\mathrm{E}\left[R[k]^2\right]+\sigma^2
+\end{equation}
+We know that the random spreading codes which we employed in our system are i.i.d with $P(a=1/\sqrt{N})\;=\;P(a=-1/\sqrt{N})\;=\;1/2$ and the $\mathrm{E}\left[\left(\mathrm{\mathbf{R}}[k]\right)\right]\;=\;1/N$
+hence (5.21) becomes
+\begin{equation}
+\sigma^2_k=\mathrm{E}[\eta^2[k]]=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}P_m\mathrm{E}\left[\left(\mathrm{\mathbf{a}}[k]-\mathrm{\mathbf{\tilde{a}}}[k]\right)^2\right]+\sigma^2
+\end{equation}
+For equal power system, i.e., equal power to all the users $P_m\;=\;P$ we now the normalize the above equation to obtain
+\begin{equation}
+\sigma_{\mathrm{eff}}^2=\frac{\hbox{$K-1$}}{\hbox{$N$}}\sigma_d^2+\frac{\hbox{$\sigma^2$}}{\hbox{$P$}}
+\end{equation}
+where $\sigma_d^2\;=\;\mathrm{E}\left[\left(\mathrm{\mathbf{a}}[k]-\mathrm{\mathbf{\tilde{a}}}[k]\right)^2\right]$. \\ \\
+In general, the estimation error $\left(\mathrm{\mathbf{a}}[k]-\mathrm{\mathbf{\tilde{a}}})^2\right)$ is the function of the input signal-to-noise ratio of each decoder, as well as the particular error control coded used.\\ \\
+The function can be written as
+\begin{equation}
+\mathrm{E}\left[\left(\mathrm{\mathbf{a}}[k]-\mathrm{\mathbf{\tilde{a}}}[k]\right)^2\right]=g\left(\frac{\hbox{$\sigma_k^2$}}{\hbox{$P_k$}}\right)
+\end{equation}
+where $g(x)$ is the variance transfer characteristic of the code. \\ \\
+Following the derivation for iterative equation given in [Schlegel and Shi] and using the asymptotic negligibility we finally obtain an equation which is fit to represent our system with the single-parameter dynamical model, such an equation is given as
+\begin{equation}
+\sigma_v^2=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{m=1}^{K}P_mg(\frac{\hbox{$\sigma_{v-1}^2$}}{\hbox{$P_m$}})+\sigma^2
+\end{equation}
+For equal power for all the users the dynamical system can be represented as
+\begin{equation}
+\sigma_v^2=f(\sigma^2_{d,v-1}); \hspace{10mm} \sigma^2_{d,v-1}=g(\sigma^2_{v-1})
+\end{equation}
+\newpage
+We now show the transfer characteristic plots of half loaded system i.e., with number of users $U=4$ and spreading factor $N_s=8$. 
+\begin{figure}[htb]
+\centerline{ \bildsc{VTC_trajectories_4_8_0dB.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+\textbf{Figure 5.8} shows the transfer characteristic plots for SNR is kept at \textbf{0dB}.\\ \\
+We now vary SNR and see what kind of characteristic curves we obtain. \\ \\
+For SNR=\textbf{3dB}, VTC is shown in \textbf{Figure 5.9}
+\begin{figure}[htb]
+\centerline{ \bildsc{VTC_trajectories_4_8_3dB.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+\newpage
+For SNR=\textbf{5dB}, trasnfer characteristics is shown in \textbf{Figure 5.10}
+\begin{figure}[htb]
+\centerline{ \bildsc{VTC_trajectories_4_8_5dB.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}\\
+To complete our discussion it will be interesting to show the Variance Transfer Characteristics for full loaded system i.e., $U=8$ and $N_s=8$ and as we done we obtain the plots for various SNR.\\ \\
+For SNR=\textbf{0dB}, VTC is shown in \textbf{Figure 5.11}
+\begin{figure}[htb]
+\centerline{ \bildsc{VTC_trajectories_8_8_0dB.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}
+\newpage
+For SNR=\textbf{3dB} we obtain the plot in \textbf{Figure 5.12}
+\begin{figure}[htb]
+\centerline{ \bildsc{VTC_trajectories_8_8_3dB.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}\\
+For SNR=\textbf{5dB} VTC turned out be in \textbf{Figure 5.12}
+\begin{figure}[htb]
+\centerline{ \bildsc{VTC_trajectories_8_8_5dB.eps}{0.8} }
+\caption{Coded CDMA Transmission Block}
+%\label{Coded CDMA}
+\end{figure}\\

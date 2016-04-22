@@ -1,0 +1,98 @@
+% mathe.tex - Mathematische (Mengen)Zeichen, Symbole und Funktionen
+%             fuer LaTeX 2.09 und LaTeX 2e
+%
+%             Original von Dieter Boss, 08/94
+%             Letzte Aenderung: H.Schmidt, 26-April-2000 (NDFT ... NIFFT)
+%
+
+\newcommand{\ds}[1]{\displaystyle{#1}}    % Kurzschreibweise fuer \displaystyle
+\newcommand{\ml}[1]{\hbox{\large $#1$}}   % math large : Angenehme Schrift-
+                                          % groesse bei der Darstellung von
+                                          % Bruechen z.B. \ml{1\over\sqrt{2}}
+
+% #####  Haeufig benoetigte Funktionen  #####
+\newcommand{\E}[1]{\ensuremath{\mathrm{E}\left\{#1\right\}}}
+\newcommand{\real}[1]{\ensuremath{\mathrm{Re}\left\{#1\right\}}}
+\newcommand{\imag}[1]{\ensuremath{\mathrm{Im}\left\{#1\right\}}}
+\newcommand{\rect}[1]{\ensuremath{\mathrm{rect}\left(#1\right)}}
+\newcommand{\tri}[1]{\ensuremath{\mathrm{tri}\left(#1\right)}}
+\newcommand{\si}{\ensuremath{\mathrm{si}}}
+\newcommand{\di}{\ensuremath{\mathrm{di}}}
+\newcommand{\ld}{\ensuremath{\mathrm{ld}}}  
+\newcommand{\erf}{\ensuremath{\mathrm{erf}}}
+\newcommand{\erfc}{\ensuremath{\mathrm{erfc}}}
+\newcommand{\eds}[1]{\ensuremath{\mbox{e }^{\ds{#1}}}}
+\newcommand{\ex}[1]{\ensuremath{e^{#1}}}
+\newcommand{\ejO}{\ex{j\Omega}}
+
+% #####  Mathematische Sonderzeichen  #####
+\newcommand{\defas}{\ensuremath{\stackrel{\Delta}{=}}}
+
+% #####  Mengenzeichen  #####
+\newcommand{\Reell}{\mathsf{I} \kern -0.15em \mathsf{R}} 
+\newcommand{\Nat}{\mathsf{I}  \kern -0.15em \mathsf{N}}
+\newcommand{\Feld}{\mathsf{I} \kern -0.15em \mathsf{F}}
+\newcommand{\Zahl}{\mathsf{Z} \kern -0.45em \mathsf{Z}}
+
+% ##  Korrespondenz-"Knochen": ##
+\newcommand{\korrespond}{\ensuremath{\;\circ \hskip-1ex -\hskip-1.2ex -\hskip-1.2ex- \hskip-1ex \bullet\;}}
+\newcommand{\ikorrespond}{\ensuremath{\;\bullet \hskip-1ex -\hskip-1.2ex -\hskip-1.2ex- \hskip-1ex \circ\;}}
+
+% #####  Transformationen  #####
+\newcommand{\FT}[1]{\ensuremath{{\cal F}\left\{#1\right\}}}        % (kont.) Fourier-Trafo
+\newcommand{\IFT}[1]{\ensuremath{{\cal F}^{-1}\left\{#1\right\}}}
+\newcommand{\HT}[1]{\ensuremath{{\cal H}\left\{#1\right\}}}        % Hilbert-Trafo
+\newcommand{\IHT}[1]{\ensuremath{{\cal H}^{-1}\left\{#1\right\}}}
+\newcommand{\LT}[1]{\ensuremath{{\cal L}\left\{#1\right\}}}        % Laplace-Trafo
+\newcommand{\ILT}[1]{\ensuremath{{\cal L}^{-1}\left\{#1\right\}}}
+\newcommand{\DFT}[1]{\ensuremath{\mathrm{DFT}\left\{#1\right\}}}   % Diskrete Fourier-Trafo
+\newcommand{\IDFT}[1]{\ensuremath{\mathrm{IDFT}\left\{#1\right\}}}
+\newcommand{\FFT}[1]{\ensuremath{\mathrm{FFT}\left\{#1\right\}}}   % Fast Fourier-Trafo
+\newcommand{\IFFT}[1]{\ensuremath{\mathrm{IFFT}\left\{#1\right\}}}
+\newcommand{\NDFT}[2]{\ensuremath{\mathrm{DFT}_{#2}\left\{#1\right\}}}   % Diskrete Fourier-Trafo
+\newcommand{\NIDFT}[2]{\ensuremath{\mathrm{IDFT}_{#2}\left\{#1\right\}}}
+\newcommand{\NFFT}[2]{\ensuremath{\mathrm{FFT}_{#2}\left\{#1\right\}}}   % Fast Fourier-Trafo
+\newcommand{\NIFFT}[2]{\ensuremath{\mathrm{IFFT}_{#2}\left\{#1\right\}}}\newcommand{\ZT}[1]{\ensuremath{{\cal Z}\left\{#1\right\}}}        % Z-Trafo
+\newcommand{\IZT}[1]{\ensuremath{{\cal Z}^{-1}\left\{#1\right\}}}
+\newcommand{\DTFT}[1]{\ensuremath{\mathrm{DTFT}\left\{#1\right\}}}   % Diskrete Time Fourier-Trafo
+\newcommand{\IDTFT}[1]{\ensuremath{\mathrm{IDTFT}\left\{#1\right\}}}
+
+% #####  Einheiten und Groessen  #####
+\newcommand{\Hz}{\ensuremath{\mathrm{\:Hz}}}
+\newcommand{\kHz}{\ensuremath{\mathrm{\:kHz}}}
+\newcommand{\MHz}{\ensuremath{\mathrm{\:MHz}}}
+\newcommand{\Mbits}{\ensuremath{\mathrm{\:Mbit/s}}}
+\newcommand{\GHz}{\ensuremath{\mathrm{\:GHz}}}
+\newcommand{\ms}{\ensuremath{\mathrm{\:ms}}}
+\newcommand{\ns}{\ensuremath{\mathrm{\:ns}}}
+\newcommand{\mus}{\ensuremath{\mathrm{\:\mu s}}}
+\newcommand{\kmh}{\ensuremath{\mathrm{\:km/h}}}
+\newcommand{\dB}{\ensuremath{\mathrm{\:dB}}}
+\newcommand{\kbits}{\ensuremath{\mathrm{\:kbit/s}}}
+\newcommand{\kBaud}{\ensuremath{\mathrm{\:kBaud}}}
+\newcommand{\SNR}{\ensuremath{\frac{S}{N}}}
+\newcommand{\EbN}{\ensuremath{\frac{E_b}{N_0}}}
+\newcommand{\EbNh}{\ensuremath{\frac{E_b}{N_0/2}}}
+
+% #####  Worte, die haeufig in Gleichungen gebraucht werden  #####
+\newcommand{\Mit}{\quad\mathrm{mit}\;\,}          % kleingeschrieben existiert \mit schon!
+\newcommand{\und}{\quad\mathrm{und}\;\,}
+\newcommand{\da}{\quad\mathrm{da}\;\,}
+\newcommand{\fuer}{\quad\mathrm{f"ur}\;\,}
+\newcommand{\wobei}{\quad\mathrm{wobei}\;\,}
+\newcommand{\mindex}[1]{\mbox{\scriptsize \sl #1}}
+
+% #####  Fettschrift fuer Vektoren  #####
+\newcommand{\vek}[1]{\ensuremath{\mathbf{#1}}}    % (fette) Vektoren oder Matrizen (mit Buchstabe als Argument)
+\newcommand{\bs}[1]{\mbox{\boldmath$#1$}}         % (fette) schraege Vektoren oder Matrizen
+
+
+
+% ############################################################################################
+% Aus Kompatibilitaetsgruenden wird die folgende Datei an dieser Stelle eingebunden. Die dort
+% aufgefuehrten Befehle sollten nicht mehr verwendet werden, weil alle dortigen \newcommand's
+% kuenftig NICHT mehr unterstuetzt werden!!
+% ############################################################################################
+\input{mathcomp.tex}
+
+% EOF

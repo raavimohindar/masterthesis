@@ -1,0 +1,59 @@
+\documentclass[a4paper,10pt]{article}
+
+\title{Multi User Efficiency}
+
+\begin{document}
+
+\section{SYSTEM MODEL}
+We consider the uplink of DS-CDMA system where $\textit{U}$ users send \textit{encoded} information to a common receiver. We restrict out model to synchronous CDMA (where synchronism is at chip, symbol, code word, and/or block level), and we assume that the propation channels of all users are slowly time-varying and frequency flat. Although unrealistic, these assumptions are roughly applicable to the UMTS-TDD uplink system where the TDMA component ensures block synchronism between users and where indoor and pico-cells have usually very short channel delay spread. The received discrete time baseband signal corresponding to the $n^{th}$ transmitted symbol, after chip matched filtering and sampling at chip-rate, is given by
+
+\begin{equation}
+	y[n]=S[n]\,\mathbf{\mathit{W}}\,a[n]+\nu[n],
+\end{equation}
+
+for $n\;=\;0,1,\cdots,N-1$ where:
+
+\begin{itemize}
+
+\item $S[n]\;=\;[s_0[n],\cdots,s_{U-1}[n]]$ is a $L\;$x$\;U$ matrix whose columns contain the user spreading sequences for the $n^{th}$ symbol. In particular $s_u[n]\;=\;[s_{0,u}[n],s_{1,u}[n],\cdots,s_{L-1,u}[n]]^\mathrm{T}$ is the complex spreading sequence of the $u^{th}$ user in the $n^{th}$ symbol, whose elements $s_{l,u}[n]$ are QPSK symbols in the set $\{(\pm 1 \pm j)/\sqrt{2L}\}$, so that $s_u^H[n]s_u[n]\;=\;2$, $\forall\;u\;=\;0,\cdots,U\;-\;1$ and $\forall \,n$. $L$ is the $\textit{spreading factor}$ (number of chip per symbol), assumed common to all users.
+
+\item $\textbf{\textit{W}}$ is a $U\;$x$\;U$ is a diagonal matrix containing the channel complex amplitudes, such that, diag$\{\textbf{\textit{W}}\}\;=\;[w_0,\cdots,w_{U-1}]$, where $w_u$ is the $u^{th}$ user channel coefficient.
+
+\item $a[n]\;=\;[a_0[n],\cdots,a_{U-1}[n]]^\mathrm{T}$ contains the user coded symbols transmitted at time $n$.
+
+\item $\nu[n]\;=\;[\nu_0[n],\cdots,\nu_{L-1}[n]]^\mathrm{T}$ contains the background noise samples, where $\nu_{\ell}[n]$ is an i.i.d. circularly symmetric Gaussian random variable with distribution $\mathcal{N}_C(0,N_0)$.
+
+\end{itemize}
+
+We assume that all users make use of convolutional coding and BPSK modulation, so that $a_u[n]\;\in\;\{\pm 1\}$, and interleave their code word before transmission. Hence, the sequence of symbols $\{a_u[n];\forall\,n\}$ represents the code word of user $u\;after\; interleaving$. With the above assumptions, and considering perfectly power-controlled system with equal power users, the received energy per symbol for user $u$ is given by $E_{su}\;=\;\vert w_u \vert ^2\;=\;E_s \forall\,u$. The output of a bank of SUMFs is given by
+
+\begin{equation}
+z[n]= \mathbf{Re}\left\{\mathbf{W}^{-1}\,S^H[n]y[n]\right\} = \mathbf{T}[n]a[n]+\nu [n]
+\end{equation}
+
+where 
+
+where $\textbf{\textit{T}}_{u,k}$ is the $(u,k)^{th}$ element of $\textbf{T}$ and where the first term is the desired user symbol, the second term is the MAI and $\mu_u$ is the additive Gaussian noise. Figure 1 shows the proposed iterative receiver, where the signal $z_u$ passes through an IC stage that uses the estimates $\hat{a}_u^{(m)}$ of the symbols $a_u$ to remove the MAI. The superscript $^{(m)}$ denotes $m^{th}$ iteration. The hard decisions $\hat{a}_u^{(m)}\;\in\;\{\pm 1\}$ provided by a bank of Viterbi decoders, are weighted by the factors $\beta_u^{(m)}\;\in\;[0,1]$, so that the signal at the output of the IC stage is given by
+
+\begin{equation}
+z_u^{(m)}=a_u+\sum\limits_{k=0,k\neq u}^{U-1} \mathbf{T}_{u,k}\left ( a_k- \beta_u^{(m)}\hat{a}_k^{(m)}\right ) + \nu_u
+\end{equation}
+
+At the first iterations, the initial estimated symbols are set to zero, $\hat{a}_u^{(0)}\;=\;0$, $\forall\,u$ so that $z_u^{(0)}\;=\;z_u$. In the case of perfect symbol estimates and $\beta_u^{(m)}\;=\;1$, Equation (4) reduces to $z_u^{(m)}\;=\;a_u\;+\;v_u$ where the MAI is completely removed and single user performace is attained. The weighting factors $\beta_u^{(m)}$ are attained its an index of reliability on the estimated symbols $\hat{a}_u^{(m)}$, such that $\beta_u^{(m)}\;=\;1$ in the case of completely reliable symbol estimates, and $\beta_u^{(m)}\;=\;0$ it they are not reliable at all.
+
+\section{FEEDBACK WEIGHT OPTIMISATION}
+
+Rigorous asymptotic analysis of such iterative schemes in the large system limits (i.e., for $N,\;U,\;L\; \rightarrow \infty$ with $U/L\;=\;\alpha$ fixed and $U/N\rightarrow 0$) from general approach of density evolution over graphs, currently used to analyse the limit performance of message-passing iterative decoders, and by using the result from the theory of large random matrices for the asymptotic analysis of linear CDMA receivers. It is also shown that this analysis holds only if the symbol estimates $\hat{a}_u^{(m}$ are functions of the decoder $\textit{extrinsic information}$. The decoder extrinsic information is defined for a SISO decoder based on the sum-product algorithm, such as the BCJR algorithm, but it is not defined for a sequence-wise ML decoders such as the Viterbi algorithm. Hence, we shall optimize the weights $\beta_u^{(m)}$ for a "fictitious" receiver where the Viterbi decoders are replaced by BCJR decoders and where the hard decisions $\hat{a}_u^{(m)}$ are obtained by one bit quantisation of the extrinsic likelihood ratios produced by the latters. WE hasten to say that the fictitious receiver has no practical relevance, for the obvious reson that if BCJR decoders are used, then much more efficient soft-estimation of the interfering symbols could be used. However, as it will be clear from the rest of this section, the weight optimisation based on asymptotic analysis of the ficitious receiver allows us to derive a very simple expression for the optimal weights, independent of the user sequences and their mutual correlation, and a very simple practical algorithm for calculating these weights on-line.
+
+Under the assumptions that the spreading sequences are random with i.i.d. chips, uniformly distributed over the QPSK constellation, and that the phases of the channel coefficients are i.i.d., uniformly distributed over $[0,2\pi]$, in the limit for $U,\;L \rightarrow \infty$ with $U/L\;=\;\alpha$ (where $\alpha$ is the $\textit{channel load}$, the signal to noise ratio at the decoders input in the $m^{th}$ iteration for the fictitious system can be written as
+
+\begin{equation}
+\mathrm{SINR}^{(m)}= \frac{2\cdot E_s/N_0}{1+\alpha\cdot E_s/N_0 \cdot \mu^{(m)}}
+\end{equation}
+
+where $\mu^{(m)}\;=\;\mathrm{E}[\vert \alpha - \beta^{(m)}\, \hat{a}^{(m)}\vert ^2]$ is the variance of the residual interference given by any one of the interfering users. Since the system is perfectly symmetric and all the users are equivalent, we have dropped the dependence on the user index $u$, meaning the Equation (5) holds for every user. The above expectation is taken with respect to the symbol in a codeword and it can be expressed as 
+
+\begin{equation}
+\mu^{(m)}= 1 + \left ( \beta^{(m)} \right )^2 - 2\beta^{(m)} \left (1-2\epsilon^{(m)} \right )
+\end{equation}
+\end{document}

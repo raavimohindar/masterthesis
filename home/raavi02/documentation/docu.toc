@@ -1,0 +1,43 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}
+\contentsline {chapter}{\numberline {2}Introduction to Channel Access Schemes}{3}
+\contentsline {section}{\numberline {2.1}The Multi-Access Channel}{3}
+\contentsline {section}{\numberline {2.2}Frequency Division Multiple Access}{3}
+\contentsline {subsection}{\numberline {2.2.1}Advantages of FDMA}{4}
+\contentsline {subsection}{\numberline {2.2.2}Disadvantages of FDMA}{4}
+\contentsline {section}{\numberline {2.3}Time-Division Multiple Access}{5}
+\contentsline {subsection}{\numberline {2.3.1}Advantages of TDMA}{5}
+\contentsline {subsection}{\numberline {2.3.2}Disadvantages of TDMA}{5}
+\contentsline {section}{\numberline {2.4}Code Division Multiple Access}{6}
+\contentsline {subsection}{\numberline {2.4.1}Direct-Sequence Spread Spectrum}{7}
+\contentsline {chapter}{\numberline {3}Coded CDMA Transmission Block}{8}
+\contentsline {section}{\numberline {3.1}Single User Transmitter Model}{8}
+\contentsline {subsection}{\numberline {3.1.1}Information Bits}{8}
+\contentsline {subsection}{\numberline {3.1.2}Encoder}{9}
+\contentsline {subsubsection}{Convolutional Codes}{9}
+\contentsline {subsection}{\numberline {3.1.3}Modulation}{9}
+\contentsline {subsubsection}{Binary Phase Shift Keying}{10}
+\contentsline {subsection}{\numberline {3.1.4}Interleaver}{10}
+\contentsline {subsection}{\numberline {3.1.5}Spreading}{11}
+\contentsline {section}{\numberline {3.2}Multi-User Transmitter Model}{12}
+\contentsline {chapter}{\numberline {4}Coded CDMA Receiver Block}{14}
+\contentsline {section}{\numberline {4.1}Optimum Detection}{14}
+\contentsline {subsection}{\numberline {4.1.1}Optimum Joint Sequence Detection}{14}
+\contentsline {subsection}{\numberline {4.1.2}Optimum Preprocessing and Subsequent Decoding}{15}
+\contentsline {subsection}{\numberline {4.1.3}Turbo Detection with Optimum Preprocessing and Decoding}{16}
+\contentsline {section}{\numberline {4.2}Linear and Non-Linear Multi-User Detection}{17}
+\contentsline {subsection}{\numberline {4.2.1}Decorrelator}{18}
+\contentsline {subsection}{\numberline {4.2.2}Minimum Mean Square Error Receiver}{18}
+\contentsline {subsection}{\numberline {4.2.3}Linear Parallel Interference Cancellation}{19}
+\contentsline {subsection}{\numberline {4.2.4}Linear Successive Interference Cancellation}{19}
+\contentsline {section}{\numberline {4.3}Non-linear Iterative Multi-User Detection}{20}
+\contentsline {subsection}{\numberline {4.3.1}Non-linear Devices}{20}
+\contentsline {subsection}{\numberline {4.3.2}Non-Linear Coded Interference Cancellation}{21}
+\contentsline {chapter}{\numberline {5}Analysis of Coded CDMA}{23}
+\contentsline {section}{\numberline {5.1}Extrinsic Information Transfer Characteristic (EXIT) Charts}{24}
+\contentsline {section}{\numberline {5.2}Multi-User Efficiency(ME)}{34}
+\contentsline {section}{\numberline {5.3}Variance Transfer Characteristics}{41}
+\contentsline {chapter}{\numberline {6}Cyclic Behavior and Rotating Disk}{50}
+\contentsline {section}{\numberline {6.1}Convex Surface}{53}
+\contentsline {section}{\numberline {6.2}Concave Surface}{53}
+\contentsline {chapter}{\numberline {7}Conclusion}{56}
+\contentsline {chapter}{Bibliography}{57}

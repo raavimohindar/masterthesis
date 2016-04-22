@@ -1,0 +1,279 @@
+	clear all;
+	close all;
+	
+	EsN0_dB=0;
+	EsN0=10.^(EsN0_dB/10);
+	user=3;
+	it_max=4;
+	g = [1 1 1; 1 0 1];                             % R=1/2, L_c=3 generator polynom
+	[n,Lc] = size(g);
+	N_u=5000-Lc+1;
+	N    = (N_u+Lc-1)*n;                          % number of coded bits
+	N_samples=200;
+	trellis=make_trellis(g,0);
+	code.trellis_out=trellis.out;
+	code.trellis_next=trellis.next;
+	code.term=1;
+	code.word_len=n;
+	code.block_len=N/n;
+	code.num_state=2^(Lc-1);
+	sf=4;
+	I_a   = [0.001 0.05:0.05:0.95 0.999].'; %ten Brink's spacing
+	sigma2_a = [0.001 0.01:0.2:50].';
+	sigma_a  = sqrt(sigma2_a);
+	tmp      = zeros(length(sigma2_a),1);
+	
+	for run2=1:length(sigma2_a)
+		delta = 15*sigma_a(run2)/N_samples;
+		x     = -5*sigma_a(run2):delta:10*sigma_a(run2);  
+		tmp(run2) = sum(exp(-(x-sigma2_a(run2)/2).^2/2/sigma2_a(run2)).*(1-log2(1+exp(-x))))...
+		/ sqrt(2*pi*sigma2_a(run2)) * delta;
+	end
+	
+	sigma2_a = interp1(tmp,sigma2_a,I_a);
+	sigma_a  = sqrt(sigma2_a);
+	pn_code=sign(randn(sf*N,user));
+	data_u=(1-sign(randn(N_u,user)))/2;
+	%(1-data_u(1:10,1).')/2
+	
+	for n=1:user
+		data(:,n)=conv_encoder(data_u(:,n),g,0,1);
+	end
+	
+	data=1-2*data;
+	
+	for n=1:user
+		perm(n,:)=randperm(N);
+		data_c(:,n)=data(perm(n,:),n);
+	end
+	
+	for n=1:user
+		test=repmat(data_c(:,n).',sf,1);
+		data1(:,n)=test(:);
+	end
+	
+	tx=data1.*pn_code;
+	tx=sum(tx,2);
+	sigma2   = sf/EsN0;
+	noise=sqrt(sigma2/2)*randn(size(tx));
+	tx=tx+noise;
+	
+	for l=1:N
+		mf(:,l)=pn_code((l-1)*sf+1:l*sf,:)'*tx((l-1)*sf+1:l*sf)/sf;
+	end
+	
+	out=zeros(user,N);
+	%--------------------------------------------------------------------------
+	%iterative Detektion
+	%--------------------------------------------------------------------------
+	L_a=zeros(size(data_c));
+	L_e=zeros(size(data_c));
+	for it=1:it_max
+	
+		for n=1:user
+	
+			if (n==1) && (it==1)
+			[n it]
+				out(n,:)=4*EsN0*mf(n,:);
+				signal.sig(perm(n,:))=out(n,:);
+				signal.L_a=zeros(size(out(n,:)));
+				signal.last_state=0;
+				[L_info(:,n),L_code(:,n)]=max_log_map(signal,code);
+				L_a(:,n)=L_code(perm(n,:),n);
+				L_e(:,n)=L_a(:,n)-signal.sig(perm(n,:)).';
+				% output of the decoder after soft clipping.
+				soft_clip(:,n,it)=abs(tanh((L_e(:,n).'+clipping(out(n,:)/(4*EsN0),0.4,2))/2)).^2.';
+				
+			end
+				
+			if (n==2) && (it==1)
+			[n it]		
+				for l=1:N
+		
+					R_xx=pn_code((l-1)*sf+1:l*sf,:)'*pn_code((l-1)*sf+1:l*sf,:)/sf;
+					ind=[1:n-1];
+					out(n,l)=4*EsN0*(mf(n,l)-R_xx(n,ind)*tanh((L_e(l,ind).'+clipping(out(ind,l)/(4*EsN0),0.4,2))/2));
+	
+				end
+				
+				signal.sig(perm(n,:))=out(n,:);
+				signal.L_a=zeros(size(out(n,:)));
+				signal.last_state=0;
+				[L_info(:,n),L_code(:,n)]=max_log_map(signal,code);
+			
+				L_a(:,n)=L_code(perm(n,:),n);
+				L_e(:,n)=L_a(:,n)-signal.sig(perm(n,:)).';
+				soft_clip(:,n,it)=abs(tanh((L_e(:,n).'+clipping(out(n,:)/(4*EsN0),0.4,2))/2)).^2.';
+				
+			end
+			
+			if (n==3) && (it==1)
+			[n it]		
+				for l=1:N
+		
+					R_xx=pn_code((l-1)*sf+1:l*sf,:)'*pn_code((l-1)*sf+1:l*sf,:)/sf;
+					ind=[1:n-1];
+					out(n,l)=4*EsN0*(mf(n,l)-R_xx(n,ind)*tanh((L_e(l,ind).'+clipping(out(ind,l)/(4*EsN0),0.4,2))/2));
+	
+				end
+				
+				signal.sig(perm(n,:))=out(n,:);
+				signal.L_a=zeros(size(out(n,:)));
+				signal.last_state=0;
+				[L_info(:,n),L_code(:,n)]=max_log_map(signal,code);
+			
+				L_a(:,n)=L_code(perm(n,:),n);
+				L_e(:,n)=L_a(:,n)-signal.sig(perm(n,:)).';
+				soft_clip(:,n,it)=abs(tanh((L_e(:,n).'+clipping(out(n,:)/(4*EsN0),0.4,2))/2)).^2.';
+				
+			end
+
+			if (it>1) && ( (n>=1) || (n<=3) )
+			[n it]	
+				for l=1:N
+		
+					R_xx=pn_code((l-1)*sf+1:l*sf,:)'*pn_code((l-1)*sf+1:l*sf,:)/sf;
+					ind=[1:n-1,n+1:user];
+					out(n,l)=4*EsN0*(mf(n,l)-R_xx(n,ind)*tanh((L_e(l,ind).'+clipping(out(ind,l)/(4*EsN0),0.4,2))/2));
+	
+				end
+			
+				signal.sig(perm(n,:))=out(n,:);
+				signal.L_a=zeros(size(out(n,:)));
+				signal.last_state=0;
+				[L_info(:,n),L_code(:,n)]=max_log_map(signal,code);
+			
+				L_a(:,n)=L_code(perm(n,:),n);
+				L_e(:,n)=L_a(:,n)-signal.sig(perm(n,:)).';
+				soft_clip(:,n,it)=abs(tanh((L_e(:,n).'+clipping(out(n,:)/(4*EsN0),0.4,2))/2)).^2.';
+						
+			end
+	
+	
+		%***********************************************************************************************	            
+	
+			b_tilde=L_e.';%-L_a.';
+			N_bins=40;
+			mm=max(max(abs(b_tilde)));
+			delta=2*mm/N_bins;
+			bins=-mm:delta:mm;
+			number=zeros(1,length(bins));
+			number1=zeros(1,length(bins));
+		
+			[a1,b1]=find(data_c(:,n)>0);
+			[a,b]=find(data_c(:,n)<0);
+			[numb,value]=hist(b_tilde(n,a),bins);
+			number(n,:)=numb/sum(numb);
+			[numb1,value1]=hist(b_tilde(n,a1),bins);
+			number1(n,:)=numb1/sum(numb1);
+		
+			summe(n)=0;
+			idx=find(((number(n,:)+number1(n,:))~=0));
+			idx1=find(((number(n,:)+number1(n,:))~=0));
+			I_e_cc_(n)=full(0.5*sum(number(n,idx).*spfun(@log2,2*number(n,idx)./(number(n,idx)+number1(n,idx))))+...
+			0.5*sum(number1(n,idx1).*spfun(@log2,2*number1(n,idx1)./(number(n,idx1)+number1(n,idx1)))));
+		
+			%***********************************************************************************************
+			b_tilde=out;
+			N_bins=40;
+			mm    = max(max(abs(b_tilde)));
+			delta = 2*mm/N_bins;
+			bins  = -mm:delta:mm;
+			number=zeros(1,length(bins));
+			number1=zeros(1,length(bins));
+		
+			[a1,b1]=find(data_c(:,n)>0);
+			[a,b]=find(data_c(:,n)<0);
+			[numb,value]=hist(b_tilde(n,a),bins);
+			number(n,:)=numb/sum(numb);
+			[numb1,value1]=hist(b_tilde(n,a1),bins);
+			number1(n,:)=numb1/sum(numb1);
+		
+			summe(n)=0;
+			idx=find(((number(n,:)+number1(n,:))~=0));
+			idx1=find(((number(n,:)+number1(n,:))~=0));
+			I_e_ic(n)=full(0.5*sum(number(n,idx).*spfun(@log2,2*number(n,idx)./(number(n,idx)+number1(n,idx))))+...
+			0.5*sum(number1(n,idx1).*spfun(@log2,2*number1(n,idx1)./(number(n,idx1)+number1(n,idx1)))));
+		
+			%*****************************************************************************************	                	                
+		end
+		
+		I_e_cc_t(it,:)=I_e_cc_;
+		I_e_ic_t(it,:)=I_e_ic;
+		
+	end
+	figure(1);
+	
+	subplot(3,1,1);
+	plot(soft_clip(:,1,1),'.r');
+	axis([0 10000 0 1])
+	
+	subplot(3,1,2);
+	plot(soft_clip(:,2,1),'.r');
+	axis([0 10000 0 1])
+	
+	subplot(3,1,3);
+	plot(soft_clip(:,3,1),'.r');
+	axis([0 10000 0 1])
+	
+	figure(2);
+	
+	subplot(3,1,1);
+	plot(soft_clip(:,1,2),'.r');
+	axis([0 10000 0 1])
+	
+	subplot(3,1,2);
+	plot(soft_clip(:,2,2),'.r');
+	axis([0 10000 0 1])
+	
+	subplot(3,1,3);
+	plot(soft_clip(:,3,2),'.r');
+	axis([0 10000 0 1])
+	
+	figure(3);
+	
+	subplot(3,1,1);
+	plot(soft_clip(:,1,3),'.r');
+	axis([0 10000 0 1])
+	
+	subplot(3,1,2);
+	plot(soft_clip(:,2,3),'.r');
+	axis([0 10000 0 1])
+	
+	subplot(3,1,3);
+	plot(soft_clip(:,3,3),'.r');
+	axis([0 10000 0 1])
+	
+	figure(4);
+	
+	subplot(3,1,1);
+	plot(soft_clip(:,1,4),'.r');
+	axis([0 10000 0 1])
+	
+	subplot(3,1,2);
+	plot(soft_clip(:,2,4),'.r');
+	axis([0 10000 0 1])
+	
+	subplot(3,1,3);
+	plot(soft_clip(:,3,4),'.r');
+	axis([0 10000 0 1])
+	
+	[max(abs(tanh(L_e)).^2) max(abs(tanh(L_a)).^2) ];
+	[min(abs(tanh(L_e)).^2) min(abs(tanh(L_a)).^2) ];
+	I_e_cc_t;
+	for n=1:user
+	test=repmat(I_e_cc_t(:,n).',2,1);
+	x_ax(:,n)=[0;test(:)];
+	test2=repmat(I_e_ic_t(:,n).',2,1);
+	y_ax(:,n)=test2(:);
+	end
+	x_ax(end,:)=[];
+	%plot(x_ax,y_ax)
+	save exit_chart_0dB_4User_sf4_traj.mat
+	%load('exit_chart_0dB_4Nutzer_sf4_100000bit_SIC.mat')
+	%figure(2)
+	%    plot(I_e_cc,I_a,I_a,I_e_sic_n,x_ax,y_ax)
+	%   axis([0 1 0 1])
+	%   grid
+	% filename=['trajectories_' num2str(EsN0_dB) 'dB_' num2str(user) 'Nutzer_sf' num2str(sf) '_' num2str(N) 'bit_SIC']
+	% save(filename,'EsN0_dB','I_e_ic_m','I_e_cc')

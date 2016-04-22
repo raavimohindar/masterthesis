@@ -1,0 +1,41 @@
+	  
+	  example for "ANT style" slides  using LaTeX
+
+
+
+example/
+	slides.tex              top level file
+	slides-pages.tex        the pages (using pictex)
+
+	
+	cleanrahmenA4quer.tex   ... necessary stuff to define landscape layout 
+	ANTcolor.tex            color definitions (optimized for beamer)
+	latex2e.tex               old compatibility stuff
+	mathe.tex               additional mathematical symbols
+	options.sty             \shadow{} command for a shadowbox
+	
+	ANT.eps                 out pet
+	uniHB2.eps              "gebogene Speckflagge"
+
+	
+		
+	maketex.sh              bash script to compile everything
+	
+	
+	
+	slides.ps               ... compiled results
+	slides2up.ps
+	slides4up.ps
+	slides12up.ps
+	slides.pdf              
+
+
+
+	testsigficajade.m.1.eps   figures in this example
+	testsigficajade.m.2.eps
+	testsigficajade.m.3.eps
+	pltcfastica8x12.m.eps
+
+	
+	
+	                                        Jürgen Rinas, 20.10.2004

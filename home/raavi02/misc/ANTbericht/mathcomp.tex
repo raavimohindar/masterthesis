@@ -1,0 +1,89 @@
+% mathecomp.tex - Mathematische (Mengen)Zeichen, Symbole und Funktionen
+%                 fuer LaTeX 2.09 und LaTeX 2e.
+%                 Kompatibilitaetsdatei als Anhang von mathe.tex.
+%                 
+%
+%             Original von Dirk Nikolai, 01/96
+%             Letzte Aenderung: Nikolai, 25/01/96
+%
+
+% #################################################################################################
+% Alles folgende ist nur aus Kompatibilitaetsgruenden in mathe.tex eingebunden und sollte deshalb 
+% in der Zukunft nicht mehr verwendet werden, weil alle folgenden \newcommand's kuenftig NICHT 
+% weiter unterstuetzt werden!!
+% #################################################################################################
+
+\newcommand{\realu}[2]{\mathrm{Re}#1\{#2#1\}} % muss statt \real verwendet werden, falls das
+                                              % Argument \underbrace o.ae. enthaelt, #1 ist eine
+                                              % zulaessige TeX-Groessenangabe, #2 der 
+                                              % eigentliche Text
+
+% Definition der mathematischen Zahlenmengen (Symbole fuer die natuerl., reellen etc. Zahlen) (Thomas Boltze)
+% Damit sind solche Dinge wie ... \in \R^{m \times n+1} mit kniffligen Definitionen von \R passe.
+% Die neuen Befehle lauten z.B. "\In{R}[m][n+1]" oder "\In{C}[n]"
+\newcommand{\C}{\mathrm C \hspace{-0.43em}\rule[0.1ex]{0.02em}{1.45ex}\hspace{0.58em}}
+\newcommand{\R}{\mathrm R \hspace{-0.44em}\rule[0.05ex]{0.02em}{1.45ex}\hspace{0.5em}}
+\newcommand{\N}{\mathrm N \hspace{-0.44em}\rule[0.05ex]{0.02em}{1.45ex}\hspace{0.5em}}
+\newcommand{\Z}{\mathrm Z \hspace{-0.44em}/\hspace{0.58em}}
+\mathchardef\inn="3232                    % Verr"ucken des \in Zeichens nach oben
+\def\in{\raisebox{0.2ex}{$\inn$}}
+\catcode`\@=11                            % ein wenig Tex-Gewurstel f"ur die optionalen Parameter:
+\def\room#1{\@ifnextchar[{\@nameuse{#1}\@roomarg}{\@nameuse{#1}}}
+\def\@roomarg[#1]{\@ifnextchar[{\@@roomarg{#1}}{^#1}}
+\def\@@roomarg#1[#2]{^{#1 \times #2}}
+\catcode`\@=12
+\def\In#1{\raisebox{0.2ex}{$\inn$} \room{#1}}
+
+% \newcommand{\matC}{\makebox[.6em]{\makebox[-.18em]{C}\rule{.03em}{1.5ex}}}
+\newcommand{\matC}{\mathrm C \hspace{-0.43em}\rule[0.1ex]{0.02em}{1.45ex}\hspace{0.58em}}
+\newcommand{\matRR}{\mathrm R \hspace{-0.44em}\rule[0.05ex]{0.02em}{1.45ex}\hspace{0.5em}}
+
+\newcommand{\matN}{\mathsf{I\!N}}         % Setze die math. Sonderzeichen zusammen
+\newcommand{\matR}{\mathsf{I\!R}}         % aus Sans Serif-Zeichen.
+\newcommand{\matZ}{\mathsf{Z\!\!\!\!\:Z}} % Problem:  "C" fehlt.
+
+
+\newcommand{\nullvec}{\mathbf{0}}   % (fette) Vektoren oder Matrizen (jeder einzeln...)
+\newcommand{\avec}{\mathbf{a}}
+\newcommand{\Avec}{\mathbf{A}}
+\newcommand{\bvec}{\mathbf{b}}
+\newcommand{\Bvec}{\mathbf{B}}
+\newcommand{\cvec}{\mathbf{c}}
+\newcommand{\Cvec}{\mathbf{C}}
+\newcommand{\dvec}{\mathbf{d}}
+\newcommand{\Dvec}{\mathbf{D}}
+\newcommand{\evec}{\mathbf{e}}
+\newcommand{\Evec}{\mathbf{E}}
+\newcommand{\fvec}{\mathbf{f}}
+\newcommand{\Fvec}{\mathbf{F}}
+\newcommand{\gvec}{\mathbf{g}}
+\newcommand{\Gvec}{\mathbf{G}}
+\newcommand{\hvec}{\mathbf{h}}
+\newcommand{\Hvec}{\mathbf{H}}
+\newcommand{\ivec}{\mathbf{i}}
+\newcommand{\Ivec}{\mathbf{I}}
+\newcommand{\lvec}{\mathrm{\mathbf $\ell$}}
+\newcommand{\Mvec}{\mathbf{M}}
+\newcommand{\Nvec}{\mathbf{N}}
+\newcommand{\Pvec}{\mathbf{P}}
+\newcommand{\Qvec}{\mathbf{Q}}
+\newcommand{\rvec}{\mathbf{r}}
+\newcommand{\Rvec}{\mathbf{R}}
+\newcommand{\svec}{\mathbf{s}}
+\newcommand{\Svec}{\mathbf{S}}
+\newcommand{\Tvec}{\mathbf{T}}
+\newcommand{\uvec}{\mathbf{u}}
+\newcommand{\Uvec}{\mathbf{U}}
+\newcommand{\vvec}{\mathbf{v}}
+\newcommand{\Vvec}{\mathbf{V}}
+\newcommand{\wvec}{\mathbf{w}}
+\newcommand{\Wvec}{\mathbf{W}}
+\newcommand{\xvec}{\mathbf{x}}
+\newcommand{\Xvec}{\mathbf{X}}
+\newcommand{\yvec}{\mathbf{y}}
+\newcommand{\Yvec}{\mathbf{Y}}
+\newcommand{\zvec}{\mathbf{z}}
+\newcommand{\Zvec}{\mathbf{Z}}
+
+
+% EOF

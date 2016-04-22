@@ -1,0 +1,18 @@
+\chapter{Introduction}
+In 3G mobile communication systems, Code Division Multiple Access (CDMA) scheme become widely acceptable access scheme which fulfills the requirement to share the common medium or channel by number of users at the same time. Even though users share the common medium at the same time, the interference between the users is negligibly small since CDMA uses codes to separate the users. In general the choice of codes are orthogonal hence, the separation of users become very simple at the receiver.\\ 
+
+Ideally we assume that codes are orthogonal but in real no CDMA system is perfect hence the orthogonality will be lost during the transmission through a uncontrollable channel. The effect of that is ever user see the remaining users as the potential interferer's and so as the rest of the users. Now, a special treatment is required to mitigate the interfering users. \\  
+
+A very sophisticated algorithms were derived which later proved too complex for practical implementation. Hence, we deploy a sub-optimum schemes which employs the iterative principle for detecting users. Historically, iterative decoding is proved to be suitable means for decoding Turbo codes. We lend the same idea and modify a bit to suite for our requirement and apply the iterative principle. \\ 
+
+In our work we analyze such a system in which the CDMA is used on the encoded bits of user information and transmitted over a channel. At the receiver the joint detection is employed, which is proven to be optimum and we construct a iterative schemes with the Interference Canceler and the Decoder as the components and these components exchange the information as according to the iterative principle. \\ 
+
+The stunning performance on employing the iterative decoding for turbo codes in terms of achievable Bit-Error-Rate (BER) has risen many question, which obviously concluded in analyzing the behavior rather the convergence behavior of the Iterative decoding schemes. \\
+
+Since, we apply the iterative principle in our system and it is apparent to analyze the system with more or less the procedure as we apply to analyze the convergence behavior of Iterative decoding of Turbo codes. \\
+
+Analysis means tracking a particular variable over the number of iterations and plotting the same. As it sounds for the necessity of single parameter requirement for tracking over number of iterations. But, our systems as more then one parameter. So, we need a theory which can characterize the system through a single parameter.  \\ 
+
+The publication by Joseph Boutros and Giuseppe Caire on Iterative Multiuser Joint Decoding: Unified Framework and Asymptotic Analysis, characterize the system as single-parameter dynamical model which is sufficient enough for to construct the analysis tool. \\  
+
+We study some of the analysis tools, which are Variance Transfer Characteristics (VTC), Multi-User Efficiency (MU) and Extrinsic Information Transfer Charts (EXIT) to analyze the coded CDMA system. Each of these tools have one parameter in common for all the users by which the single-parameter dynamical model holds. The details about the analysis tools are in the following chapters.

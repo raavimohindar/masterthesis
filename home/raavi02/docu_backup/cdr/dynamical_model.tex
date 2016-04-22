@@ -1,0 +1,19 @@
+\documentclass{article}
+\renewcommand{\thepage}{}
+\input{latex2e}
+\input{mathe}
+\usepackage{psfrag}
+\begin{document}
+\begin{figure}[htb]
+  \begin{center}
+
+
+        \psfrag{F}[c][c]{$a^{''}$}
+        \psfrag{E}[c][c]{$a^{'}$}
+        \psfrag{F1}[c][c]{$f_{\mathrm{PIC}}(a^{'})$}
+        \psfrag{F2}[c][c]{\hspace{0.5mm}$f_{\mathrm{APP}}(a^{''})$}
+
+    \includegraphics{dynamical_model_psfrag.eps}
+    \end{center}
+\end{figure}
+\end{document}

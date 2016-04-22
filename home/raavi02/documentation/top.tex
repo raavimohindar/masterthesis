@@ -1,0 +1,184 @@
+% ##############################################################################
+% ##     LaTeX2e-Muster-Datei fuer Projekt-, Studien- und Diplomarbeiten      ##
+% ##  ----------------------------------------------------------------------  ##
+% ##     Dieter Boss, Dirk Nikolai, Uni Bremen, FB1, Nachrichtentechnik       ##
+% ##                        Version 1.2,  20.05.96                            ##
+% ##############################################################################
+%
+% Benoetigte LaTeX2e-Packages:        - twocolumn          - 11pt
+%                                     - babel[german]      - amstex
+% Benoetigte LaTeX209-Packages:       - fancyheadings      - epsfig
+%                                     - verbatimfiles      - options
+% Benoetigte input-files:             - latex2e.tex        - mathe.tex
+% Benoetigte Bilder (im Ordner PS/):  - musterBER.pst      - musterbild1.eps
+%                                     - musterbild2.eps    - ...
+%                                     - ...                - ...
+%
+
+\documentclass[11pt]{report}           % Seitennumerierung immer rechts
+%\documentclass[twoside,11pt]{report}  % Seitennumerierung im Wechsel rechts 
+                                       % und links
+
+% ##########  Inputenc package   ######################
+\usepackage[latin1]{inputenc}          % deutsche Umlaute in der Latin1-Codierung
+                                       % z.B. "‰ˆ¸ƒ÷‹ﬂ"
+
+% ##########  German package   ######################
+%\usepackage[german]{babel}             % Fuer deutsche Umlaute (ae="a, sz="s) und
+                                       % Ueberschriften ("Inhaltsverzeichnis")
+
+% ##########  Showkeys package   ####################
+\usepackage{showkeys}       	       % Die Namen von allen Labels und Referenzen werden
+                                       % im Dokument ausgedruckt. Diese Package muss beim 
+                                       % endgueltigen Dokument auskommentiert werden!
+
+% ##########  LaTeX2e changes  ######################
+\input{latex2e.tex}
+\usepackage{epsfig}                   % Zum Einbinden von Postscript-Bildern
+
+% ##########  Mathematische Definitionen  ###########
+\input{mathe.tex}
+%\usepackage{amstex}                   % Fuer fortgeschrittene Mathekonstuktionen
+
+% ##########  Fancyheadings, Options etc  ###########
+\usepackage{fancyheadings}             % Fuer einheitlichen Seitenkopf
+\usepackage{options}                   % Box mit Schatten
+%\usepackage{longtable}                % fuer mehrseitige Tabellen (z.B. im Anhang)
+
+% ##########  Caption package   ######################
+\usepackage[hang,small,bf]{caption}    % Angenehmere Darstellung von (Bild-)Unterschriften
+%\renewcommand{\figurename}{Bild}       % Bezeichnung 'Bild' statt 'Abbildung'
+
+% ##########  Seitenmasse und -position  ##########
+% \textwidth16cm
+% \textheight25cm
+% \oddsidemargin 8mm
+% \evensidemargin -1mm
+% \topmargin-13mm 
+
+% ##########  Zusatzabstand bei Absaetzen  ##########
+\parskip1.5ex plus 0.3ex
+
+% ##########  Keine Einrueckung bei Absaetzen  ##########
+\parindent0cm
+
+% ##########  Zeilenabstand  ##########
+\newcommand{\zeilenabstand}{1.0}
+\renewcommand{\baselinestretch}{\zeilenabstand}
+
+% ##########  Verbatim package  ######################
+%\usepackage{verbatimfiles}             % Zum Einbinden von ASCII-Files, z.B.
+                                       % Matlab-m-Files im Anhang
+%\newcommand{\getASCII}[1]{\renewcommand{\baselinestretch}{0.8}\begin{footnotesize}%
+%\verbatimfile{#1}\end{footnotesize}\renewcommand{\baselinestretch}{\zeilenabstand}}
+
+% ##########  Stilparameter fuer gleitende Objekte  ##########
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\floatpagefraction}{1.0}
+
+% ##########  Trennungen weitestgehend unterdruecken  ##########
+\hyphenpenalty=5000
+\doublehyphendemerits=5000
+\brokenpenalty=5000
+\finalhyphendemerits=5000
+
+% ################  Neue Headings f"ur Bookstyle  #################
+% Beispiele s. /usr/local/lib/tex/inputs/fancyheadings.sty, angepasst von Dieter Boss
+\pagestyle{fancyplain}    % must appear after changes to \textwidth
+\plainheadrulewidth 0.4pt % damit auf erster Seite auch Unterstrich erscheint (Boe)
+%\headsep1cm
+\renewcommand{\chaptermark}[1]%
+   {\markboth{\uppercase{\thechapter.\ #1}}{}}
+\renewcommand{\sectionmark}[1]%
+   {\markright{\uppercase{\thesection.\ #1}}}
+%\setlength{\headrulewidth}{0pt}
+%\setlength{\footrulewidth}{0pt}
+\lhead[\thepage]{\scriptsize\rightmark}
+\rhead[\scriptsize\leftmark]{\thepage}
+\cfoot{}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+
+% ################  Modifizierter Fussnotenstil  ##################
+\newlength{\footnotelaenge}
+\makeatletter
+\renewcommand{\@makefntext}[1]{%
+\setlength{\footnotelaenge}{\columnwidth}
+\addtolength{\footnotelaenge}{-0.7em}
+    \noindent
+    \hbox to 0.7em {\hss\@makefnmark}\parbox[t]{\footnotelaenge}{#1}}
+\makeatother
+
+
+% #####  Hier sind die Daten der Arbeit einzutragen.      #####
+% #####  Sie werden automatisch ins Dokument uebernommen. #####
+\newcommand{\Arbeitsart}{Master Thesis}     % oder: Studienarbeit, Projektarbeit
+\newcommand{\Ausgabetermin}{02.11.2004}
+\newcommand{\Abgabetermin}{15.03.2005}
+\newcommand{\Berichtsdatum}{20.03.2005}
+\newcommand{\Betreuer}{Dr.-Ing. Volker Kuehn}
+\newcommand{\Autor}{Raavi M. Mohindar Rao}
+\newcommand{\Berichtstitel}{Analysis tools for Multi User Detection}
+
+
+% #####  Hier die selbst definierten Kommandos eintragen:       #####
+% #####  Bsp: - Kommando ohne Argumente:                        #####
+% #####         \newcommand{\neuesKommando}{blabla}             #####
+% #####       - Kommando mit 2 Argumenten:                      #####
+% #####         \newcommand{\neuesKommando}[2]{{\large #1:} #2} #####
+% ...
+
+
+% #####  Es wird nur kompiliert, was hier angegeben wird!   #####
+% #####  Einzelne Eintraege also loeschen, falls sie zeit-  #####
+% #####  weilig nicht kompiliert werden sollen (damit es    #####
+% #####  schneller geht!):                                  #####
+\includeonly{intro}%,ANTanh}  % alles kompilieren
+%\includeonly{ANTkap1,ANTkap2,ANTkap3}   % nur teilweise kompilieren
+
+
+
+\begin{document}              % Hier geht's erst richtig los ...
+  
+\include{intro}          % Titelseiten
+%   \clearemptydoublepage
+%   \thispagestyle{fancyplain}
+%   \pagenumbering{Roman}
+%   \tableofcontents            % Inhaltsverzeichnis
+%   \thispagestyle{fancy}
+%   \clearemptydoublepage
+%   \pagenumbering{arabic}
+%   \include{intro}           % Kapitel 1 (Einleitung)
+  %\include{ANTkap2}           % Kapitel 2
+  %\include{ANTkap3}           % Kapitel 3
+  %\include{ANTkap4}           % Kapitel 4
+  %\include{ANTkap5}           % Kapitel 5
+  %\include{ANTanh}            % Anhang
+
+% Es wird normalerweise nur in die Literaturliste uebernommen,
+% was im Text durch \cite{} angesprochen wird. Mit \nocite{} koennen
+% weitere Literaturstellen uebernommen werden, ohne dass diese im 
+% weiteren Text auftauchen, z.B.:
+% \nocite{Pro95,KK92}
+% 
+%   \bibliographystyle{alpha}
+%   \thispagestyle{fancyplain}  % Literaturverzeichnis
+%   {\small
+%    \bibliography{quellen}
+%    \addcontentsline{toc}{chapter}{Literatur}
+%   }
+% 
+
+
+\comment{%
+ Noch Einbringen, weitere Ideen:
+   - Leerzeichen nach Punkt
+   - Unterschiedliche Bindestriche
+   - ...
+} % end of \comment
+
+
+\end{document}
+
+# EOF

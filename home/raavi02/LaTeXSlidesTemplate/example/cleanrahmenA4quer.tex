@@ -1,0 +1,91 @@
+\special{landscape}
+% ###################################################
+% ##       A4-quer-Rahmen fuer Folien  etc.        ##
+% ###################################################
+% Autoren:  Boss, Jelonnek, Dickmann;   07/94...02/96
+%
+% Jede Seite hat A4-Querformat und folgendes Layout:
+%
+%      ----------------------------------------
+%      |                                      |
+%      |                                      |
+%      |                                      |
+%      |                                      |
+%      |                                      |
+%      |                                      |
+%      |                                      |
+%      |                                      |
+%      |                                      |
+%      |                                      |
+%      ----------------------------------------
+%      | \datum |    \titelzeile    | Seite x |
+%      ----------------------------------------
+%
+% - Empfohlene Seitenmasse (im top level LaTeX file definieren):
+%     \textwidth25.7cm
+%     \textheight16cm
+%     \topmargin-16mm
+%     \oddsidemargin-2.5mm
+%     \evensidemargin-2.5mm
+% - Die Variablen \titelzeile und \datum sind im Top level LaTeX File
+%   wie folgt zu definieren:
+%     \setbox\titelzeile=\hbox{ITG-Fachgruppensitzung}
+%     \setbox\datum=\hbox{\large 25.02.94}
+% - Ob "Seite x" oder "Page x" etc erscheint, haengt von der gewaehlten
+%   Sprache ab ("\usepackage[german]{babel}" etc.).
+% - Zum Einbinden eines Postscript-Logos in das Datum-Feld ist der Befehl "\includelogo"
+%   vordefiniert, der das Kommando "\bildwi{}{}" benoetigt. In dieser Version
+%   ist die Logo-Einbindung auskommentiert. Falls dies geaendert werden soll,
+%   ist nach "LOGO" zu suchen, um die relevanten Stellen zu finden.
+% - Anschauen mit "xdvi -s 4 -paper a4r FILENAME &"
+%
+%/usr/local/lib/texmf/tex/latex/ANT/rahmenlogo.eps
+%\newcommand{\includelogo}{\bildwi{rahmenlogo.eps}{0.15}}   % LOGO: diese Zeile nicht auskommentierten
+\newcommand{\horizontaloffset}{-18mm}
+\newcommand{\vertikaloffset}{0mm}       % -16mm
+\newcommand{\gesamtbreite}{27.5cm}
+\newcommand{\gesamthoehe}{19cm}
+\newcommand{\kopfhoehe}{14mm}
+\newcommand{\fusshoehe}{14mm}
+\newcommand{\datumbreite}{38mm}         % 28mm; mit LOGO: 38mm
+\newcommand{\titelbreite}{19.85cm}      % 21cm; mit LOGO: 19.85cm
+\newcommand{\seitennrbreite}{38mm}      % 28mm; mit LOGO: 38mm
+\newcommand{\linienabstand}{0.5mm}
+
+% Kopfdeklaration (siehe ST-Computer Juni`90)
+\newbox\titelzeile
+\setbox\titelzeile=\hbox{}
+\newbox\datum
+\setbox\datum=\hbox{}
+\newbox\author
+\setbox\author=\hbox{}
+\makeatletter
+\def\ps@headings{\let\@mkboth\markboth
+  \def\@oddfoot{}
+  \def\@evenfoot{}
+  \def\@evenhead{}
+
+  \def\@oddhead{\protect\hbox to \gesamtbreite{\hss \hskip \horizontaloffset\vtop to 0cm{\vskip\vertikaloffset
+                   \hbox{ \vtop to \gesamthoehe{
+                         \hbox to \gesamtbreite{
+                         \hrulefill\hspace{2mm}\raisebox{-4mm}[4mm]{\bildwi{ANT.eps}{0.1}}\hspace{2mm}\rule{10mm}{0.15mm}}
+                         \vss
+                         \vspace{\linienabstand}
+                         \hrule
+                         \hbox to \gesamtbreite{
+                              \vbox to \fusshoehe{\vss
+                                   \hbox to \datumbreite{\hss \vbox{\hbox{\sf\unhcopy\datum}}\hss}
+                                   \vss}
+                              \hss
+                              \vbox to \fusshoehe{\vss
+                                    \hbox to \titelbreite{\hss\vbox{\hbox{\sf\unhcopy\titelzeile}}\hss}
+                                    \vss}
+                              \hss
+                              \vbox to \fusshoehe{\vss\hbox to \seitennrbreite{\hss \vbox{\hbox{\sf\huge \thepage \ }}\hss}\vss}
+                              \hss
+                          }
+                        }}
+              \vss}\hss}}}
+\makeatother
+
+\setbox\datum=\hbox{\hspace*{0.25cm}\bildwi{uniHB2.eps}{0.26}}

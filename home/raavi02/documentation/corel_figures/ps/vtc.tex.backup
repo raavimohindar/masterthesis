@@ -1,0 +1,18 @@
+\documentclass{article}
+\renewcommand{\thepage}{}
+\input{latex2e}
+\input{mathe}
+\usepackage{psfrag}
+\begin{document}
+\begin{figure}[htb]
+  \begin{center}
+        
+	%\psfrag{B}[c][c]{$t \rightarrow$}
+        %\psfrag{A}[c][c]{$f \rightarrow$}
+        %\psfrag{E}[c][c]{$e$}
+	
+	\includegraphics{vtc_psfrag.eps}
+    \end{center}
+\end{figure}
+\end{document}
+

@@ -1,0 +1,26 @@
+\chapter{Preface}
+In 3G mobile communication systems Code Division Multiple Access (CDMA) has become widely acceptable access schemes, which fullfills the requirements to share the common medium or channel for users who takes part in simultaneous transmission. Since CDMA uses codes to separate users, the interference among the users can be null or very less, when the orthogonality of the codes are maintained. This feature makes CDMA more attract-full for mobile communication environment. \\ \\
+In general the codes employed to separate users are orthogonal to each other. Hence, the separation of users at the receiver becomes simple. But in reality the orthogonality of the codes can be lost during transmission over a channel. Due to this each users see other users as potential interferes. Now scenario becomes more complex and it needs special treatment in order to mitigate the interfearing users. \\ \\
+Many algorithms were derived for joint detection of users, which later proved to be more complex for practical implementation. The reduced complexity in detecting users jointly was achieved by splitting the detector and decoder components and process the components individually. \\ \\
+Historically it is seen that performance curves for turbo codes when iterative decoding is employed, reaches very close to theoretical limits. This stunning performance has lead to analyze the convergence properties of the iterative decoding scheme.\\ \\
+Since we apply same principle (iterative detection) to coded CDMA systems for detecting users. We now motivate to analyze the convergence properties of the components employed in coded CDMA systems. \\ \\
+Such a analysis require to track the behavior of a single parameter which is presume to be common for all users. Hence it requires a theory to confirm that the analysis with the single-parameter of the whole system is possible or not. \\ \\
+Thankfully to *Ref* for presenting single-parameter dynamical model of a coded CDMA systems. Later which has paved the way for various analysis tools. \\ \\
+In our work, we study the convergence properties of the detector and decoder by tracking the parameters such as variance, multiple-access interference and mutual information which are common to all users. We present analysis tools in details after the formal introduction to the coded CDMA systems. \\ \\
+\textit{chapter 2} \\ \\
+In chapter 1, the issue of which access schemes is to be employed for mobile communication environment is resolved by studying advantages and disadvantages of various access schemes. \\ \\
+\textit{chapter 3} \\ \\
+An uplink transmission model for single user case was proposed. Each and every block in that model is studied in detail. Later we extend the model for N-user case. \\ \\
+\textit{chapter 4} \\ \\
+A receiver structure designed to employ turbo principle was proposed and we study why such a structure in required by analyzing optimum and sub-optimum detection schemes. \\ \\
+\textit{chapter 5} \\ \\
+We introduce to various analysis tools to study the convergence properties of the coded CDMA system and we present simulated results as a proof for our claim. \\ \\
+\textit{chapter 6} \\ \\
+In conclusion, we present some of the ideas to analyze coded CDMA systems when serial interference canceler is employed.
+
+	
+	
+
+	
+
+

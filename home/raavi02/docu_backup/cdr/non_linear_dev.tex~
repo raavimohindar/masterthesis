@@ -1,0 +1,24 @@
+\documentclass{article}
+\renewcommand{\thepage}{}
+\input{latex2e}
+\input{mathe}
+\usepackage{psfrag}
+\begin{document}
+\begin{figure}[htb]
+  \begin{center}
+
+        \psfrag{x}[c][c]{$x\rightarrow$}
+        \psfrag{y}[c][c]{$q(x)\rightarrow$}
+        \psfrag{t}[c][c]{}
+        \psfrag{aaaaaa}[c][c]{$\alpha=4$}
+        \psfrag{bbbbbb}[c][c]{$\alpha=2$}
+        \psfrag{cccccc}[c][c]{$\alpha=1$}
+        \psfrag{dddddd}[c][c]{$\alpha=0.5$}
+        \psfrag{eeeeee}[c][c]{clip}
+        \psfrag{ffffff}[c][c]{HD}
+
+
+    \includegraphics{non_linear_dev_psfrag.eps}
+    \end{center}
+\end{figure}
+\end{document}

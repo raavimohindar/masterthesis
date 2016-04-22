@@ -1,0 +1,78 @@
+\begin{thebibliography}{BCJR72}
+
+\bibitem[BC01]{JC}
+J.~Boutros and G.~Caire.
+\newblock {I}terative {M}ultiuser {J}oint {D}ecoding {U}nified {F}ramework and
+  {A}symptotic {A}nalysis.
+\newblock In {\em IEEE Trans, on Information Technology}, December 2001.
+
+\bibitem[BCJR72]{BCJR}
+L.R. Bahl, J.~Cocke, F.~Jelinek, and J.~Raviv.
+\newblock {O}ptimal {D}ecoding {O}f {L}inear {C}odes {F}or {M}inimizing
+  {S}ymbol {E}rror {R}ate.
+\newblock In {\em International Symposium on Information Theory, Asilomar,
+  California}, July 1972.
+
+\bibitem[BGT93]{TUR}
+C.~Berrou, A.~Glavieux, and P.~Thitimajshima.
+\newblock Near {S}hannon {L}imit {E}rror - {C}orrecting {C}oding and
+  {D}ecoding: {T}urbo-{C}odes(1).
+\newblock In {\em Proc. IEEE International Conference on Communications}, May
+  1993.
+
+\bibitem[Bri00]{TEN}
+S.~Ten Brink.
+\newblock {I}terative {D}ecoding {T}rajectories of {P}arallel {C}oncatenated
+  {C}odes.
+\newblock In {\em IEEE/ITG Conference on Source and Channel Coding, Munich,
+  Germany}, January 2000.
+
+\bibitem[CT91]{TC91}
+T.M. Cover and J.A. Thomas.
+\newblock {\em {E}lements of {I}formation {T}heory}.
+\newblock Wiley-Interscience, {N}ew {J}ersey, 1991.
+
+\bibitem[Kue04]{Kuehn}
+V.~Kuehn.
+\newblock {A}nalysis of {I}terative {M}ulti-user {D}etection {S}chemes {W}ith
+  {EXIT} {C}harts.
+\newblock In {\em IEEE International Symposium on Spread Spectrum Techniques
+  and Applications (ISSSTA) Sydney, Australia}, 30.8.2004.
+
+\bibitem[Kue05]{K05}
+V.~Kuehn.
+\newblock {\em {D}igital {C}ommunications over {M}IMO {C}hannels}.
+\newblock Habilitationsschrift, 2005.
+
+\bibitem[NHC02]{GC}
+A.~Nordio, M.~Hernandez, and G.~Caire.
+\newblock {D}esign and {P}erformance of a {L}ow-{C}omplexity {I}terative
+  {M}ultiuser {J}oint {D}ecoder {B}ased on {V}iterbi {D}ecoding and {P}arallel
+  {I}nterference {C}ancellation.
+\newblock In {\em IEEE Trans, on Information Technology}, April, 2002.
+
+\bibitem[Pro01]{Pro01}
+J.G. Proakis.
+\newblock {\em {Digital Communication}}.
+\newblock McGraw-Hill Higher Education, {S}ingapore, 2001.
+
+\bibitem[RHV95]{MLP}
+P.~Robertson, P.~Hoeher, and E.~Villebrun.
+\newblock {O}ptimal and {S}ub-{O}ptimal {M}aximum a {P}osteriori {A}lgorithms
+  {S}uitable {F}or {T}urbo {D}ecoding.
+\newblock March 1995.
+
+\bibitem[SS04]{VTC}
+C.~Schlegel and Z.~Shi.
+\newblock {O}ptimal {P}ower {A}llocation and {C}ode {S}election in {I}terative
+  {D}etection of {R}andom {CDMA}.
+\newblock In {\em Seminar on Digital Communication, Zurich}, 2004.
+
+\bibitem[WKK05]{PETRA}
+P.~Weitkemper, V.~Kuehn, and K.-D. Kammeyer.
+\newblock {A}nalysis {O}f {I}terative {S}uccessive {I}nterference
+  {C}ancellation {I}n {SC}-{CDMA} {S}ystems.
+\newblock In {\em Fifth International Workshop on Multi-Carrier
+  Spread-Spectrum, Oberpfaffenhofen, Germany}, September 2005.
+
+\end{thebibliography}

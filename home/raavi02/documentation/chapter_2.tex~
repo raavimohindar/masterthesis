@@ -1,0 +1,745 @@
+\chapter{Coded CDMA Receiver Block}
+In the previous chapter we see how the coded bits of \textit{N} users are transmitted using Code Division Multiple Access technique with BPSK modulation. The \textit{N} user bits are transmitted as a vector to the AWGN channel. For simplicity, we took the AWGN channel. \\
+
+In this chapter we see about the optimum reception of \textit{N} user bits, which is corrupted by additive white Gaussian noise.
+
+\section{Receiver For Signals Corrupted By AWG Noise}
+
+We start our analysis based on the mathematical model that we construct for the signal at the input of the receiver. Since, we performed Binary Phase Shift Keying on the information bits at the transmission side therefore we call those BPSK modulated signals as signaling waveforms and we write those signaling waveforms as $\{s_m(t)\}$ where, $m$ takes the value $1,\cdots , M$ and $M=2$ for BPSK. Each of the signaling waveform is transmitted in the interval $0\leq t \leq T$, where $T$ is the time duration in which we assume these singling waveform exit. \\
+
+Since we assume AWGN channel, the signaling waveform is affected only by additive white Gaussian noise. So we express the received signal in the interval $0\leq t \leq T$ as,
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/f_3_1_channelmodel.eps}{0.8} }
+  \caption{Frequency Division Multiple Access}
+%  \label{FIGmust}
+\end{figure}
+\begin{equation}
+r(t) = s_m(t) + n(t), \hspace{8mm} 0\leq t \leq T
+\end{equation}
+
+where $n(t)$ denotes a sample function of the additive white Gaussian noise process with power spectral density as $\Phi_{nn}(f)\;=\;\frac{1}{2}N_0$ W/Hz. We design a receiver based on the observation of the received signal $r(t)$ over the interval $0\leq t \leq T$ in a optimum way that it minimizes the probability of making the error. We need to demodulate the signal first and detect the same later, so it is convenient to split the process into two. The former one is more important then the later because in our model we employ BPSK where we need to de-map the signals and detect the same as 0's and 1's. We focus our attention on how to demodulate the signals in the next section\\
+
+The sole function of the signal demodulator is to convert the received signal $r(t)$ into a \textit{N} dimensional vector $\mathrm{\mathbf{r}}=[r_1\; r_2 \cdots r_N]$, where \textit{N} is the dimension of the transmitted signals. In our case $N=2$. There are two different realizations for the signal demodulators. One is based on signal correlators and other is use of matched filters. Since we use matched filters in our system we focus our attention on that.
+
+\section{Matched Filter Demodulator}
+
+Matched filter takes the de-spreaded signal which is corrupted by additive white Gaussian noise and expand into a series of linearly weighted orthonormal basis functions $\{f_k(t)\}$. We assume that these \textit{N} basis functions $\{f_k(t)\}$ span the signal space, with this every one of the possible transmitted signals of the set $\{s_m(t)\}$ can be represented as a linear combination of basis function $\{f_k(t)\}$. Further these basis function $\{f_k(t)\}$ do not span the noise space, which falls out of the signal space and it is irrelevant to the detection of the signal. \\
+
+The received signal is passed through the bank of \textit{N} linear filters. Let the impulse response of \textit{N} filters are 
+
+\begin{eqnarray}
+h_k(t)=\left \{
+\begin{array}{lll}
+f_k(T-t),&\hspace{5mm}&\leq t \leq T \\ \\ 
+0,& \hspace{5mm} &\mathrm{otherwise.} 
+\end{array}
+\right .
+\end{eqnarray}
+
+where $\{f_k(t)\}$ are the $N$ basis functions. The output of these filters are 
+
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/matched_filter_resp.eps}{0.8} }
+  \caption{Frequency Division Multiple Access}
+%  \label{FIGmust}
+\end{figure}
+
+\begin{eqnarray}
+\begin{array}{llll}
+y_k(t)&=&\int\limits_{0}^{t}r(\tau)h_k(t-\tau)d\tau \\ \\
+&=&\int\limits_{0}^{t}r(\tau)f_k(T-t+\tau),&\hspace{5mm}k=1,2,\cdots,N
+\end{array}
+\end{eqnarray}
+
+Now, the output is sampled at $t=T$ then we obtain
+
+\begin{equation}
+y_k(T)=\int\limits_{0}^{T}r(\tau)f_k(\tau)\,d\tau = r_k,\hspace{5mm}k=1,2,\cdots,N
+\end{equation}
+
+where $r_k$ is the sampled outputs of the filter at $t=T$. The received signal $r(t)\;=\;s(t)+n(t)$ is passed through the matched filter, and we design a filter with impulse response $h(t)\;=\;s(T-t)$, where $s(t)$ is assumed to be confined to the time interval $0\leq t \leq T$, is called the \textit{matched filter} to the signal $s(t)$. Figure x.x shows the signal $s(t)$ and the impulse response $h(t)$. Since, matching is done to the information bearing signals and not to the noise. Now, the output of the filter with impulse response $h(t)=s(T-t)$ to the input signal $s(t)$ is
+
+\begin{equation}
+y(t)=\int\limits_{0}^{t}\,s(\tau)s(T-t+\tau)\,d\tau
+\end{equation}
+
+which is basically the time-autocorrelation function of the signal s(t). The response $y(t)$ is shown in the below figure x.x, since time-autocorrelation function is even and it attain the maximum at $t=T$.\\
+
+In the case of the demodulator, the $N$ matched filters are matched to the basis functions $\{f_k(t)\}$.
+
+\subsection{Properties of matched filter}
+When signal $s(t)$ is corrupted by AWGN, the filter with an impulse response matched to $s(t)$ leads to maximization of the output signal-to-noise ration (SNR).\\
+
+We make the assumptions that received signal $r(t)$ consists of the signal $s(t)$ and noise $n(t)$, the noise is assumed to be Additive White Gaussian with zero-mean, with power spectral density $\Phi_{nm}(f)=\frac{1}{2}N_0$ W/Hz. Now the signal is passed through the filter with impulse response $h(t)$ and its output is sampled at the $t=T$. Then the response is
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/mf_demodulator.eps}{0.8} }
+  \caption{Frequency Division Multiple Access}
+%  \label{FIGmust}
+\end{figure}
+\begin{equation}
+y(t)=\int\limits_{0}^{t}r(\tau)\,h(t-\tau)\,d\tau
+\end{equation}
+
+we can decompose into the signal and noise as
+
+\begin{equation}
+y(t)=\int\limits_{0}^{t}s(\tau)\,h(t-\tau)\,d\tau + \int\limits_{0}^{t}n(\tau)\,h(t-\tau)\,d\tau
+\end{equation}
+
+and sampling at $t=T$, we get
+
+\begin{eqnarray}
+\begin{array}{lll}
+y(T)&=&\int\limits_{0}^{T}s(\tau)\,h(T-\tau)\,d\tau + \int\limits_{0}^{T}n(\tau)\,h(t-\tau)\,d\tau \\ \\
+&=&y_s(T)+y_n(T)
+\end{array}
+\end{eqnarray}
+
+where $y_s(T)$ and $y_n(T)$ are noise and signal components. The problme is to select the filter which maximizes the Signal-to-Noise ratio, which is defined as
+
+\begin{equation}
+\mathrm{SNR}_0=\frac{\hbox{$y_s^2(T)$}}{\hbox{$E[y_n^2(T)]$}}
+\end{equation}
+
+The denominator is variance of the noise and it can be express as 
+
+\begin{equation}
+E[y_n^2(T)]=\frac{1}{2}N_0\int\limits_{0}^{T}h^2(T-t)dt
+\end{equation}
+
+variance depends only on the power spectral density of the noise and the energy of the impulse response $h(t)$. Substituting the equation 1.10 into 1.9 we get 
+
+\begin{equation}
+\mathrm{SNR}_0=\frac{\hbox{$\left[\int\limits_{0}^{T}s(\tau)h(T-\tau)d\tau \right ]^2$}}{\hbox{$\frac{1}{2}N_0\int\limits_{0}^{T}h^2(T-t)dt$}}=\frac{\hbox{$\left [\int\limits_{0}^{T}h(\tau)s(T-\tau)d\tau \right]^2$}}{\hbox{$\frac{1}{2}N_0\int\limits_{0}^{T}h^2(T-t)dt$}}
+\end{equation}
+The maximisation of SNR is obtained by maximising the numerator and keeping the denominator as constant. Numerator is maximized using Cauchy-Schwarz inequality, in general it is stated as
+
+\begin{equation}
+\left[\int\limits_{-\infty}^{\infty}g_1(t)g_2(t)\right ] ^2 \leq \int\limits_{-\infty}^{\infty} g_1^2(t)dt \int\limits_{-\infty}^{\infty}g_2^2(t)dt
+\end{equation}
+
+if we substitute $g_1(t)\;=\;h(t)$ and $g_2(t)\;=\;s(T-t)$ and for the equality condition $g_1(t)\;=\;Cg_2(t)$ with this $h(t)\;=\;Cs(T-t)$, which is the matched filter to the signal $s(t)$. Substituting the same in equation 1.11 we get,
+
+\begin{eqnarray}
+\begin{array}{lll}
+\mathrm{SNR}_0&=&\frac{\hbox{$2$}}{\hbox{$N_0$}}\int\limits_{0}^{T}s^2(t)dt \\ \\
+&=&\frac{\hbox{$2\mathcal{E}$}}{\hbox{$N_0$}}
+\end{array}
+\end{eqnarray}
+
+The SNR depends only the eneegy of the waveform $s(t)$ but not on the characteristics of $s(t)$.\\
+
+Since, $N$ matched filters are matched to the basic function $\{f_k(t)\}$ and basis functions span only the signal space, hence the output of the matched filter delivers sufficient statistics for reaching out a decision. Basis function do not span the noise space and no statitics can be obtained from the noise.
+
+
+\section{Optimum Receiver}
+The optimum receiver is one which selects the most probable sequence of bits $\{b_k(n),\;1\leq n \leq N,\;1\leq k \leq K\}$ from the received signal $r(t)$ observed in the interval $0\leq t \leq T$. In this section we consider the optimum receiver for synchronous transmission.
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/optimum_receiver.eps}{0.8} }
+  \caption{Frequency Division Multiple Access}
+%  \label{FIGmust}
+\end{figure}
+\subsection{Synchronous Transmission}
+In this tranmission scheme each user generates only one symbol which interferes with the desired symbol, under the additive white Gaussian noise, so it is sufficient to consider the received signal in the interval $0\leq t \leq T$. Hence we express the received signal as
+\begin{equation}
+r(t)=\sum\limits_{k=1}^{K} \sqrt{\mathcal{E}_k} b_k(1)g_k(t)+n(k),\hspace{10mm} 0\leq t \leq T
+\end{equation}
+
+The function of the optimum maximum-likelihood receiver computes the log-likelihood function
+\begin{equation}
+\Lambda(b)=\int\limits_{0}^{T}\left [ r(t)-\sum\limits_{k=1}^{K}\sqrt{\mathcal{E}_k}\,b(1)\,g_k(t)\right ]^2 dt
+\end{equation}
+and selects the information sequence $\{b_k(1),\;1\leq k \leq K\}$ that minimizes the likelihood function $\Lambda(b)$. We can expand the likelihood function and see what possible information that we can obtain.
+
+\begin{eqnarray}
+\begin{array}{rrr}
+\Lambda(b)&=&\int\limits_{0}^{T}r^2(t)dt-2\sum\limits_{k=1}^{K}\sqrt{\mathcal{E}_k}\,b_k(1)\int\limits_{0}^{T}r(t)\,g_k(t)\,dt \\ \\
+&&+\sum\limits_{j=1}^{K}\sum\limits_{k=1}^{K}\sqrt{\mathcal{E}_j\mathcal{E}_k}\,b_k(1)\,b_j(1)\int\limits_{0}^{T}g_k(t)g_j(t)dt
+\end{array} 
+\end{eqnarray}
+
+The $r^2(t)$ represents the power and does not contribute to determine which sequence was transmitted. Hence it may be neglected. The term
+
+\begin{equation}
+r_k=\int\limits_{0}^{T}r(t)g_k(t)dt,\hspace{10mm}0 \leq k\leq K
+\end{equation}
+
+represent the cross-correlation of the received signal with each of the $K$ signature sequences. Finally, the integral involving $g_k(t)$ and $g_j(t)$ can be written as
+
+\begin{equation}
+\rho_{jk}(0)=\int\limits_{0}^{T}g_j(t)g_k(t)\,dt
+\end{equation}
+
+applying equation (1.29) and (1.30) in equation (1.28) we get as follows
+
+\begin{equation}
+C(\mathrm{\mathbf{r}}_K,\mathrm{\mathbf{b}}_K)=2\sum\limits_{k=1}^{K}\sqrt{\mathcal{E}_k}\,b_k(1)\,r_k-\sum\limits_{j=1}^{K}\sum\limits_{k=1}^{K}\sqrt{\mathcal{E}_j\mathcal{E}_k}\,b_k(1)b_j(1)\,\rho_{jk}(0)
+\end{equation}
+The correlation metrics can also be expressed in vector inner product form 
+\begin{equation}
+C(\mathrm{\mathbf{r}}_K,\mathrm{\mathbf{b}}_K)=2\mathrm{\mathbf{b}}_k^{'}\mathrm{\mathbf{r}}_k -\mathrm{\mathbf{b}}_k^{'} \mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_k
+\end{equation}
+
+where, $\mathrm{\mathbf{r}}_K=[r_1\;\;r_2\;\;\cdots\;\;r_K]^{'}$,\hspace{10mm} $\mathrm{\mathbf{b}}_K=[\sqrt{\mathcal{E}_1}b_1(1)\cdots\sqrt{\mathcal{E}_K}b_K(1)]^{'}$ \\
+
+and $\mathrm{\mathbf{R}}_s$ is the correlation matrix, with the elements $\rho_{jk}(0)$. As we seen in the matched filter section, that optimum detector must have the knowledge of the received signal energies in order to compute the correlation metrics. Figure x.x shows the optimum multiuser receiver. \\
+
+For the information bits of $K$ users there are $2^K$ possible choices of the bits. The optimum detector is one which computes the correlation metrics for each sequence and selects the sequence which yields the largest correlation metrics. It is computationally demanding and the complexity grows exponentially with the number of user.
+
+\section{Suboptimum Detectors}
+As we seen in the complexity of the optimum decoder increases exponentially as the number of users $K$ increases. This is not feasible for the practical implementation. In this section we describe about the sub-optimum decoders whose complexity increases linearly to the number of users $K$. We study some of the decoders and choose which among those is feasible for our system. We start with Conventional single-user detector and study about merits and de-merits of the decoder and we proceed with Decorrelating detector. \\
+
+\subsection{Conventional single-user detector}
+In this type of detector, each user has a demodulator that match-filters the received signal with the signature sequence of the user and passes the output to the detector which makes the decision based on the matched filter output. In this type of detector the presence of other user as interference is neglected and treated as additional noise together with background noise. \\ 
+
+Let us consider for the synchronous trasnmission, in which the output of the matched filter for the $k$th user
+
+\begin{eqnarray}
+\begin{array}{lll}
+r_k&=&\int\limits_{0}^{T} r(t)g_k(t)dt,\hspace{10mm} 0 \leq t \leq T \\ \\
+&=&\sqrt{\mathcal{E}_k}b_k(1)+\sum\limits_{\stackrel{j=1}{j \neq k}}^{K} \sqrt{\mathcal{E}_j}b_j(1)\rho_{jk}(0)+n_k(1)
+\end{array}
+\end{eqnarray}
+
+and the noise components are given as
+
+\begin{equation}
+n_k(1)=\int\limits_{0}^{T}n(t)g_k(t)\,dt
+\end{equation}
+Since, the treatment of interference from the other users as noise, the demand for orthogonality of signature sequence is very high. Strictly speaking when the signature sequence is perfectly orthogonal the term\\ $\sum\limits_{\stackrel{j=1}{j \neq k}}^{K}\sqrt{\mathcal{E}_j}b_j(1)\rho_{jk}(0)+n_k(1)$ vanishes and conventional single-user detector is optimum.\\
+
+If one or more of the signature sequence of the other users is not orthogonal to the user then the interference from the others users are extremely high, provided the power levels of the interfering user is higher then the user. This situation is generally called as \textit{near-far problem} in multiuser communication system. Conventional single-user detector when employed demands sophisticated power control mechanism. \\
+
+There are some other types of detectors whose complexity grows linearly with the users and still mitigate the \textit{near-far problem}. One such type of detector is \textit{Decorrelating detector}.
+
+\subsection{Decorrelating detector}
+
+Decorrelating detector mitigates the problem of \textit{near-far problem} and yet shows the complexity linear to the growth of users $K$. Let us formulate the mathematical model for the decorrelating detector. The received signal vector $r_k$ represents the output of the $K$ matched filter which is given as
+
+\begin{equation}
+\mathrm{\mathbf{r}}_K = \mathrm{\mathbf{R}}_s\,\mathrm{\mathbf{b}}_K + \mathrm{\mathbf{n}}_K
+\end{equation}
+
+where $\mathrm{\mathbf{b}}_K=[\sqrt{\mathcal{E}_1}b_1(1)\hspace{5mm}\sqrt{\mathcal{E}_2}b_2(1)\hspace{2.5mm}\cdots\hspace{2.5mm}\sqrt{\mathcal{E}_K}b_K(1)]^{'}$ and the noise samples can be represented as $\mathrm{\mathbf{n}}_K=[n_1(1)\;n_2(1)\,\cdots\,n_K(1)]^{'}$ which has the covariance 
+
+\begin{equation}
+E(\mathrm{\mathbf{n}}_K\mathrm{\mathbf{n}}_K^{'})=\frac{\hbox{$N_0$}}{\hbox{$2$}}\;\mathrm{\mathbf{R}}_s
+\end{equation}
+
+Since the noise is Gaussian distributed and $\mathrm{\mathbf{r}}_K$ can be described by a $K$-dimensional Gaussian PDF with mean $\mathrm{\mathbf{R}}_s\,\mathrm{\mathbf{b}}_K$ and covariance $\mathrm{\mathbf{R}}_s$. The PDF is given as
+
+\begin{equation}
+p(\mathrm{\mathbf{r}}_K\vert \mathrm{\mathbf{b}}_K) = \frac{\hbox{$1$}}{\hbox{$\sqrt{(N_0\,\pi)^K}\mathrm{det}\,\mathrm{\mathbf{R}}_s$}}\mathrm{exp}
+\left[
+-\frac{\hbox{$1$}}{\hbox{$N_0$}}
+(\mathrm{\mathbf{r}}_K-\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K)^{'}
+\mathrm{\mathbf{R}}_s^{-1}
+(\mathrm{\mathbf{r}}_K-\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K)
+\right]
+\end{equation}
+
+We call the linear estimate of $\mathrm{\mathbf{b}}_K$ as the best when the value of $\mathrm{\mathbf{b}}_K$ minimizes the likelihood function
+
+\begin{equation}
+\Lambda(\mathrm{\mathbf{b}}_K)=(\mathrm{\mathbf{r}}_K-\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K)^{'}\mathrm{\mathbf{R}}_s^{-1}
+(\mathrm{\mathbf{r}}_K-\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K)
+\end{equation}
+
+We just put the result after the minimization as
+
+\begin{equation}
+\mathrm{\mathbf{b}}_K^{0}=\mathrm{\mathbf{R}}_s^{-1}\mathrm{\mathbf{r}}_K
+\end{equation}
+
+Then the symbols are detected by taking the sign of each element of $\mathrm{\mathbf{b}}_K^{0}$. The estimated output is given is $\mathrm{\mathbf{\hat{b}}}_K=\mathrm{sign}(\mathrm{\mathbf{b}}_K^{0})$.\\
+
+The estimate $\mathrm{\mathbf{b}}_K$ is the linear estimate that maximizes the correlation metric $C(\mathrm{\mathbf{r}}_K,\,\mathrm{\mathbf{b}}_K)\;=\;2\mathrm{\mathbf{b}^{'}}_K\mathrm{\mathbf{r}}_K\;-\;\mathrm{\mathbf{b}^{'}}_K\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K$.
+
+\subsection{Minimum mean-square-error detector}
+In \textit{Decorrelation detector}, the linear maximum likelihood estimate is obtained by minimizing the quadratic log likelihood function:\begin{center}$\Lambda(\mathrm{\mathbf{b}}_K)=(\mathrm{\mathbf{r}}_K-\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K)^{'}\mathrm{\mathbf{R}}_s^{-1}
+(\mathrm{\mathbf{r}}_K-\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K)$ by then we obtain $\mathrm{\mathbf{b}}_K^{0}=\mathrm{\mathbf{R}}_s^{-1}\mathrm{\mathbf{r}}_K$.\end{center} A slight different approach is by writing the minimum of quadratic log likelihood function as $\mathrm{\mathbf{b}}^{0}=\mathrm{\mathbf{Ar}}$, the matrix \textbf{A} is to be determined so to minimize the mean square error (MSE).\\
+
+Let us define the error function which is to be minimized
+
+\begin{eqnarray}
+\begin{array}{lll}
+J(\mathrm{\mathbf{b}})&=&E\left [ (\mathrm{\mathbf{b}}-\mathrm{\mathbf{b}}^0)^{'}(\mathrm{\mathbf{b}}-\mathrm{\mathbf{b}}^0)\right ] \\ \\
+&=&E\left [ (\mathrm{\mathbf{b}}-\mathrm{\mathbf{Ar}})^{'}(\mathrm{\mathbf{b}}-\mathrm{\mathbf{Ar}})\right ]
+\end{array}
+\end{eqnarray}
+
+here we take the expectation with respect to the data vector and the additive noise. The optimum matrix \textbf{A} may be found by forcing the error $(\mathrm{\mathbf{b}}-\mathrm{\mathbf{Ar}})$ to lie orthogonal to the data vector $\textbf{r}$. Thus,
+
+\begin{eqnarray}
+\begin{array}{lll}
+E\left[ (\mathrm{\mathbf{b}}-\mathrm{\mathbf{Ar}})\mathrm{\mathbf{r}}^{'}\right ] &=&0  \\ \\
+E(\mathrm{\mathbf{br^{'}}})-\mathrm{\mathbf{A}}E(\mathrm{\mathbf{rr^{'}}}) &=&0
+
+\end{array}
+\end{eqnarray}
+
+For synchronous transmission
+
+\begin{equation}
+E(\mathrm{\mathbf{b}}_K\mathrm{\mathbf{r}^{'}}_K)=E(\mathrm{\mathbf{b}}_K\mathrm{\mathbf{b}^{'}}_K)\mathrm{\mathbf{R}^{'}}_s=\mathrm{\mathbf{DR}^{'}}_s
+\end{equation}
+
+and 
+
+\begin{eqnarray}
+\begin{array}{lll}
+E(\mathrm{\mathbf{r}}_K\mathrm{\mathbf{r}^{'}}_K)&=&E\left [ (\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K+\mathrm{\mathbf{n}}_K)+(\mathrm{\mathbf{R}}_s\mathrm{\mathbf{b}}_K+\mathrm{\mathbf{n}}_K)^{'} \right ] \\ \\
+&=&\mathrm{\mathbf{R}}_s\mathrm{\mathbf{D}}\mathrm{\mathbf{R}^{'}}_s+\frac{\hbox{$N_0$}}{\hbox{$2$}}\mathrm{\mathbf{R}^{'}}_s
+\end{array}
+\end{eqnarray}
+
+where \textbf{D} is the diagonal matrix with diagonal elements $\{\mathcal{E}_k,\;1\leq k \leq K\}$. Now we have the expectations and we substitute in equation (1.29) and solve for the matrix \textbf{A}, then we obtain
+
+\begin{equation}
+\mathrm{\mathbf{A}}^0=\left ( \mathrm{\mathbf{R}}_s+\frac{\hbox{$N_0$}}{\hbox{$2$}}\mathrm{\mathbf{D}}^{-1}\right )^{-1}
+\end{equation}
+
+Hence we substitute in the minimum of log likelihood ratio to obtain $\mathrm{\mathbf{b}^{0}}_k$.
+
+\begin{equation}
+\mathrm{\mathbf{b}}_k^0=\mathrm{\mathbf{A}^{0}}\mathrm{\mathbf{r}}_K
+\end{equation}
+and the estimates are obtained by taking the sign of $\mathrm{\mathbf{b}}_k^0$
+
+\begin{equation}
+\mathrm{\mathbf{\hat{b}}}_K=\mathrm{sgn}(\mathrm{\mathbf{b}}_k^0)
+\end{equation}
+
+
+\section{Interference Canceler}
+In this section we discuss about the interference cancelers, which are essential because we treat the users as interfereres. It requires cancellation of interference before the signal is passed through the decoders. Interference cancellation technique are simple linear mathematical operation performed over and over on the received signal until the effect of interference is reduced. This technique is borrowed from the Numerical Integration in Linear Algebra. The cancellation techniques are of two type: Parallel Interference Cancellation in short PIC and SIC which is Successive Interference Cancellation. PIC is quite analogous to Jacobi Iterative Method of finding the solution in Linear Algebra and Gauss-Seidal Iteration method is used in Successive Interference Cancellation. Both these cancellers have merits and de-merits which we will see in this chapter. We do not study about the convergence behaviour of these cancellers, instead we borrow it from the already proven theory and implement it in our work.
+\begin{figure}[htb]
+  \centerline{ \bildsc{ps/sic.eps}{0.8} }
+  \caption{Multiple-Access Communication}
+%  \label{Multiple-Access\\ Communication}
+\end{figure}
+\subsection{Successive Interference Cancellers}
+First we would to see how to perform paralled interference cancelation technique through a simple example, in which we consider a linear system of the form
+\begin{eqnarray}
+\begin{array}{rrrrrrrrr}
+x_1          &-& 0.25\,x_2   &-& 0.25\,x_3   &+& 0\,x_4      &=& 50 \\ \\
+
+-0.25\,x_1   &+& x_2         &+& 0\,x_3      &-& 0.25\,x_4   &=& 50 \\ \\
+
+-0.25\,x_1   &+& 0\,x_2      &+& x_3         &-& 0.25\,x_4   &=& 25 \\ \\             
+	     
+0\,x_1	     &-& 0.25\,x_2   &-& 0.25\,x_3   &+& x_4         &=& 25 \\ \\ 
+\end{array}
+\end{eqnarray}
+Now we write the system of equation into a form that main diagonal elements corresponds to the users, though we do not specify yet how the main diagonal element corresponds to the user we will see the mathematical decomposition later.
+\begin{eqnarray}
+\begin{array}{rrrrrrrrrrr}
+x_1          &=&             & & 0.25\,x_2   &+& 0.25\,x_3   &&              &+& 50 \\ \\
+
+x_2          &=& 0.25\,x_1   & &             & &             &+& 0.25\,x_4   &+& 50 \\ \\
+
+x_3          &=& 0.25\,x_1   & &             & &             &+& 0.25\,x_4   &+& 25 \\ \\             
+	     
+x_4          &=& 	     &+& 0.25\,x_2   &+& 0.25\,x_3   & &             &+& 25 \\ \\ 
+\end{array}
+\end{eqnarray}
+We use these equations for the iteration and we start with very poor approximation to the solution, because at the initial iteration the effect of interference is pre-dominant hence we assume $x_1^{(0)}\;=\;100,\;x_2^{(0)}\;=\;100,x_3^{(0)}\;=\;100\;\mathrm{and}\; x_4^{(0)}\;=\;100$. Substitute in the below equation to obtain the refinement in the assumed solution as follows
+\begin{eqnarray}
+\begin{array}{rrrrrrrrrrr}
+x_1^{(1)}    &=&             & & 0.25\,x_2^{(0)}   &+& 0.25\,x_3^{(0)}   &&              &+& 50 \\ \\
+
+x_2^{(1)}    &=& 0.25\,x_1^{(1)}   & &             & &             &+& 0.25\,x_4^{(0)}   &+& 50 \\ \\
+
+x_3^{(1)}    &=& 0.25\,x_1^{(1)}   & &             & &             &+& 0.25\,x_4^{(0)}   &+& 25 \\ \\             
+
+x_4^{(1)}    &=& 	     &+& 0.25\,x_2^{(1)}   &+& 0.25\,x_3^{(1)}   & &             &+& 25 \\ \\ 
+\end{array}
+\end{eqnarray}
+and we obtain the improvisation in the solution as $x_1^{(1)}\;=\;100,\;x_2^{(1)}\;=\;100,x_3^{(1)}\;=\;75\;\mathrm{and}\; x_4^{(1)}\;=\;68.75$. As you see in the equation (1.3) the equation is obtained by substituting the most recent approximations. The corresponding elements replace the previous ones as soon as they have been computed and it is seen in the the second and third equation that we use $x_1{(1)}$ not $x_1{(0)}$ and so also in the last equation we use $x_2{(1)}$ and $x_3{(1)}$ not $x_2{(0)}$ and $x_3{(0)}$. \\ 
+
+In the next iteration we use the latest solution and substitute the most recent solution.
+\begin{eqnarray}
+\begin{array}{rrrrrrrrrrr}
+x_1^{(2)}    &=&             & & 0.25\,x_2^{(1)}   &+& 0.25\,x_3^{(1)}   &&              &+& 50 \\ \\
+
+x_2^{(2)}    &=& 0.25\,x_1^{(2)}   & &             & &             &+& 0.25\,x_4^{(1)}   &+& 50 \\ \\
+
+x_3^{(2)}    &=& 0.25\,x_1^{(2)}   & &             & &             &+& 0.25\,x_4^{(1)}   &+& 25 \\ \\             
+x_4^{(2)}    &=& 	     &+& 0.25\,x_2^{(2)}   &+& 0.25\,x_3^{(2)}   & &             &+& 25 \\ \\ 
+\end{array}
+\end{eqnarray}
+We can perform the iterations till we reach to the final or exact solution. Above example just demonstrate how to perform the iterations. We can derive the general formulas to perform the iteration. \\
+
+For simplicity we assume that all diagonal elements are of unity, i.e., $a_{jj}=1$ for $j=1,\cdots,n$. Then we de-compose the matrix into Identity part + Lower triangle matrix and Upper triangular matrix like
+
+\begin{equation}
+\mathrm{\mathbf{A\;\;=\;\;I\;+\;L\;+\;U}}
+\end{equation}
+
+where \textbf{I} is the $n$ x $n$ unit matrix and \textbf{L} and \textbf{U} are lower and upper trianglular with zero main diagonals. If we substitute equation (1.5) into \textbf{Ax = b}, then we get 
+
+\begin{equation}
+\mathrm{\mathbf{Ax=(I+L+U)x=b}}
+\end{equation}
+
+by multiplying identity part with \textbf{x} (\textbf{Ix=x}) and to the upper and lower triangular matrix we get
+
+\begin{equation}
+\mathrm{\mathbf{x=b-Lx-Ux}}
+\end{equation}
+
+Generalizing the above formula for desired number of iteration we get
+
+\begin{equation}
+\mathrm{\mathbf{x^{(m+1)}=b-Lx^{(m+1)}-Ux^{(m)}}}
+\end{equation}
+
+where $\mathrm{\mathbf{x}}^{(m)}\;=\;[x_j^{(m)}]$ is the $m$th approximation and $\mathrm{\mathbf{x}}^{(m+1)}\;=\;\left [x_j^{(m+1)}\right ]$ is the $(m+1)$th approximation. \\
+
+\begin{tabular}{|p{13cm}|}
+\hline
+
+\\ALGORITHM GAUSS-SEIDEL (\textbf{A,b}, $\mathrm{\mathbf{x}}^{(0)},\epsilon,N$) \\ \\
+\hline \\
+This algorithm computes a solution \textbf{x} of the system \textbf{Ax=b} given an initial approximation $\mathrm{\mathbf{x}}^{(0)}$, where \textbf{A} = $a_{jk}$ is an $n$ x $n$ matrix with $a_{jj}\;\neq$ 0, \\$j\;=\;1,\cdots,n$ \\ \\ 
+
+INPUT: \textbf{A,b,} inital approximation $\mathrm{\mathbf{x}}^{(0)}$, tolerance $\epsilon > 0$, maximum number of iterations $N$\\ \\
+OUTPUT: Approximate solution $\mathrm{\mathbf{x}}^{(m)}\;=\;\left [ x_j^{(m)} \right ]$ or a failure message that $\mathrm{\mathbf{x}}^{(N)}$ does not satisfy the tolerance condition \\ \\
+ \hspace{7mm} For $m\;=\;0,\cdots,N-1,$ do: \\ \\
+ \hspace{14mm}  For $j\;=\;1,\cdots,n,$ do: \\ \\ 
+ \hspace{16mm}\vline
+ \hspace{20mm} $x_j^{(m+1)}=-\frac{\hbox{$1$}}{\hbox{$a_{jj}$}}\left ( \sum\limits_{k=1}^{j-1}a_{jk}x_k^{(m+1)}+\sum\limits_{k=j+1}^{n}a_{jk}x_k^{(m)}-b_j\right )$ \\ \\
+ \hspace{14mm} End \\ \\
+ \hspace{14mm} If $\stackrel{max}{j}\vert x_j^{(m+1)}-x_j^{(m)} \vert < \epsilon$ then OUTPUT $\mathrm{\mathbf{x}}^{(m+1)}$. Stop\\ \\
+ \hspace{24mm}[\textit{Procedure completed successfully}]  \\ \\
+ \hspace{7mm} End \\ \\
+OUTPUT: "No solution satisfying the tolerance condition obtained after $N$ iteration steps." Stop \\ \\
+ \hspace{24mm}[\textit{Procedure completed unsuccessfully}] \\ \\
+End GAUSS-SEIDEL \\
+\hline
+\end{tabular}
+\subsection{Parallel Interference Cancellation}
+The Gauss-Seidel iteration is a method of successive cancellation because we replace the approximations by corresponding new ones as soon as the latter ones have been computed. There is another method of cancellation, in which no component of $x^{(m+1)}$ is used until all the components of $x^{(m+1)}$ have been computed. This method is called \textbf{Jacobi iteration}. In method the improved values are not used until a step has been completed and then replacing $x^{(m)}$ by $x^{(m+1)}$ at once, before the beginning of the next iteration. We will demonstrate with an example like in the case for Successive Interference Cancellation. We pick the same example and apply this algorithm, we will see the comparison between those algorithm in terms of convergence. We write the system of linear equation as
+\begin{eqnarray}
+\begin{array}{rrrrrrrrrrr}
+x_1          &=&             & & 0.25\,x_2   &+& 0.25\,x_3   &&              &+& 50 \\ \\
+
+x_2          &=& 0.25\,x_1   & &             & &             &+& 0.25\,x_4   &+& 50 \\ \\
+
+x_3          &=& 0.25\,x_1   & &             & &             &+& 0.25\,x_4   &+& 25 \\ \\             
+	     
+x_4          &=& 	     &+& 0.25\,x_2   &+& 0.25\,x_3   & &             &+& 25 \\ \\ 
+\end{array}
+\end{eqnarray}
+
+We assume the same starting values $x_1^{(0)}\;=\;100,\;x_2^{(0)}\;=\;100,x_3^{(0)}\;=\;100\;\mathrm{and}\; x_4^{(0)}\;=\;100$ and apply the same in the eqaution (1.9)
+\begin{eqnarray}
+\begin{array}{rrrrrrrrrrr}
+x_1^{(1)}    &=&             & & 0.25\,x_2^{(0)}   &+& 0.25\,x_3^{(0)}   &&              &+& 50 \\ \\
+
+x_2^{(1)}    &=& 0.25\,x_1^{(0)}   & &             & &             &+& 0.25\,x_4^{(0)}   &+& 50 \\ \\
+
+x_3^{(1)}    &=& 0.25\,x_1^{(0)}   & &             & &             &+& 0.25\,x_4^{(0)}   &+& 25 \\ \\             
+
+x_4^{(1)}    &=& 	     &+& 0.25\,x_2^{(0)}   &+& 0.25\,x_3^{(0)}   & &             &+& 25 \\ \\ 
+\end{array}
+\end{eqnarray}
+In the above equation, even though the improvised value $x_1^{(1)}$ is available we use only the old value $x_1^{(0)}$. The newly obtained values is used only in the next iteration which is shown in the below eqaution.
+\begin{eqnarray}
+\begin{array}{rrrrrrrrrrr}
+x_1^{(2)}    &=&             & & 0.25\,x_2^{(1)}   &+& 0.25\,x_3^{(1)}   &&              &+& 50 \\ \\
+
+x_2^{(2)}    &=& 0.25\,x_1^{(1)}   & &             & &             &+& 0.25\,x_4^{(1)}   &+& 50 \\ \\
+
+x_3^{(2)}    &=& 0.25\,x_1^{(1)}   & &             & &             &+& 0.25\,x_4^{(1)}   &+& 25 \\ \\             
+
+x_4^{(2)}    &=& 	     &+& 0.25\,x_2^{(1)}   &+& 0.25\,x_3^{(1)}   & &             &+& 25 \\ \\ 
+\end{array}
+\end{eqnarray}
+
+hence mathematically we can write the algorithm \textbf{Ax = b} in the form \textbf{x = b + (I-A)x} which in matrix form
+
+\begin{equation}
+\mathrm{\mathbf{x^{(m+1)}=b+(I-A)x^{(m)}}}
+\end{equation}
+
+This convergence behavior is interesting to study that Successive Interference Canceler using Gauss-Seidel Iteration method converges much faster then the Parallel Interference canceler using Jacobi Iteration method.
+\newpage
+\section{Optimum Decoding}
+As we know that viterbi algorithm performs the maximum-likelihood decoding, which minimizes the bit error probability for convolutional codes. The particular algorithm cannot be applied for the sequence transmission. Hence, it does not minimizes the symbol error probability. The algorithm proposed by Balh, Cocke, Jelinek and Raviv commonly called as BCJR algorithm finds the method for optimum decoding of linear codes which minimizes the symbol error probability. We derive the algorithm for a Markov source and later we specify how it can be applied on coding scheme. \\
+
+Let us consider the transmission scheme in which source generate the binary data inform of 1's and 0's which is modelled as discrete-time finite-state Markov process. Since we assume finite-state therefore we define $M$ distinct states of the Markov source by the integer $m,\;m=0,1,\cdots,M-1$. At the arbitrary time $t$, we define the state of the process as $S_t$ which in-turn produces the output $X_t$. \\
+
+Since there is change of states from time to time, so we define the sequence of states from time $t$ to $t^{'}$ as $S_t^{t^{'}}=S_t,\;S_{t+1},\cdots,S_{t^{'}}$ correspondingly the output as $X_t^{t^{'}}=X_t,\;X_{t+1},\cdots,X_{t^{'}}$. \\
+
+The state transitions of the Markov process is highly probabilistic, hence it is governed by the state transition probabilities which is given as
+
+\begin{equation}
+p_t(m\vert m^{'})=\mathrm{Pr}\{S_t=m\vert S_{t-1}=m^{'}\}
+\end{equation}
+and the corresponding output is given as
+
+\begin{equation}
+q_t(X\vert m^{'},m)=\mathrm{Pr}\{X_t=X\vert S_{t-1}=m^{'};S_t=m\}
+\end{equation}
+where $X\in$ finite discrete alphabet.
+
+The Markov source starts at the known state and ends at the known state. The start state is given as $S_0\;=\;0$ which produces the output sequence $X_1^{\tau}$ and terminates at the know state $S_{\tau}=0$. \\
+
+The output of the Markov source $X_1^{\tau}$ is feed as an input to the Discrete Memoryless Channel (DMC) which in turn produces the output $Y_1^{\tau}=Y_1,\;Y_2,\cdots,Y_{\tau}$. The transition probabilities of the DMC are defined by $R(\cdot\vert \cdot)$
+
+\begin{equation}
+\mathrm{Pr}\{Y_1^{t}\vert X_1^{t}\}=\prod\limits_{j=1}^{t}R(Y_j\vert X_j),\hspace{5mm}\mathrm{where}\hspace{5mm}0\leq t \leq \tau
+\end{equation}
+
+The function of the decoder is to observe the received value $Y_1^{\tau}$ and from that estimate the APP of the \textit{states} and the \textit{transitions} of the Markov source. \\
+i.e., the conditional probabilities of the states and the transitions upon receiving $Y_1^{\tau}$ 
+
+\begin{equation}
+\mathrm{Pr}\{S_t=m\vert Y_1^{\tau}\}=\mathrm{Pr}\{S_t=m;Y_1^{\tau}\}/\mathrm{Pr}\{Y_1^{\tau}\}
+\end{equation}
+and
+
+\begin{equation}
+\mathrm{Pr}\{S_{t-1}=m^{'};S_t=m\vert Y_1^{\tau}\}=\mathrm{Pr}\{S_{t-1}=m^{'};S_t=m;Y_1^{\tau}\}/\mathrm{Pr}\{Y_1^{\tau}\}
+\end{equation}
+
+We now interpret the time-invariant Markov source graphically through the state transition diagram as shown in Figure x.x. The nodes represent the states of the Markov process and branches represent the transition of the states which has non-zero probabilities. Interestingly if we index the states with the time index $t$ and the state index $m$, we get the \textit{trellis} diagram as shown in figure x.x. Trellis diagram gives the time progression of the state sequences. For every state sequence $S_{_1}^{\tau}$ there is unique path through the trellis diagram. \\
+
+Each node in the trellis is associated with the APP $\mathrm{Pr}\{S_{_t}=m\vert Y_{_1}^{\tau}\}$ and the branches are associated with APP $\mathrm{Pr}\{S_{_{t-1}}=m^{'};S_{_{t}}=m\vert Y_{_{1}}^{\tau}\}$. As we stated before, the objective of the decoder is the compute these APPs based on receiving $Y_{_{1}}^{\tau}$. \\
+
+For the analysis purpose we define the joint probabilities as follows
+
+\begin{equation}
+\lambda_{_{t}}(m)=\mathrm{Pr}\{S_{_{t}}=m;Y_{_{1}}^{\tau}\}
+\end{equation}
+and
+
+\begin{equation}
+\sigma_{_{t}}(m^{'},m)=\mathrm{Pr}\{S_{_{t-1}}=m^{'};S_{_{t}}=m;Y_{_{1}}^{\tau}\}
+\end{equation}
+
+For a given $Y_{_{1}}^{\tau}$, $\mathrm{Pr}\{Y_{_{1}}^{\tau}\}$ is a constant, we can divide $\lambda_{_{t}}(m)$ and $\sigma_{_{t}}(m^{'},m)$ by $\mathrm{Pr}\{Y_{_{1}}^{\tau}\}$ to get the conditional probabilities of (1.50) and (1.51). Let us derive a method to compute the $\lambda_{_{t}}(m)$ and $\sigma_{_{t}}(m^{'},m)$. \\ \\
+Let the probability functions can be defined as 
+\begin{eqnarray}
+\begin{array}{lll}
+\alpha_{_{t}}(m)&=&\mathrm{Pr}\{S_{_{t}}=m;Y_{_{1}}^{t}\} \\ \\
+\beta_{_{t}}(m)&=&\mathrm{Pr}\{Y_{_{t+1}}^{\tau}\vert S_{_{t}}=m\} \\ \\
+\gamma_{_{t}}(m^{'},m)&=&\mathrm{Pr}\{S_{_{t}}=m; Y_{_{t}}\vert S_{_{t-1}}=m^{'}\}
+\end{array}
+\end{eqnarray}
+Now $\lambda_{_{t}}(m)$ can be extended in such a way that
+\begin{eqnarray}
+\begin{array}{lll}
+\lambda_{_{t}}(m)&=&\mathrm{Pr}\{S_{_{t}}=m;Y_{_{1}}^{t}\}\cdot \mathrm{Pr}\{Y_{_{t+1}}\vert S_{_{t}}=m; Y_{_{1}}^{t}\} \\ \\
+&=&\alpha_{_{t}}(m)\cdot \mathrm{Pr}\{Y_{_{t+1}}^{\tau}\vert S_{_{t}}=m\} \\ \\
+&=&\alpha_{_{t}}(m)\cdot \beta_{_{t}}(m)
+\end{array}
+\end{eqnarray}
+Similarly,
+\begin{eqnarray}
+\begin{array}{lll}
+\sigma_{_{t}}(m^{'},m)&=&\mathrm{Pr}\{S_{_{t-1}}=m^{'};Y_{_{1}}^{t-1}\}\cdot \mathrm{Pr}\{S_{_{t}}=m;Y_{_{t}}\vert S_{_{t-1}}=m^{'}\}\cdot \mathrm{Pr}\{Y_{_{t+1}}^{\tau}\vert S_{_{t}}=m\} \\ \\
+&=&\alpha_{_{t-1}}(m^{'})\cdot \gamma_{_{t}}(m^{'},m)\cdot \beta_{_{t}}(m)
+\end{array}
+\end{eqnarray}
+Now for $t=1,2,\cdots,\tau$
+\begin{eqnarray}
+\begin{array}{lll}
+\alpha_{_{t}}(m)&=&\sum\limits_{m^{'}=0}^{M-1}\mathrm{Pr}\{S_{_{t-1}}=m^{'};S_{_{t}}=m;Y_{_{1}}^t\} \\ \\
+&=&\sum\limits_{m^{'}}^{}\mathrm{Pr}\{S_{_{t-1}}=m^{'};Y_{_{1}}^{t-1}\}\cdot \mathrm{Pr}\{S_{_{t}}=m;Y_{_{t}}\vert S_{_{t-1}}=m^{'}\} \\ \\
+&=&\sum\limits_{m^{'}}^{}\alpha_{_{t-1}}(m^{'})\cdot \gamma_{_{t}}(m^{'},m)
+\end{array}
+\end{eqnarray}
+Now we set the boundary conditions when $t=0$
+\begin{equation}
+\alpha_{_0}(0)=1,\;\mathrm{and}\;\alpha_{_{0}}(m)=0,\;\mathrm{for}\;m\neq 0
+\end{equation}
+Similarly, for $t=1,2,\cdots,\tau-1$
+\begin{eqnarray}
+\begin{array}{lll}
+\beta_{_{t}}(m)&=&\sum\limits_{m^{'}=0}^{M-1}\mathrm{Pr}\{S_{_{t+1}}=m^{'};Y_{_{t+1}}^{\tau}\vert S_{_{t}}=m\} \\ \\
+&=&\sum\limits_{m^{'}}^{}\mathrm{Pr}\{S_{_{t+1}}=m^{'};Y_{_{t+1}}\vert S_{_{t}}=m\} \vert \cdot \mathrm{Pr}\{Y_{_{t+2}}^{\tau}\vert S_{_{t+1}}=m^{'}\} \\ \\
+&=&\sum\limits_{'}^{}\beta_{_{t+1}}(m^{'})\cdot \gamma_{_{t+1}}(m,m^{'})
+\end{array}
+\end{eqnarray}
+The boundary condition is given by
+\begin{equation}
+\beta_{_{\tau}}(0)=1,\;\mathrm{and}\;\beta_{_{\tau}}(m)=0,\;\mathrm{for}\;m\neq 0
+\end{equation}
+
+The relation (1.57) and (1.59) shows that $\alpha_{_{t}}(m)$ and $\beta_{_{\tau}}(m)$ are recursively obtainable. Now
+\begin{eqnarray}
+\begin{array}{lll}
+\gamma_{_{t}}&=&\sum\limits_{\mathcal{X}}^{}\mathrm{Pr}\{S_{_t}=m\vert S_{_{t-1}}=m^{'}\}\\ \\
+&& \cdot\; \mathrm{Pr}\{X_{_{t}}=X\vert S_{_{t-1}}=m^{'},S_{_{t}}=m\}\cdot \mathrm{Pr}\{Y_{_{t}}\vert X\} \\ \\
+&=&\sum\limits_{\mathcal{X}}p_{_{t}}(m\vert m^{'})\cdot q_{_t}(X\vert m^{'},m)\cdot R(Y_{_{t}},X)
+\end{array}
+\end{eqnarray}
+where $\sum\limits_{\mathcal{X}}$ represents the sum of all possible output symbols.\\
+
+Finally, we outline the operation of the decoder for computing $\lambda_{_{t}}(m)$ and $\sigma_{_{t}}(m^{'},m)$.
+
+\begin{enumerate}
+\item $\alpha_{_{0}}(m)$ and $\beta_{_{\tau}}(m),\;m\;=\;0,1,\cdots,M-1$ are initialized according to (1.58) and (1.60). \\
+\item As soon as $Y_{_{t}}$ is received, the decoder computer $\gamma_{_{t}}(m,m^{'})$ using (1.61) and $\alpha_{_{t}}(m)$ using (1.57). The obtained values of $\alpha_{_{t}}(m)$ stored for all $t$ and $m$. \\
+\item After the reception of complete sequence $Y_{_{1}}^{\tau}$, the decoder recursively computes $\beta_{_{t}}(m)$ using (1.59). After the computation, they can be multiplied by that approximate $\alpha_{_{t}}(m)$ and $\gamma_{_{t}}(m^{'},m)$ to obtain $\lambda_{_{t}}(m)$ and $\sigma_{_{t}}(m^{'},m)$ using (1.55) and (1.56).
+\end{enumerate}
+\section{Sub-Optimal Decoding}
+The proposed BCJR algorithm is optimum for estimating the states and transitions of the Markov process observed in white noise. The algorithm is also called as the \textit{symbol-by-symbol MAP algorithm}. However, this algorithm is too complex for practical implementation because of numerical representation of probabilities, non-linear functions and multiplications and additions of these values. \\
+
+Some approximations made on MAP algorithm which leads to \textit{Max-Log-MAP algorithm}. In this algorithm we process everything in a logarithmic domain, by that additions and multiplications are much easier to handle with the cost of Sub-Optimum performance when compared with MAP algorithm at low signal-to-noise rations. The relation between the MAP and Max-Log-MAP is shown in figure x.x.
+
+We introduce encoding of data in chapter 2, in which we perform systematic coding so we call the systematic part as $\vec{x^{s}}$ and the parity part as $\vec{x^{p}}$ which are then further treated which is suitable for multi-user communication and transmitted over a channel. We also specify the type of the channel we assumed. Hence, the corresponding received sequence can be denoted as $\vec{y}\;=\;(\vec{y^{s}},\vec{y^{p}})$. \\
+
+Before starting the Max-Log-MAP, we define the APP of the states and the transitions of MAP algorithm.
+
+\subsection{MAP Algorithm}
+Let us define the state of the encoder at time $k$ as $S_{_k}$ and the state takes any value in between 0 and $2^{M}-1$. We associated an output $d_k$ during the change in transition from $k-1$ to $k$. The goal of the MAP algorithm is to provide the logarithm of the ratio of the a posteriori probability (APP) of each information bit $d_k$ being 1 to the APP of the bit being 0. Hence we obtain the ratio as
+
+\begin{equation}
+\Lambda(d_k)=\mathrm{ln}\frac{\hbox{$\sum\limits_{S_{_k}}\sum\limits_{S_{k-1}}\gamma_1(y_{_k},S_{_{k-1}},S_{_{k}})\cdot \alpha_{_{k-1}}(S_{_{k-1}})\cdot \beta_{_k}(S_{_k})$}}{\hbox{$\sum\limits_{S_{_k}}\sum\limits_{S_{k-1}}\gamma_0(y_{_k},S_{_{k-1}},S_{_{k}})\cdot \alpha_{_{k-1}}(S_{_{k-1}})\cdot \beta_{_k}(S_{_k})$}}
+\end{equation}
+the forward recursion of the MAP can be expressed as
+
+\begin{eqnarray}
+\begin{array}{lll}
+\alpha_{k}(S_{_k})&=&\frac{\hbox{$\sum\limits_{S_{_{k-1}}}\sum\limits_{i=0}^1 \gamma_i (y_{_k},S_{_{k-1}},S_{_k})\cdot \alpha_{_{k-1}}(S_{_{k-1}}) $}}{\hbox{$\sum\limits_{S_{_k}}\sum\limits_{S_{_{k-1}}}\sum\limits_{i=0}^1 \alpha_i(y_{_k},S_{_{k-1}},S_{_k})\cdot \alpha_{_{k-1}}(S_{_{k-1}})$}} \\ \\
+\alpha_0(S_{_0})&=&\left \{
+\begin{array} {lll}
+1\;\mathrm{for}\;S_0=0\\ \\
+0\;\mathrm{else}  
+\end{array}
+\right.
+\end{array}
+\end{eqnarray}
+and the backward recursion is given as
+\begin{eqnarray}
+\begin{array}{lll}
+\beta_{k}(S_{_k})&=&\frac{\hbox{$\sum\limits_{S_{_{k+1}}}\sum\limits_{i=0}^1 \gamma_i (y_{_{k+1}},S_{_{k}},S_{_{k+1}})\cdot \beta_{_{k+1}}(S_{_{k+1}}) $}}{\hbox{$\sum\limits_{S_{_k}}\sum\limits_{S_{_{k+1}}}\sum\limits_{i=0}^1 \alpha_i(y_{_{k+1}},S_{_{k}},S_{_{k+1}})\cdot \alpha_{_{k}}(S_{_{k}})$}} \\ \\
+\beta_N(S_{_N})&=&\left \{
+\begin{array} {lll}
+1\;\mathrm{for}\;S_N=0\\ \\
+0\;\mathrm{else}  
+\end{array}
+\right.
+\end{array}
+\end{eqnarray}
+
+The transition probabilities are
+
+\begin{eqnarray}
+\begin{array}{lll}
+\gamma_{i}\left [ (y_{_{k}}^{s},y_{_{k}}^{p}),S_{_{k-1}},S_{_{k}} \right ]&=&p\left(y_{_{k}}^{s}\vert d_{_{k}}=i\right)\cdot\\ \\
+&& p\left( y_{_{k}}^{p}\vert d_{_{k}}=i,S_{_{k}},S_{_{k-1}} \right)\cdot \\ \\
+&&q\left ( d_{_{k}}=i\vert S_{_{k}},S_{_{k-1}} \right )\cdot \\ \\
+&&\mathrm{Pr}\left\{S_{_{k}}\vert S_{_{k-1}}\right\};\hspace{5mm}i=0,1
+\end{array}
+\end{eqnarray}
+The value of $q(d_k=i\vert S_{_{k}},S_{_{k-1}})$ is either one or zero depending on whether bit $i$ is associated with the transition from state $S_{_{k-1}}$ to $S_{_{k}}$ or not. It is the last component that we use a priori information for bit $d_k$. In case of non-parallel transitions $\mathrm{Pr}\left\{ S_{_{k}} \vert S_{_{k-1}} \right \} = \mathrm{Pr} \left \{ d_k=1 \right\}$ if $q(d_k=1\vert S_{_{k}},S_{_{k-1}})=1$ and $\mathrm{Pr} \left \{ S_{_{k}} \vert S_{_{k-1}} \right \}=\mathrm{Pr} \left \{d_k=0 \right\}$ if $q(d_k=0\vert S_{_{k}},S_{_{k-1}})=1$.
+
+\subsection{The Max-Log-MAP Algorithm}
+As we described earlier that MAP algorithm is too complex for practical implementation. A method was proposed to reduce the complexity is Max-Log-MAP in which $\gamma_i \left[\left(y_k^{s},y_k^{p}\right),S_{_{k-1}},S_{_{k}}\right],\;\alpha_k(S_{_{k}})$ and $\beta_{k}(S_{_{k}})$ are not calculated directly instead the logarithms of these values and finding the maximum, hence we obtain the Max-Log-MAP algorithm.\\
+
+By taking the logarithm of equation (1.65) we get the things as follows but before we must define the distributions before
+
+\begin{eqnarray}
+\begin{array}{lll}
+p\left(y_k^{p}\vert d_k=i,S_{_{k}},S_{_{k-1}}\right)&=&\frac{\hbox{$1$}}{\hbox{$\sqrt{\pi N_0}$}}\cdot e^{-\frac{1}{N_0}\left[y_k^{p}-x_k^{p}\left(i,S_{_{k}},S_{_{k-1}}\right)\right]^2} \\ \\
+p\left(y_k^{p}\vert d_k=i\right)&=&\frac{\hbox{$1$}}{\hbox{$\sqrt{\pi N_0}$}}\cdot e^{-\frac{1}{N_0}\left[y_k^{s}-x_k^{s}(i)\right]^2}
+\end{array}
+\end{eqnarray}
+and we set $q(\cdot)=1$ then
+
+\begin{eqnarray}
+\begin{array}{lll}
+\mathrm{ln}\gamma_i\left [\left( y_k^s,y_k^p \right),S_{_{k-1}},S_{_{k}} \right ]=\frac{2\,y_k^s\,x_k^s(i)}{N_0}&+& \frac{2y_k^p x_k^p(i,S_{_{k}},S_{_{k-1}})}{N_0}\;\; + \;\; \\ \\
+&&\mathrm{ln\;Pr}\left\{S_{_{k}}\vert S_{_{k-1}} \right \} + K
+\end{array}
+\end{eqnarray}
+the constant $K$ get canceled out in the calculation of $\mathrm{ln}\;\alpha_k\;(S_{_{k}})$ and $\mathrm{ln}\;\beta_k\;(S_{_{k}})$ further $N_0$ must be estimated to properly weight the channel information with the a-priori probabilities $\mathrm{Pr}(S_{_{k}}\vert S_{_{k-1}})$.
+
+The logarithmic value of $\alpha_k(S_{_{k}})$ is given as,
+
+\begin{eqnarray}
+\begin{array}{lll}
+\mathrm{ln}\;\alpha_k(S_{_{k}})&=& \\ \\
+&&\mathrm{ln}\left(\sum\limits_{S_{_{k-1}}}\sum\limits_{i=0}^{1}e^{\mathrm{ln}\gamma_i\left[\left(y_k^s,y_k^p\right),S_{_{k-1}},S_{_{k}}\right]+\mathrm{ln}\alpha_{k-1}\left(S_{_{k-1}}\right)}\right) \\ \\
+&&\mathrm{ln}\left(\sum\limits_{S_{_{k-1}}}\sum\limits_{S_{_{k}}}\sum\limits_{i=0}^{1}e^{\mathrm{ln}\gamma_i\left[\left(y_k^s,y_k^p\right),S_{_{k-1}},S_{_{k}}\right]+\mathrm{ln}\alpha_{k-1}\left(S_{_{k-1}}\right)}\right) 
+\end{array}
+\end{eqnarray}
+and for $\beta_k(S_{_{k}})$
+
+\begin{eqnarray}
+\begin{array}{lll}
+\mathrm{ln}\;\beta_k(S_{_{k}})&=& \\ \\
+&&\mathrm{ln}\left(\sum\limits_{S_{_{k+1}}}\sum\limits_{i=0}^{1}e^{\mathrm{ln}\gamma_i\left[\left(y_{k+1}^s,y_{k+1}^p\right),S_{_{k}},S_{_{k+1}}\right]+\mathrm{ln}\beta_{k+1}\left(S_{_{k+1}}\right)}\right) \\ \\
+&&\mathrm{ln}\left(\sum\limits_{_{S_{k}}}\sum\limits_{S_{_{k+1}}}\sum\limits_{i=0}^{1}e^{\mathrm{ln}\gamma_i\left[\left(y_{k+1}^s,y_{k+1}^p\right),S_{_{k}},S_{_{k+1}}\right]+\mathrm{ln}\alpha_{k}\left(S_{_{k}}\right)}\right) \\ \\
+\end{array}
+\end{eqnarray}
+
+The equation (1.68) and (1.69) can be simplified by using the following approximation.
+
+\begin{equation}
+\mathrm{ln}\left(e^{\delta_1}+\cdots + e^{\delta_n}\right)\approx \max_{i\small{\in} \{1\dots n\}}\delta_i
+\end{equation}
+max$_{i\in\{1\dots n\}}\;\delta_i$ can be calculated by successively using $n-1$ maximum functions overs only with two values. Thereby, we define $\bar{\gamma}_i\left[\left(y_k^s,y_k^p\right),S_{_{k-1}},S_{_{k}}\right]\;=\;\mathrm{ln}\;\gamma_i\;\left[\left(y_k^s,y_k^p\right),S_{_{k-1}},S_{_{k}}\right],\;\bar{\alpha}_k(S_{_{k}})\;=\;\mathrm{ln}\;\alpha_k\;S_{_{k}}$ and $\beta_k\;(S_{_{k}})\;=\;\mathrm{ln}\;\beta_k\;(S_{_{k}})$. The equations (1.68) and (1.69) can be written as
+
+\begin{eqnarray}
+\begin{array}{lll}
+\bar{\alpha}_k(S_{_{k}})&=&\max\limits_{\left(S_{_{k-1}},i\right)} \left\{\bar{\gamma}_i\left[\left(y_{_k}^s,y_{_k}^p\right),S_{_{k-1}},S_{_{k}}\right]+\bar{\alpha}_{k-1}(S_{_{k-1}})\right\}-\\ \\
+&&\max\limits_{\left(S_{_{k}},S_{_{k-1}},i\right)} \left\{\bar{\gamma}_i\left[\left(y_{_k}^s,y_{_k}^p\right),S_{_{k-1}},S_{_{k}}\right]+\bar{\alpha}_{k-1}(S_{_{k-1}})\right\}\\ \\
+\end{array}
+\end{eqnarray}
+and
+\begin{eqnarray}
+\begin{array}{lll}
+\bar{\beta}_k(S_{_{k}})&=&\max\limits_{\left(S_{_{k+1}},i\right)} \left\{\bar{\gamma}_i\left[\left(y_{_{k+1}}^s,y_{_{k+1}}^p\right),S_{_{k}},S_{_{k+1}}\right]+\bar{\beta}_{k+1}(S_{_{k+1}})\right\}-\\ \\
+&&\max\limits_{\left(S_{_{k}},S_{_{k+1}},i\right)} \left\{\bar{\gamma}_i\left[\left(y_{_{k+1}}^s,y_{_{k+1}}^p\right),S_{_{k}},S_{_{k+1}}\right]+\bar{\alpha}_{k}(S_{_{k}})\right\}\\ \\
+\end{array}
+\end{eqnarray}
+
+We can write the a posteriori probability (APP) of each information bit $d_k$ being 1 to the APP of $d_k$ being 0
+
+\begin{eqnarray}
+\begin{array}{lll}
+\Lambda(d_k)&\approx&\max\limits_{\left(S_{_{k}},S_{_{k-1}}\right)} \left\{\bar{\alpha}_1\left[\left(y_{_{k}}^s,y_{_{k}}^p\right),S_{_{k-1}},S_{_{k}}\right]\right .+ \\ \\
+&&\left.\bar{\alpha}_{_{k-1}}\left(S_{_{k-1}}\right)+\bar{\beta}_{_k}\left(S_{_{k}}\right)\right \}- \\ \\
+&&\max\limits_{\left(S_{_{k}},S_{_{k-1}}\right)} \left\{\bar{\alpha}_1\left[\left(y_{_{k}}^s,y_{_{k}}^p\right),S_{_{k-1}},S_{_{k}}\right]\right .+ \\ \\
+&&\left. \bar{\alpha}_{_{k-1}}\left(S_{_{k-1}}\right)+\bar{\beta}_{_k}\left(S_{_{k}}\right)\right \}
+\end{array}
+\end{eqnarray}
+
+When Max-Log-MAP decoder is employed in iterative decoding for Turbo codes, the log-likelihood ratio is split into three terms as extrinsic, a priori and systematic components for that we write the branch transition probabilities as
+
+\begin{eqnarray}
+\begin{array}{lll}
+\bar{\gamma}_i^{'}\left(y_{_{k}}^p,S_{_{k-1}},S_{_{k}}\right)&=&\mathrm{ln}\,p\left(y_{_{k}}^p\vert d_k=i,S_{_{k}},S_{_{k-1}}\right)+ \\ \\
+&&\mathrm{ln}\,q (d_k=i\vert S_{_{k}},S_{_{k-1}})
+\end{array}
+\end{eqnarray}
+and we put the equation (1.74) into (1.73) we get as follows
+
+\begin{eqnarray}
+\begin{array}{lll}
+&&\Lambda(d_k)\;\approx\\ \\
+&&\max\limits_{(S_{_{k}},S_{_{k-1}})}\left[\bar{\gamma}^{'}_1\left(y_{_k}^p,S_{_{k-1}},S_{_{k}}\right)+\bar{\alpha}_{_{k-1}}(S_{_{k-1}})+\bar{\beta}_{_{k}}(S_{_{k}})\right ] + \\ \\
+&&\mathrm{ln\;p}\left(y_{_{k}}^s\vert d_{_{k}}=1\right)+\mathrm{ln\;Pr}\{d_{_{k}}=1\}- \\ \\
+&&\max\limits_{(S_{_{k}},S_{_{k-1}})}\left[\bar{\gamma}^{'}_0\left(y_{_k}^p,S_{_{k-1}},S_{_{k}}\right)+\bar{\alpha}_{_{k-1}}(S_{_{k-1}})+\bar{\beta}_{_{k}}(S_{_{k}})\right ] + \\ \\
+&&\mathrm{ln\;p}\left(y_{_{k}}^s\vert d_{_{k}}=0\right)+\mathrm{ln\;Pr}\{d_{_{k}}=0\}
+\end{array}
+\end{eqnarray}
+
+and $L(d_{_{k}})=\mathrm{ln}\left(\frac{\hbox{$\mathrm{Pr}\{d_{_{k}}=1\}$}}{\hbox{$\mathrm{Pr}\{d_{_{k}}=0\}$}}\right)$ and $\mathrm{ln}\left(\frac{\hbox{$\mathrm{p}\left(y_{_k}^s\vert d_{_k}=1\right)$}}{\hbox{$\mathrm{p}\left(y_{_k}^s\vert d_{_k}=0\right)$}}\right)=\frac{\hbox{$4y_{_{k}}^s$}}{\hbox{$N_0$}}$ and substituting in equation (1.75) we get
+
+\begin{eqnarray}
+\begin{array}{lll}
+&&\Lambda(d_k)\;\approx\\ \\
+&&\max\limits_{(S_{_{k}},S_{_{k-1}})}\left[\bar{\gamma}^{'}_1\left(y_{_k}^p,S_{_{k-1}},S_{_{k}}\right)+\bar{\alpha}_{_{k-1}}(S_{_{k-1}})+\bar{\beta}_{_{k}}(S_{_{k}})\right ] - \\ \\
+&&\max\limits_{(S_{_{k}},S_{_{k-1}})}\left[\bar{\gamma}^{'}_0\left(y_{_k}^p,S_{_{k-1}},S_{_{k}}\right)+\bar{\alpha}_{_{k-1}}(S_{_{k-1}})+\bar{\beta}_{_{k}}(S_{_{k}})\right ] - \\ \\
+&&\frac{\hbox{$4y_{_{k}}^s$}}{\hbox{$N_0$}}-L(d_{_{k}})
+\end{array}
+\end{eqnarray}
+
+The first two terms in the equation (1.76) is called the extrinsic information and the third term is called the systematic information and the last term is called the a priori component. The decomposition is possible only for systematic codes.
+

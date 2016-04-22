@@ -1,0 +1,64 @@
+\chapter{MultiUser Efficiency}
+In this we study the another class of analysis tools, which is based on the estimates of Multiple-Access Interference. These estimates are used to cancel the interference of the received signal and it seems in each and every iteration the much improvised signal with less interference is pass through the decoders for decoding. Hence, the analysis confine to the single-parameter dynamical model. The parameter is called the Multiple-Access Interference (MAI), which is common to all the users. This kind of analysis is called the MultiUser Efficiency, we will see the how to calculate and plot the MultiUser Efficiency curves in the following sections.
+\section{System Model}
+We assume the same model as we assumed for Variance Transfer Characteristics, that a synchronous coded CDMA with equal power for all the users and all users coded at the same rate, hence we write the received discrete-time base band signal corresponding to the $n^{\mathrm{th}}$ transmitted symbol, after chip matched filtering and sampling at chip-rate is give by
+\begin{equation}
+y[n]=S[n]\,W\,a[n]+\nu[n],
+\end{equation}
+for $n\;=\;0,1,\dots,N-1$
+\begin{itemize}
+\item $S[n]\;=\;[s_0[n],\dots,s_{U-1}[n]]$ is a $L\;x\;U$ matrix whose columns contain the user spreading sequence for the $n^{\mathrm{th}}$ symbol. In particular $s_u[n]\;=\;[s_{0,u}[n],s_{1,u}[n],\dots,s_{L-1,u}[n]]^\mathrm{T}$ is the complex spreading sequence of the $u^{\mathrm{th}}$ user in the $n^{\mathrm{th}}$ symbol, whose elements $s_{l,u}[n]$ are BPSK symbols, so that $s_n^{\mathrm{H}}[n]s_u[n]\;=\;1,\,\forall\,u=0,\dots,U-1$ and $\forall\,n$. $L$ is the \textit{spreading factor}, which is assumed to be common to all the users.
+\item $W$ is a $UxU$ diagonal matrix containing the channel complex amplitudes, such that $\mathrm{diag}\{W\}\;=\;[w_0,\dots,w_{U-1}]$, where $w_u$ is the $u^{\mathrm{th}}$ user channel coefficient.
+\item $a[n]\;=\;[a_0[n],\dots,a_{U-1}[n]]^{\mathrm{T}}$ contains the user coded symbols transmitted at time $n$.
+\item $\nu[n]\;=\;[\nu_0[n],\dots,\nu_{L-1}[n]]^{\mathrm{T}}$ contains the background noise samples, where $\nu_l[n]$ is an i.i.d circularly symmetric Gaussian random variable with distribution $\mathcal{N}_C(0,N_0)$.
+\end{itemize}
+With the assumption of perfectly power controlled system with equal power to all the users, then the output of a bank of SUMF is give by
+\begin{equation}
+z[n]=\mathrm{Re}\left\{W^{-1}S^{\mathrm{H}}[n]y[n]\right\}=T[n]a[n]+v[n]
+\end{equation}
+where, $T[n]\;=\;\mathrm{Re}\left\{\frac{\hbox{$1$}}{\hbox{$E_s$}}W^{\mathrm{H}}S^{\mathrm{H}}[n]S[n]W\right\}$, and the noise term $v[n]\;=\;\mathrm{Re}\left\{\frac{\hbox{$1$}}{\hbox{$E_s$}}W^{\mathrm{H}}S^{\mathrm{H}}[n]S[n]\nu[n]\right\}$ with distribution $v[n]\approx \mathcal{N}\left(0,\frac{\hbox{$N_0$}}{\hbox{$2E_s$}}T[n]\right)$. Without the time index the equation (1.2) can be written as 
+\begin{equation}
+z_u\;=\;a_u+\sum\limits_{\stackrel{k=0}{k\neq u}}^{U-1}T_{u,k}\,a_k+v_u
+\end{equation}
+In the above equation, the first term is the desired user symbol, the second term is the MAI and $v_u$ is the additive Gaussian noise. Our intention is to remove the MAI of the symbols $a_u$ by estimating the $\hat{a}_u^{(m)}$ and subtract the estimate with the received signal. Here, $m$ is the index for iteration. We can construct a iteration model as shown in Figure x.x, to perform the task iteratively. The estimates from the decoder is weighted by a factor $\beta_u^{(m)}\;\in\;[0,1]$ which is feed to interference canceler as a-priori information. The signal at the output of the IC stage is given by
+\begin{equation}
+z_u^{(m)}=a_u+\sum\limits_{\stackrel{k=0}{k\neq u}}^{U-1}T_{u,k}\left(a_k-\beta_u^{(m)}\hat{a}_k^{(m)}\right)+v_u
+\end{equation}
+At the start, the initial estimated symbols are set to zero, $\hat{a}_u^{(0)}\;=\;0,\;\forall\,u$ so that $z_u^{(0)}=z_u$. For the perfect symbol estimate the weighting factor $\beta_u^{(m)}\;=\;1$ then equation (1.4) reduces very simply to $z_u^{(m)}\;=\;a_u+v_u$ which is the complete removal of the MAI in that it reaches the single user performance. So, $\beta_u^{(m)}$ is the index of reliability on the estimated symbols $\hat{a}_u^{(m)}$, completely reliable or totally not reliable is when $\beta_u^{(m)}\;=\;1$ and $\beta_u^{(m)}\;=\;0$. \\
+
+Under the condition of large system limits i.e., $U,\;L\;\rightarrow\;\infty$ with the system load $U/L\;=\;\alpha$, the signal to interference to noise ratio of the system is give as
+\begin{equation}
+\mathrm{SINR}^{(m)}=\frac{\hbox{$2\,E_s/N_0$}}{\hbox{$1+\alpha E_s/N_0\,\mu^{(m)}$}}
+\end{equation}
+where $\mu^{(m)}\;=\;\mathrm{E}[\vert a - \beta^{(m)} \hat{a}^{(m)}\vert^2]$ is the variance of the residual interference given by any one of the interfering users. For symmetric systems we can treat all users as equal then we can drop the dependency of the user index $u$, then the equation (1.5) holds for all the users. If we expand the expectation we get
+\begin{equation}
+\mu^{(m)}=1+\left(\beta^{(m)}\right)^2-2\beta^{(m)}\left(1-2\epsilon^{(m)}\right)
+\end{equation}
+where $\epsilon^{(m)}\;=\;\mathrm{Pr}(a\neq \hat{a}^{(m)})$ is the symbol error rate (SER) of a decoder with the input signal-to-noise ratio $\mathrm{SINR}^{(m-1)}$. With the assumption that the residual interference plus the noise is Gaussian, then the SER is becomes a function of SINR. Mathematically,
+\begin{equation}
+\epsilon^{(m)}=f\left(\mathrm{SINR}^{(m-1)}\right).
+\end{equation}
+
+The SINR at the iteration $m$ can be written as
+\begin{equation}
+\mathrm{SINR}^{(m)}=2\frac{\hbox{$E_s$}}{\hbox{$N_0$}}\,\eta^{(m)}
+\end{equation}
+where
+\begin{equation}
+\eta^{(m)}=\frac{\hbox{$1$}}{\hbox{$1+\alpha\,\frac{\hbox{$E_s$}}{\hbox{$N_0$}}\mu^{(m)}$}}
+\end{equation}
+now equation (1.6) can be written as
+\begin{equation}
+\mu^{(m)}=1+\left(\beta^{(m)}\right)^2-2\beta^{(m)}\left(1-2f\left(\mathrm{SINR}^{(m-1)}\right)\right)
+\end{equation}
+
+The term $\eta^{(m)}$ is the degradation factor of the SINR at iteration $m$ with respect to the single-user SNR, which otherwise called as "Multiuser Efficiency" (ME) at iteration $m$. The single-user performance can be achieved when $\eta^{(m)}\;=\;1$. Since, $\beta^{(m)}$ is indirectly proportional to $\mathrm{SINR}^{(m)}$ for maximizing the $\mathrm{SINR}^{(m)}$, $\beta^{(m)}$ is chosen in order to minimize the residual interference variance. From equation (1.6) the optimal weighting factor is obtained as $\beta^{(m)}\;=\;1-2\,\epsilon^{(m)}$ and upon substituting in equation (1.6) we get the variance of residual interference as
+\begin{equation}
+\mu^{(m)}=4\,\epsilon^{(m)}\left(1-\epsilon^{(m)}\right)
+\end{equation}
+Since $\epsilon^{(m)}\;\in\;[0,1/2]$ is monotonically decreasing function and so the residual interference the Multiuser Efficiency is monotonically increasing function, upper bounded by 1. Hence for the large system limits $\stackrel{\mathrm{lim}}{m\rightarrow \infty}\eta^{(m)}=1$ thereby we reach to single-user bound. The evolution of the ME with iterations can be described by one-dimensional non-linear dynamical system with $\eta^{(m)}=\Psi\left(\eta^{(m-1)}\right)$ with the starting values as $\eta^{(0)}\;=\;(2\,E_s/N_0)/(1+\alpha\,E_s/N_0)$ and the mapping function is defined as
+\begin{equation}
+\Psi(\eta)=\left(1+4\alpha \frac{\hbox{$E_s$}}{\hbox{$N_0$}}f(2\eta E_s/N_0)(1-f(2\eta E_s/N_0))\right)^{-1}
+\end{equation}
+
+

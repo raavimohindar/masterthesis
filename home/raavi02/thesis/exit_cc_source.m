@@ -1,0 +1,297 @@
+    %-------------------------------------------------------------------
+    % m-file for determining EXIT trajectory for convolutional codes
+    %-------------------------------------------------------------------
+    % 
+
+    clear all
+    set(0,'DefaultTextInterpreter','none')
+
+
+    %-------------------------------------------------------------------
+    % definition of parameters
+    %-------------------------------------------------------------------
+    %
+    
+    if ~exist('sim_ext','var')     % Parameters defined here, otherwise by external program!
+        calc = 1;
+        plt = 0;
+
+        %G = [7;5];                % [1 1 1; 1 0 1]
+        G = [15;11];               % [1 1 1 1; 1 1 0 1]
+        %G = [19;31];              % [1 0 0 1 1; 1 1 1 1 1] 
+        %G = [109;79];              % [1 0 1 1 0 1 1; 1 1 1 1 0 0 1];
+        g = fliplr(de2bi(G));
+
+        r_flag = 0;                % flag indicating the feedback polynomial for RSC codes
+        % r_flag=0: NSC code
+        % r_flag=i: i-th polynomial used for feedback
+        term = 1;                  % flag indicating trellis truncation or termination
+        % term=0: truncation, term=1: termination
+
+        [n,Lc] = size(g);
+
+        % a priori information at decoder input
+        Ia = [0.001 0.05:0.05:1];  % vector with a priori mutual information, 
+
+        decoder = 'max';           % decoding algorithm (max = Max-Log-MAP,
+        %                     map = MAP)
+
+        decoder_in = 2;            % decoder_in=1: only a priori information at decoder input
+        % decoder_in=2: a priori LLRs and MF output at decoder input
+
+        N_u = 10;                 % number of information bits
+
+        %     P = [1 0 1 1;              % puncturing pattern
+        %          1 1 1 0];
+        P = [1 1 1 0;                % puncturing pattern
+        1 0 1 1];
+        Rc = 1/2;
+
+        if term
+            punc = gen_punc(P,N_u+Lc-1);
+        else    
+            punc = gen_punc(P,N_u);
+        end
+
+        name = ['Results/awgn_cc' int2str(Lc) 'g' int2str(G(1))];
+        
+        for i=2:n
+            name = [name '_' int2str(G(i))];
+        end
+        
+        name = [name 'r' int2str(r_flag) 'p' int2str(bi2de(P'))' '_' decoder];
+        
+        if (decoder_in==2)
+            name = [name '_EbN0r1_2'];
+        end
+
+        if (decoder_in==2)
+            EbN0dB = 1.8;
+        end
+    end
+
+    %-------------------------------------------------------------------
+    if calc
+
+    if (decoder_in==2)
+        % signal-to-noise ratio on channel
+        EsN0     = 10.^(EbN0dB/10)*Rc;
+        sigma2_N = 1 ./ EsN0;          % variance of complex noise
+        sigma_N  = sqrt(sigma2_N/2);   % factor per real valued noise component
+    end
+
+    N_samples = 1000;  % number of samples for numerical integration
+
+
+    disp('calculating a priori mutual information');
+    sigma2 = 0.01:0.2:50;
+    sigma  = sqrt(sigma2);
+    I_a_cc = zeros(size(sigma2));
+
+    for run=1:length(sigma2)
+        delta = 10*sigma(run)/N_samples;
+        x     = -5*sigma(run):delta:5*sigma(run);
+
+        % mutual entropy of a priori information and encoded data
+        I_a_cc(run) = sum(exp(-(x-sigma2(run)/2).^2/2/sigma2(run)) .* log2(1+exp(-x)));
+        I_a_cc(run) = 1 - I_a_cc(run) / sqrt(2*pi*sigma2(run)) * delta;
+    end
+    
+    sigma2_a = interp1(I_a_cc,sigma2,Ia,'cubic');
+    sigma_a  = sqrt(sigma2_a);
+
+    clear x delta I_a_cc sigma sigma2
+    
+    % positions of systematic information bits in unpunctured frame
+    
+    if term
+        syst   = 1:n:(N_u+Lc-1)*n;        % trellis terminated
+        in.sig = zeros((N_u+Lc-1)*n,1);
+    else
+        syst   = 1:n:N_u*n;               % trellis truncated
+        in.sig = zeros(N_u*n,1); 
+    end
+
+
+    %-------------------------------------------------------------------
+    % calculating EXIT charts
+    %-------------------------------------------------------------------
+    %
+    trellis = make_trellis(g,r_flag);
+    code.trellis_out = trellis.out;
+    code.trellis_next = trellis.next;
+    code.num_state = 2^(Lc-1);
+    code.block_len = N_u+(Lc-1)*term;
+    code.word_len = n;
+    code.term = term;
+
+    N_bins = 40;        % number of bins of histogram
+
+
+    if exist('EbN0dB','var')
+        tmp = length(EbN0dB);
+    else
+        tmp = 1;
+    end
+    
+    I_e_cc = zeros(tmp,length(Ia));   % extrinsic mutual information
+    I_se_cc = zeros(tmp,length(Ia));  % extrinsic + systematic mutual information
+    I_t_cc = zeros(tmp,length(Ia));   % total mutual information
+    cbins  = zeros(tmp,N_bins+1);
+    histo0 = zeros(tmp,length(Ia),N_bins+1);
+    histo1 = zeros(tmp,length(Ia),N_bins+1);
+
+
+    for run1=1:length(Ia)
+
+        disp(['calculating EXIT charts for Ia=' num2str(Ia(run1),2)]);
+
+        % information bits
+        u = (sign(randn(N_u,1))+1)/2;
+
+        % convolutional encoding  
+        [c,ls,tb] = conv_encoder(u,g,r_flag,term);
+        
+        if term 
+            u = 1-2*[u;tb];
+        else
+            u = 1-2*u;
+        end
+
+    % BPSK
+        c   = 1 - 2*c;
+        N_c = length(c);
+        in.last_state = ls;
+
+        for run2=1:tmp
+
+            if decoder_in==1
+                % a priori information
+                in.L_a = zeros(N_u+(Lc-1)*term,1);
+                % decoder input = matched filter output
+                noise = randn(N_c,1) * sigma_a(run1);
+                in.sig(punc) = sigma2_a(run1)/2*c(punc) + randn(size(punc)) * sigma_a(run1);
+                    if strcmp(lower(decoder),'max')
+                    [L_info,L_t] = max_log_map(in,code);  
+                    else
+                    [L_info,L_t] = log_map(in,code);  
+                    end
+                L_t = L_t(punc);
+                L_e = L_t - in.sig(punc);
+                idx0 = find(c(punc)>0);
+                idx1 = find(c(punc)<0);
+            else 
+                % a priori information
+                in.L_a = sigma2_a(run1)/2*u + randn(N_u+(Lc-1)*term,1)*sigma_a(run1);
+                % decoder input = matched filter output
+                in.sig(punc) = c(punc) + randn(size(punc)) * sigma_N(run2);
+                in.sig = 4*EsN0(run2) * in.sig;   % LLR
+                    
+                    if strcmp(lower(decoder),'max')
+                    L_t = max_log_map(in,code);  
+                    else
+                    L_t = log_map(in,code);  
+                    end
+                L_e = L_t - in.L_a;
+
+                idx0 = find(u>0);
+                idx1 = find(u<0);
+            end
+
+            % mutual information of entire output of inform
+            mm    = max(abs(L_t));
+            delta = 2*mm/N_bins;
+            bins  = -mm:delta:mm;
+
+            [histo0(run2,run1,:),cbins(run2,:)] = hist(L_t(idx0),bins);
+            histo0(run2,run1,:) = histo0(run2,run1,:) / sum(histo0(run2,run1,:));               
+            [histo1(run2,run1,:),cbins(run2,:)] = hist(L_t(idx1),bins);
+            histo1(run2,run1,:) = histo1(run2,run1,:) / sum(histo1(run2,run1,:));
+
+            % mutual entropy of a posteriori information and encoded data
+            idx = find((histo0(run2,run1,:)+histo1(run2,run1,:))~=0);
+            I_t_cc(run2,run1) = sum(histo0(run2,run1,idx).*spfun(@log2,2*histo0(run2,run1,idx)./(histo0(run2,run1,idx)+histo1(run2,run1,idx)))...
+            + histo1(run2,run1,idx).*spfun(@log2,2*histo1(run2,run1,idx)./(histo0(run2,run1,idx)+histo1(run2,run1,idx))))/2;
+
+
+            % mutual information of extrinsic and systematic part
+
+            if decoder_in==2
+                mm    = max(abs(L_e));
+                delta = 2*mm/N_bins;
+                bins  = -mm:delta:mm;
+
+                [histo0(run2,run1,:),cbins(run2,:)] = hist(L_e(idx0),bins);
+                histo0(run2,run1,:) = histo0(run2,run1,:) / sum(histo0(run2,run1,:));
+
+                [histo1(run2,run1,:),cbins(run2,:)] = hist(L_e(idx1),bins);
+                histo1(run2,run1,:) = histo1(run2,run1,:) / sum(histo1(run2,run1,:));
+
+                % mutual entropy of extrinsic+systematic information and encoded data
+                idx = find((histo0(run2,run1,:)+histo1(run2,run1,:))~=0);
+                I_se_cc(run2,run1) = sum(histo0(run2,run1,idx).*spfun(@log2,2*histo0(run2,run1,idx)./(histo0(run2,run1,idx)+histo1(run2,run1,idx)))...
+                +histo1(run2,run1,idx).*spfun(@log2,2*histo1(run2,run1,idx)./(histo0(run2,run1,idx)+histo1(run2,run1,idx))))/2;
+
+                L_e = L_e - in.sig(syst);
+            end
+
+
+            % mutual information only of extrinsic part
+            mm    = max(abs(L_e));
+            delta = 2*mm/N_bins;
+            bins  = -mm:delta:mm;
+
+            [histo0(run2,run1,:),cbins(run2,:)] = hist(L_e(idx0),bins);
+            histo0(run2,run1,:) = histo0(run2,run1,:) / sum(histo0(run2,run1,:));
+
+            [histo1(run2,run1,:),cbins(run2,:)] = hist(L_e(idx1),bins);
+            histo1(run2,run1,:) = histo1(run2,run1,:) / sum(histo1(run2,run1,:));
+
+            % mutual entropy of extrinsic information and encoded data
+            idx = find((histo0(run2,run1,:)+histo1(run2,run1,:))~=0);
+            I_e_cc(run2,run1) = sum(histo0(run2,run1,idx).*spfun(@log2,2*histo0(run2,run1,idx)./(histo0(run2,run1,idx)+histo1(run2,run1,idx)))...
+            +histo1(run2,run1,idx).*spfun(@log2,2*histo1(run2,run1,idx)./(histo0(run2,run1,idx)+histo1(run2,run1,idx))))/2;
+    end   % for run2
+
+    if decoder_in==2
+    save(name,'I_e_cc','I_se_cc','I_t_cc','bins','histo0','histo1','Ia','EbN0dB','G','r_flag','term','P','N_u','Rc')
+    else
+    save(name,'I_e_cc','I_t_cc','bins','histo0','histo1','Ia','G','r_flag','term','P','N_u','Rc')
+    end
+
+    end   % for run1   
+
+    else   % if calc
+    load(name)
+    end
+
+    if plt
+    if (decoder_in==2)
+    %         figure(1)
+    %         mesh(Ia,EbN0dB,I_e_cc)
+    %         grid on
+    %         ylabel('EsN0 in dB')
+    %         xlabel('Ia')
+    %         title('extrinsic mutual information')
+    %         
+    %         figure(2)
+    %         mesh(Ia,EbN0dB,I_t_cc)
+    %         grid on
+    %         ylabel('EsN0 in dB')
+    %         xlabel('Ia')
+    %         title('total mutual information')
+    %         
+    figure(3)
+    plot(Ia,I_e_cc,'b',Ia,I_se_cc,'r')
+    grid on
+    axis([0 1 0 1])
+    %        legend('-1dB','0dB','1dB','2dB','3dB',4)
+    title(name)
+    else
+    figure(1)
+    plot(Ia,Ia,Ia,I_e_cc,Ia,I_t_cc)
+    grid on
+    legend('I_a','I_e','I_t',2)
+    xlabel('Ia')
+    end
+    end

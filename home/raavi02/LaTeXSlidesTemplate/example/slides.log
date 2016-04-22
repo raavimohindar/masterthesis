@@ -1,0 +1,529 @@
+This is e-TeX, Version 3.14159-2.1 (Web2C 7.4.5) (format=latex 2005.6.13)  17 JAN 2006 10:47
+entering extended mode
+**slides.tex
+(./slides.tex
+LaTeX2e <2001/06/01>
+Babel <v3.7h> and hyphenation patterns for american, french, german, ngerman, b
+ahasa, basque, catalan, croatian, czech, danish, dutch, finnish, greek, iceland
+ic, irish, italian, latin, magyar, norsk, norsk, portuges, romanian, russian, s
+lovak, slovene, spanish, swedish, turkish, ukrainian, nohyphenation, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2001/04/21 v1.4e Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/fleqn.clo
+File: fleqn.clo 1998/08/17 v1.1c Standard LaTeX option (flush left equations)
+\mathindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/base/size10.clo
+File: size10.clo 2001/04/21 v1.4e Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen103
+)
+(/usr/share/texmf/tex/generic/babel/babel.sty
+Package: babel 2001/03/01 v3.7h The Babel package
+
+(/usr/share/texmf/tex/generic/babel/english.ldf
+Language: english 2001/04/15 v3.3l English support from the babel system
+
+(/usr/share/texmf/tex/generic/babel/babel.def
+File: babel.def 2001/03/01 v3.7h Babel common definitions
+\babel@savecnt=\count87
+\U@D=\dimen104
+)
+\l@canadian = a dialect from \language\l@english 
+))
+(/usr/share/texmf/tex/latex/base/inputenc.sty
+Package: inputenc 2001/07/10 v0.99a Input encoding file 
+
+(/usr/share/texmf/tex/latex/base/latin1.def
+File: latin1.def 2001/07/10 v0.99a Input encoding file 
+)) (./options.sty)
+(/usr/share/texmf/tex/plain/dvips/colordvi.tex)
+(/usr/share/texmf/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+(/usr/share/texmf/tex/latex/graphics/graphics.sty
+Package: graphics 2001/07/07 v1.0n Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texmf/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2001/08/31 v1.1 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: dvips.def on input line 80.
+
+(/usr/share/texmf/tex/latex/graphics/dvips.def
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))
+\Gin@req@height=\dimen105
+\Gin@req@width=\dimen106
+)
+(/usr/share/texmf/tex/latex/misc/rotating.sty
+Package: rotating 1997/09/26, v2.13 Rotation package
+
+(/usr/share/texmf/tex/latex/base/ifthen.sty
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\c@r@tfl@t=\count88
+\rot@float@box=\box26
+)
+(/usr/share/texmf/tex/latex/graphics/epsfig.sty
+Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
+\epsfxsize=\dimen107
+\epsfysize=\dimen108
+) (./ANTcolor.tex
+(/usr/share/texmf/tex/latex/graphics/color.sty
+Package: color 1999/02/16 v1.0i Standard LaTeX Color (DPC)
+
+(/usr/share/texmf/tex/latex/config/color.cfg
+File: color.cfg 2001/08/31 v1.1 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: dvips.def on input line 125.
+
+(/usr/share/texmf/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
+))) (./mathe.tex)
+(./latex2e.tex) (./cleanrahmenA4quer.tex
+\titelzeile=\box27
+\datum=\box28
+\author=\box29
+File: uniHB2.eps Graphic file (type eps)
+ <uniHB2.eps>) (./slides.aux)
+\openout1 = `slides.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
+LaTeX Font Info:    ... okay on input line 64.
+File: uniHB2.eps Graphic file (type eps)
+
+<uniHB2.eps> (./slides-pages.tex
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/sc' in size <14.4> not available
+(Font)              Font shape `OT1/cmr/m/sc' tried instead on input line 2.
+
+
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 16--18
+[] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[1
+
+]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <20.74> on input line 29.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 29.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 29.
+
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 38--40
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[2]
+File: ../../documentation/ps/communication.eps Graphic file (type eps)
+ <../../documentation/ps/communication.eps>
+File: ../../documentation/ps/spreading.eps Graphic file (type eps)
+
+<../../documentation/ps/spreading.eps>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 54.
+
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 80--82
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[3]
+File: ../../documentation/ps/receiver_section.eps Graphic file (type eps)
+ <../../documentation/ps/receiver_section.eps>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <24.88> on input line 118.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 118.
+
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 122--124
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[4]
+File: ../../documentation/ps/dynamical_generic.eps Graphic file (type eps)
+ <../../documentation/ps/dynamical_generic.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 155--157
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[5]
+File: ../../documentation/ps/receiver_section.eps Graphic file (type eps)
+ <../../documentation/ps/receiver_section.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 186--188
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[6]
+File: ../../documentation/ps/tens_model.eps Graphic file (type eps)
+ <../../documentation/ps/tens_model.eps>
+File: ../../documentation/ps/generic_half_exit.eps Graphic file (type eps)
+
+<../../documentation/ps/generic_half_exit.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 223--225
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[7]
+File: ../../documentation/ps/dynamical_exit.eps Graphic file (type eps)
+ <../../documentation/ps/dynamical_exit.eps>
+File: ../../documentation/ps/exit_trajectories_0dB_half.eps Graphic file (type 
+eps)
+
+<../../documentation/ps/exit_trajectories_0dB_half.eps>
+File: ../../documentation/ps/exit_trajectories_3dB_half.eps Graphic file (type 
+eps)
+
+<../../documentation/ps/exit_trajectories_3dB_half.eps>
+File: ../../documentation/ps/exit_trajectories_5dB_half.eps Graphic file (type 
+eps)
+
+<../../documentation/ps/exit_trajectories_5dB_half.eps>
+File: ../../documentation/ps/exit_trajectories_8dB_half.eps Graphic file (type 
+eps)
+
+<../../documentation/ps/exit_trajectories_8dB_half.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 251--253
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[8]
+File: ../../documentation/ps/generic_full_exit.eps Graphic file (type eps)
+ <../../documentation/ps/generic_full_exit.eps>
+File: ../../documentation/ps/exit_trajectories_0dB_full.eps Graphic file (type 
+eps)
+
+<../../documentation/ps/exit_trajectories_0dB_full.eps>
+File: ../../documentation/ps/exit_trajectories_3dB_full.eps Graphic file (type 
+eps)
+
+<../../documentation/ps/exit_trajectories_3dB_full.eps>
+File: ../../documentation/ps/exit_trajectories_8dB_full.eps Graphic file (type 
+eps)
+
+<../../documentation/ps/exit_trajectories_8dB_full.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 280--282
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[9]
+File: ../../documentation/ps/exit_trajectories_2p5dB_half.eps Graphic file (typ
+e eps)
+ <../../documentation/ps/exit_trajectories_2p5dB_half.eps>
+File: ../../documentation/ps/exit_trajectories_2p5dB_full.eps Graphic file (typ
+e eps)
+
+<../../documentation/ps/exit_trajectories_2p5dB_full.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 304--306
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[10]
+File: ../../documentation/ps/receiver_section.eps Graphic file (type eps)
+ <../../documentation/ps/receiver_section.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 328--330
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[11]
+File: ../../documentation/ps/generic_mue_half.eps Graphic file (type eps)
+ <../../documentation/ps/generic_mue_half.eps>
+File: ../../documentation/ps/dynamical_me.eps Graphic file (type eps)
+
+<../../documentation/ps/dynamical_me.eps>
+File: ../../documentation/ps/load_h_0dB.eps Graphic file (type eps)
+
+<../../documentation/ps/load_h_0dB.eps>
+File: ../../documentation/ps/load_h_3dB.eps Graphic file (type eps)
+
+<../../documentation/ps/load_h_3dB.eps>
+File: ../../documentation/ps/load_h_8dB.eps Graphic file (type eps)
+
+<../../documentation/ps/load_h_8dB.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 357--359
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[12]
+File: ../../documentation/ps/generic_mue_full.eps Graphic file (type eps)
+ <../../documentation/ps/generic_mue_full.eps>
+File: ../../documentation/ps/load_f_0dB.eps Graphic file (type eps)
+
+<../../documentation/ps/load_f_0dB.eps>
+File: ../../documentation/ps/load_f_3dB.eps Graphic file (type eps)
+
+<../../documentation/ps/load_f_3dB.eps>
+File: ../../documentation/ps/load_f_8dB.eps Graphic file (type eps)
+
+<../../documentation/ps/load_f_8dB.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 387--389
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[13]
+File: ../../documentation/ps/load_h_2p5dB.eps Graphic file (type eps)
+ <../../documentation/ps/load_h_2p5dB.eps>
+File: ../../documentation/ps/load_f_2p5dB.eps Graphic file (type eps)
+
+<../../documentation/ps/load_f_2p5dB.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 414--416
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[14]
+File: ../../documentation/ps/receiver_section.eps Graphic file (type eps)
+ <../../documentation/ps/receiver_section.eps>
+File: ../../documentation/ps/dynamical_model.eps Graphic file (type eps)
+
+<../../documentation/ps/dynamical_model.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 447--449
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[15]
+File: ../../documentation/ps/generic_half_vtc.eps Graphic file (type eps)
+ <../../documentation/ps/generic_half_vtc.eps>
+File: ../../documentation/ps/VTC_trajectories_4_8_0dB.eps Graphic file (type ep
+s)
+
+<../../documentation/ps/VTC_trajectories_4_8_0dB.eps>
+File: ../../documentation/ps/VTC_trajectories_4_8_3dB.eps Graphic file (type ep
+s)
+
+<../../documentation/ps/VTC_trajectories_4_8_3dB.eps>
+File: ../../documentation/ps/VTC_trajectories_4_8_5dB.eps Graphic file (type ep
+s)
+
+<../../documentation/ps/VTC_trajectories_4_8_5dB.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 477--479
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[16]
+File: ../../documentation/ps/generic_full_vtc.eps Graphic file (type eps)
+ <../../documentation/ps/generic_full_vtc.eps>
+File: ../../documentation/ps/VTC_trajectories_8_8_0dB.eps Graphic file (type ep
+s)
+
+<../../documentation/ps/VTC_trajectories_8_8_0dB.eps>
+File: ../../documentation/ps/VTC_trajectories_8_8_3dB.eps Graphic file (type ep
+s)
+
+<../../documentation/ps/VTC_trajectories_8_8_3dB.eps>
+File: ../../documentation/ps/VTC_trajectories_8_8_5dB.eps Graphic file (type ep
+s)
+
+<../../documentation/ps/VTC_trajectories_8_8_5dB.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 504--506
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[17]
+File: ../../documentation/ps/circular_disk.eps Graphic file (type eps)
+ <../../documentation/ps/circular_disk.eps>
+File: ../../documentation/ps/concave.eps Graphic file (type eps)
+
+<../../documentation/ps/concave.eps>
+File: ../../documentation/ps/1.eps Graphic file (type eps)
+ <../../documentation/ps/1.eps>
+File: ../../documentation/ps/3.eps Graphic file (type eps)
+
+<../../documentation/ps/3.eps>
+File: ../../documentation/ps/4.eps Graphic file (type eps)
+ <../../documentation/ps/4.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 536--538
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[18]
+File: ../../documentation/ps/cycles.eps Graphic file (type eps)
+ <../../documentation/ps/cycles.eps>
+File: ../../documentation/ps/x1.eps Graphic file (type eps)
+ <../../documentation/ps/x1.eps>
+File: ../../documentation/ps/convex.eps Graphic file (type eps)
+
+<../../documentation/ps/convex.eps>
+File: ../../documentation/ps/z1.eps Graphic file (type eps)
+ <../../documentation/ps/z1.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 565--567
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[19]
+File: ../../documentation/ps/receiver_section_sic.eps Graphic file (type eps)
+ <../../documentation/ps/receiver_section_sic.eps>
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 585--587
+[][] 
+ []
+
+File: ANT.eps Graphic file (type eps)
+<ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[20]
+Overfull \hbox (8.5356pt too wide) in paragraph at lines 602--604
+[][] 
+ []
+
+)
+File: ANT.eps Graphic file (type eps)
+ <ANT.eps>
+Overfull \hbox (51.21504pt too wide) has occurred while \output is active
+[]
+ []
+
+[21] (./slides.aux) ) 
+Here is how much of TeX's memory you used:
+ 1586 strings out of 95370
+ 20572 string characters out of 1188185
+ 71027 words of memory out of 1000001
+ 4586 multiletter control sequences out of 10000+50000
+ 11568 words of font info for 40 fonts, out of 500000 for 1000
+ 198 hyphenation exceptions out of 1000
+ 25i,15n,24p,302b,382s stack positions out of 1500i,500n,5000p,200000b,5000s
+
+Output written on slides.dvi (21 pages, 47452 bytes).

@@ -1,0 +1,59 @@
+\chapter{Cleveres} \label{CPTsim} 
+%
+\section{Symbolische Verweise} \label{SECverw}
+%
+Wer Verweise auf Seitennummern nach dem Muster ``wie man auf Seite 35 sieht'' 
+{\em fest verdrahtet}, wird sich ziemlich bald dar"uber "argern, da"s er alle derartigen 
+Verweise ab"andern mu"s, nur weil er {\em vor} Seite~35 Text eingef"ugt hat, 
+so da"s sich alles folgende entsprechend verschiebt.
+
+Deshalb fangen kluge Leute einen derartigen Pfusch gleich gar nicht an
+und verwenden prinzipiell {\em symbolische Verweise}, d.h.\ Verweise nicht direkt
+auf eine Zahl, sondern auf ein {\em label}. Dies gilt nicht nur f"ur Seitennummern,
+sondern auch f"ur Kapitel-, Gleichungs-, Tabellen- und Bildernummern.
+In \LaTeX\ steht dazu der Befehl \verb+\ref{LABELNAME}+ zur Verf"ugung, 
+wobei dies voraussetzt, da"s man an der entsprechenden Stelle den Label {\tt LABELNAME}
+mittels \verb+\label{LABELNAME}+ definiert hat.
+
+Beispiel: Nehmen wir an, die Zeile \verb+\section{Fazit} \label{SECfazit}+
+steht in einem \LaTeX-Dokument und erzeugt die "Uberschrift ``5.4 Fazit''.
+Der symbolische Verweis auf Abschnitt~5.4 sieht dann so aus:\quad
+\verb+wie in Abschnitt~\ref{SECfazit} gezeigt wurde+. Dabei stellt die
+Tilde sicher, da"s \LaTeX\ keinen Zeilenumbruch zwischen {\tt Abschnitt} und
+{\tt 5.4} vornimmt.
+
+"Aquivalentes gilt nat"urlich auch f"ur \verb+\chapter{...}+, \verb+\subsection{...}+ etc..
+Prinzipiell mu"s der \verb+\label+-Befehl immer direkt nach dem Anfang der entsprechenden
+Umgebung stehen, bei Gleichungen also nach \verb+\begin{equation}+ oder der entsprechenden
+Konstruktion, bei Tabellen nach \verb+\begin{table}+. Ausnahme: bei Abbildungen mu"s
+der \verb+\label+-Befehl nach \verb+\caption{...}+ und vor \verb+\end{figure}+ stehen.
+F"ur Verweise auf Seitennummern gibt es den speziellen Befehl \verb+\pageref{LABELNAME}+.
+Der dazugeh"orige \verb+\label+-Befehl kann irgendwo im \LaTeX-Dokument zwischen 
+\verb+\begin{document}+ und \verb+\end{document}+ stehen.
+
+N.B.: Damit \LaTeX\ die symbolischen Verweise richtig aufl"ost,
+mu"s zweimal kompiliert werden! Beim ersten Mal werden die Labels erzeugt und
+beim zweiten Mal von \verb+\ref{...}+ ausgelesen. Kompiliert man nicht oft genug,
+so erscheinen {\tt ??} statt der gew"unschten Referenzen.
+
+Bemerkung: die einzigen Verweise, die nicht mit dem \verb+\label+- 
+und \verb+\ref+-Befehlen bewerkstelligt werden, sind Referenzen auf die Literaturliste
+(Bibliographie). Dies geschieht mit {\tt bibtex} und dem Befehl \verb+\cite{...}+
+und ist in Abschnitt~\ref{SECbib} beschrieben.
+
+\section{Literaturverzeichnis mit BibTeX} \label{SECbib}
+%
+Verweise auf das Literatur-Verzeichnis erfolgen mit dem
+\verb+\cite{QUELLExx}+-Befehl, wobei {\tt QUELLExx} ein Label ist, das in der
+Datei {\tt quellen.bib} definiert sein mu"s.  In dieser Datei werden
+solchen Labeln alle Angaben zugewiesen (Autoren, Titel, Journal etc.).
+
+Die Default-Datei enth"alt bereits einige Labels: {\tt KK92}, {\tt Kam92}, {\tt Pro95}.
+Es hat sich als zweckm"a"sig erwiesen, die Labels bei nur einem Autor aus den drei Anfangsbuchstaben
+des Nachnamens und der Jahreszahl zusammenzusetzen. Bei mehreren Autoren benutzt man die
+Initialen der Nachnamen und die Jahreszahl.
+Verwendet man \verb+\bibliographystyle{alpha}+ (wie es im ANT-Musterbericht der Fall ist),
+so erzeugt der \verb+\cite+-Befehl Verweise in der Form \cite{KK92,Kam92} oder \cite{Pro95},
+sofern das \LaTeX-Dokument einmal mit Bibtex ``behandelt'' und dann zweimal compiliert wurde.
+
+% EOF

@@ -1,0 +1,87 @@
+\documentclass[11pt]{report}
+\usepackage[latin1]{inputenc} 
+%\usepackage{showkeys}
+\input{latex2e.tex}
+\usepackage{epsfig}
+\input{mathe.tex}
+\usepackage{fancyheadings}
+\usepackage{options}
+\usepackage[hang,small,bf]{caption}
+\usepackage{amsopn}
+\usepackage{amsmath, amsthm, amssymb}
+\textwidth16cm
+\textheight25cm
+\oddsidemargin 8mm
+\evensidemargin -1mm
+\topmargin-13mm 
+\parskip1.5ex plus 0.3ex
+\parindent0cm
+\newcommand{\zeilenabstand}{1.0}
+\renewcommand{\baselinestretch}{\zeilenabstand}
+\usepackage{verbatim}    
+\newcommand{\getASCII}[1]{\renewcommand{\baselinestretch}{0.8}\begin{footnotesize}%
+\verbatimfile{#1}\end{footnotesize}\renewcommand{\baselinestretch}{\zeilenabstand}}
+\renewcommand{\topfraction}{1.0}
+\renewcommand{\bottomfraction}{1.0}
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\floatpagefraction}{1.0}
+\hyphenpenalty=5000
+\doublehyphendemerits=5000
+\brokenpenalty=5000
+\finalhyphendemerits=5000
+
+\pagestyle{fancyplain}   
+\plainheadrulewidth 0.4pt\renewcommand{\chaptermark}[1]%
+   {\markboth{\uppercase{\thechapter.\ #1}}{}}
+\renewcommand{\sectionmark}[1]%
+   {\markright{\uppercase{\thesection.\ #1}}}
+\lhead[\thepage]{\scriptsize\rightmark}
+\rhead[\scriptsize\leftmark]{\thepage}
+\cfoot{}
+
+\newlength{\footnotelaenge}
+\makeatletter
+\renewcommand{\@makefntext}[1]{%
+\setlength{\footnotelaenge}{\columnwidth}
+\addtolength{\footnotelaenge}{-0.7em}
+    \noindent
+    \hbox to 0.7em {\hss\@makefnmark}\parbox[t]{\footnotelaenge}{#1}}
+\makeatother
+\def\argmax{\mathop{\mathrm{arg\,max}}}
+\def\argmin{\mathop{\mathrm{arg\,min}}}
+\def\max{\mathop{\mathrm{max}}}
+\def\min{\mathop{\mathrm{min}}}
+\newcommand{\Arbeitsart}{Master Thesis}     % oder: Studienarbeit, Projektarbeit
+\newcommand{\Ausgabetermin}{13.04.2005}
+\newcommand{\Abgabetermin}{14.12.2005}
+\newcommand{\Berichtsdatum}{14.12.2005}
+\newcommand{\Betreuer}{Dipl.-Ing. Petra Weitkemper}
+\newcommand{\Autor}{Raavi M. Mohindar Rao}
+\newcommand{\Berichtstitel}{Analysis of Iterative Multi-User \\ Detection by Information Theory}
+\newcommand{\clearemptydoublepage}{\newpage{\pagestyle{empty}\cleardoublepage}}
+\includeonly{titel,chapter1,chapter2,chapter3,chapter4,chapter5,chapter6,conclusion}
+\begin{document}
+\include{titel}
+\clearemptydoublepage
+  \thispagestyle{fancyplain}
+  \pagenumbering{Roman}
+  \tableofcontents            % Inhaltsverzeichnis
+  \thispagestyle{fancy}
+  \clearemptydoublepage
+  \pagenumbering{arabic}
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
+\include{chapter4}
+\include{chapter5}
+\include{chapter6}
+\include{conclusion}
+\nocite{Pro01,TC91,Kuehn,GC,VTC,JC,K05,BCJR,TUR,TEN,PETRA}
+\bibliographystyle{alpha}
+\thispagestyle{fancyplain}  % Literaturverzeichnis
+{\small
+\bibliography{docu}
+\addcontentsline{toc}{chapter}{Bibliography}
+}
+
+\end{document}

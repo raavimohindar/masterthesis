@@ -1,0 +1,195 @@
+\chapter{Coded CDMA Receiver Block}
+In this chapter we study about various optimum and sub-optimum detection schemes and analyze each scheme in detail by studying advantages and dis-advantages for to implement in our communication system.
+\section{Optimum Detection}
+The vector of information bits $\mathrm{\mathbf{x}}$ is transmitted over a individual channel with channel impulse response $h_k$. At the receiver all the signals are superimposed and corrupted by additive white Gaussian noise $\mathrm{\mathbf{n}}$. Then the received vector is of the form
+\begin{equation}
+\mathrm{\mathbf{y}}=\mathrm{\mathbf{H}}\cdot\mathrm{\mathbf{x}}+\mathrm{\mathbf{n}}=\mathrm{\mathbf{S}}\cdot\mathrm{\mathbf{a}}+\mathrm{\mathbf{n}}
+\end{equation}
+where $\mathrm{\mathbf{H}}$ is the concatenation of several user-specific convolution matrices. The received vector $\mathrm{\mathbf{x}}$ consist of user-specific spreading codes $c_k$ of all users which then convolve with channel impulse response $h_k$ forms the signature $s$. Thus $\mathrm{\mathbf{S}}$ represents the signature of all the users.\\ \\
+We now try to detect users jointly and see what complexity arises in terms to implement, as a detector in our communication systems.
+
+\subsection{Optimum Joint Sequence Detection}
+
+In joint sequence detection scheme, we assume that we have perfect knowledge of the channel impulse response and spreading codes we employed in the transmission block. Optimum detector is one which performs joint maximum a-posteriori decoding of all users upon receiving the sequence $\mathrm{\mathbf{y}}$. Mathematically we can express the joint maximum a-posteriori decoding as
+
+\begin{equation}
+\mathrm{\hat{\mathbf{d}}^{map}}=\stackrel{\mathrm{arg\;max}}{\mathrm{\tilde{\mathbf{d}}}} \mathrm{Pr}\{\mathrm{\tilde{\mathbf{d}}}\vert \mathrm{\mathbf{S}},\mathrm{\mathbf{y}}\} = \stackrel{\mathrm{arg\;max}}{\mathrm{\tilde{\mathbf{d}}}} p_{\underline{\mathcal{Y}}\vert\mathrm{\tilde{\mathbf{d}}},\mathrm{\mathbf{S}}}(\mathrm{\mathbf{y}})\cdot \mathrm{Pr}\{\mathrm{\tilde{\mathbf{d}}}\}
+\end{equation}
+by using Bayes rule we can obtain the second equality, now we can exploit the fact that $P_{\underline{\mathcal{Y}}\vert \mathrm{\tilde{\mathbf{d}}},\mathrm{\mathbf{S}}}$ is independent to the hypothesis $\mathrm{\tilde{\mathbf{d}}}$, so it does not contribute to the decision [K\"uhn05]. In case a-priori probabilities $\mathrm{Pr\{\tilde{\mathbf{d}}\}}$ is not known then we can apply joint maximum-likelihood (ML) detection scheme on the received sequence. Mathematically joint ML detection scheme can be written as
+\begin{equation}
+\mathrm{\hat{\mathbf{d}}^{mld}}=\stackrel{\mathrm{arg\;max}}{\mathrm{\tilde{\mathbf{d}}}}p_{\underline{\mathcal{Y}}\vert\mathrm{\tilde{\mathbf{d}}},\mathrm{\mathbf{S}}}(\mathrm{\mathbf{y}})
+\end{equation}
+after some algebraic simplification we obtain as follows
+\begin{eqnarray}
+\begin{array}{lll}
+\mathrm{\hat{\mathbf{d}}^{mld}}&=&\stackrel{\mathrm{arg\;max}}{\mathrm{\tilde{\mathbf{d}}}} \mathrm{ln\;exp}\left(-\frac{\hbox{$[\mathrm{\mathbf{y}}-\mathrm{\mathbf{S}}\cdot \mathrm{\mathbf{a}}(\mathrm{\tilde{\mathbf{d}}})]^{H}\;[\mathrm{\mathbf{y}}-\mathrm{\mathbf{S}}\cdot \mathrm{\mathbf{a}}(\mathrm{\tilde{\mathbf{d}}})]$}} {\hbox{$\sigma^2_{\mathcal{N}}$}}\right) \\ \\
+
+&=&\stackrel{\mathrm{arg\;min}}{\mathrm{\tilde{\mathbf{d}}}}\vert \vert \mathrm{\mathbf{y}}-\mathrm{\mathbf{S}}\cdot\mathrm{(\tilde{\mathbf{d}})}\vert\vert^2
+\end{array}
+\end{eqnarray}
+From (4.4) we interpret that joint maximum likelihood detector search for the hypothesis $\mathrm{\tilde{\mathbf{d}}}$ that minimizes the squared Euclidian distance between the received sequence $\mathrm{\mathbf{y}}$ and $\mathrm{\mathbf{S\cdot a(\tilde{d})}}$. \\ \\
+Since $\mathrm{\mathbf{d}}$ is the set of finite discrete alphabets, an exhaustive search is required to fulfill the criterion in (4.4). The complexity in terms of computations required to reach the decision is far too high, even for medium size systems. Hence, it is practically infeasible for to implement as a detector. \\ \\
+In a step to reduce the complexity is to separate FEC decoding block and the multi-user detection block, so that at one stretch computations can be avoided. With that idea we construct such a system and analyze whether it is feasible to implement or not.
+\subsection{Optimum Preprocessing and Subsequent Decoding}
+Employing soft-decision decoders will provide information gain in contrast to hard-decision, which then can be used for subsequent processing. Joint preprocessor delivers log-likelihood ratios $L(\mathrm{\hat{b}}\vert \mathrm{\mathbf{y}})$ of the coded bits $b$, so that it can feed directly to the soft-in soft-out decoder. In such cases system matrix $\mathrm{\mathbf{S}}$ can also be splited into several small matrices of size $N_s\;\mathrm{x}\;N_U$, hence symbol-wise preprocessing is optimal. \\ \\
+At the receiver processing of $\mathrm{\mathbf{y}}$ is started by calculating the log-likelihood ratios as follows,
+\begin{eqnarray}
+\begin{array}{lllll}
+L(\hat{a}_u\vert \mathrm{\mathbf{y}})&=&\mathrm{ln}\frac{\hbox{$\mathrm{Pr}\{a_u=+1 \vert \mathrm{\mathbf{y}}\}$}}{\hbox{$\mathrm{Pr}\{a_u=-1 \vert \mathrm{\mathbf{y}}\}$}}&=&\mathrm{ln}\frac{\hbox{$p_{\underline{\mathcal{Y}}\vert a_u=+1}(\mathrm{\mathbf{y}})\cdot \mathrm{Pr}\{a_u=+1\}$}}{\hbox{$p_{\underline{\mathcal{Y}}\vert a_u=+1}(\mathrm{\mathbf{y}})\cdot \mathrm{Pr}\{a_u=-1\}$}} \\ \\
+&=&L(y\vert \hat{a}_u)+L_a(a_u)
+\end{array}
+\end{eqnarray}
+After some algebraic manipulation finally we get
+
+\begin{eqnarray}
+\begin{array}{lll}
+L(\hat{a}_u\vert \mathrm{\mathbf{y}})&=&
+\mathrm{ln}
+\frac
+{\hbox{$\sum_{\mathrm{\mathbf{a}},a_u=+1}p_{\underline{\mathcal{Y}}\vert a}(\mathrm{\mathbf{y}})\cdot \mathrm{Pr}\{\mathrm{\mathbf{a}}\}$}}
+{\hbox{$\sum_{\mathrm{\mathbf{a}},a_u=-1}p_{\underline{\mathcal{Y}}\vert a}(\mathrm{\mathbf{y}})\cdot \mathrm{Pr}\{\mathrm{\mathbf{a}}\}$}} \\ \\
+&=&
+\mathrm{\mathbf{ln}}
+\frac
+{\hbox{$\sum_{\mathrm{\mathbf{a}},a_u=+1}\mathrm{\mathbf{exp}}[-\vert\vert \mathrm{\mathbf{y}}-\mathrm{\mathbf{S}}\cdot \mathrm{\mathbf{a}}\vert \vert ^2 / \sigma^2_{\mathcal{N}}]\cdot \mathrm{Pr}\{\mathrm{\mathbf{a}}\}$}}
+{\hbox{$\sum_{\mathrm{\mathbf{a}},a_u=-1}\mathrm{\mathbf{exp}}[-\vert\vert \mathrm{\mathbf{y}}-\mathrm{\mathbf{S}}\cdot \mathrm{\mathbf{a}}\vert \vert ^2 / \sigma^2_{\mathcal{N}}]\cdot \mathrm{Pr}\{\mathrm{\mathbf{a}}\}$}}
+\end{array}
+\end{eqnarray}
+where $\mathrm{Pr}\{\mathrm{\mathbf{a}}\}$ are the a-priori probabilities which are not know in prior and can be neglected during the calculation. Further manipulation on the exponential part gives 
+\begin{equation}
+-\vert\vert\mathrm{\mathbf{y}}-\mathrm{\mathbf{S}}\cdot\mathrm{\mathbf{a}}\vert\vert ^2 = 2\cdot \mathrm{Re}\{\mathrm{\mathbf{a}}^H\cdot\mathrm{\mathbf{r}}\}-\mathrm{\mathbf{a}}^H \cdot \mathrm{\mathbf{R}}\cdot \mathrm{\mathbf{a}}
+\end{equation}
+Finally we see the matched filter output $\mathrm{\mathbf{r}}=\mathrm{\mathbf{S}}^H\cdot\mathrm{\mathbf{y}}$ is correlated with the hypothesis $\mathrm{\mathbf{a}}$. As we employ BPSK modulation in our system, $\mathrm{\mathbf{a}}$ and $\mathrm{\mathbf{r}}^{'}\;=\;\mathrm{Re}\{\mathrm{\mathbf{S}}^H\cdot \mathrm{\mathbf{y}}\}$ becomes real-valued then (4.7) simplifies to
+\begin{equation}
+-\vert\vert\mathrm{\mathbf{y}}-\mathrm{\mathbf{S}}\cdot\mathrm{\mathbf{a}}\vert\vert ^2 \Longrightarrow 2\mathrm{\mathbf{a}}^T\mathrm{\mathbf{r}}^{'}-\mathrm{\mathbf{a}}^T\cdot \mathrm{Re}\{\mathrm{\mathbf{R}}\}\cdot \mathrm{\mathbf{a}}
+\end{equation}
+As we know the output of the matched filter delivers sufficient statistics and with that further pre-processing still provides the optimum log-likelihood ratios as described below
+\begin{equation}
+L(\mathrm{\mathbf{r}}^{'}\vert \hat{a}_u)=\mathrm{\mathbf{ln}}\frac{\hbox{$\sum_{\mathrm{\mathbf{a}},a_u=+1}\mathrm{exp}\left([2\mathrm{\mathbf{a}}^T\mathrm{\mathbf{r}}^{'}-\mathrm{\mathbf{a}}^T\mathrm{\mathbf{R}}^{'}\mathrm{\mathbf{a}}]/(2\sigma^2_{\mathcal{N}^{'}})\right)$}}{\hbox{$\sum_{\mathrm{\mathbf{a}},a_u=-1}\mathrm{exp}\left([2\mathrm{\mathbf{a}}^T\mathrm{\mathbf{r}}^{'}-\mathrm{\mathbf{a}}^T\mathrm{\mathbf{R}}^{'}\mathrm{\mathbf{a}}]/(2\sigma^2_{\mathcal{N}^{'}})\right)$}}
+\end{equation}
+As we see in (4.9) exponent still remains, hence the computation complexity grows exponentially with the number of users. Hence the analyzed detection scheme does not fit to implement in our system. 
+\subsection{Turbo Detection with Optimum Preprocessing and Decoding}
+In combating the exponential growth of complexity we analyze yet an another scheme in which we employ individual de-interleaving and FEC decoding, and there by the information is feed back to the pre-processors as according to the Turbo principle [K\"uhn05]. \\ \\
+Soft output decoders delivers the log likelihood ratios $L(\hat{a}_u)\;=\;L_a(a_u)$, which can be used to calculate the a-priori probabilities as,
+\begin{equation}
+\mathrm{Pr}\{a_u\}=\frac{\hbox{$e^{L_u(a_u)/2}$}}{\hbox{$1+e^{L_u(a_u)}$}}\cdot e^{a_uL_u(a_u)/2}
+\end{equation}
+theses can be feed to pre-processors for subsequent processing. Individual interleavers guarantee the assumption that, $L_a(a_u)$ are statistically independent. So we write a-priori information as follows
+\begin{equation}
+\mathrm{Pr}\{\mathrm{\mathbf{a}}\}=\prod\limits_{u=1}^{N_U}\frac{e^{L_a(a_u)/2}}{1+e^{L_u(a_u)}}\cdot e^{a_uL_u(a_u)/2}
+\end{equation}
+Using equation (4.7) and inserting (4.11) in (4.6) and subsequent simplification we obtain $L(\hat{a}_u\vert \mathrm{\mathbf{r}})$ as
+\begin{equation}
+L(\hat{a}_u\vert \mathrm{\mathbf{r}})=
+\mathrm{ln}
+\frac
+{
+\hbox{$\sum_{\mathrm{\mathbf{a}},a_u=+1}e^{\left[2\mathrm{\mathbf{a}}^T\mathrm{\mathbf{r}}^{'}-\mathrm{\mathbf{a}}^{T}\mathrm{\mathbf{R}}^{'}\mathrm{\mathbf{a}}\right]/(2\sigma^2_{\mathcal{N}^{'}})+\sum_{\mu = 1}^{N_U}}a_{\mu}L_a(a_{\mu})/2$}
+}
+{
+\hbox{$\sum_{\mathrm{\mathbf{a}},a_u=-1}e^{\left[2\mathrm{\mathbf{a}}^T\mathrm{\mathbf{r}}^{'}-\mathrm{\mathbf{a}}^{T}\mathrm{\mathbf{R}}^{'}\mathrm{\mathbf{a}}\right]/(2\sigma^2_{\mathcal{N}^{'}})+\sum_{\mu = 1}^{N_U}}a_{\mu}L_a(a_{\mu})/2$}
+}
+\end{equation}
+Above equation can be written in the form after some manipulation as follows
+\begin{equation}
+L(\hat{a}_u\vert \mathrm{\mathbf{r}})=L_a(a_u)+L_e(\hat{a}_u)
+\end{equation}
+Equation (4.12) can be approximated [K\"uhn05] as follows
+\begin{eqnarray}
+\begin{array}{lll}
+L(\hat{a}\vert \mathrm{\mathbf{r}})&\approx& L_a(a_u)
++\stackrel{\mathrm{max}}{\mathrm{\mathbf{a}},a_u=+1}\left[ \frac{\hbox{$2\mathrm{\mathbf{a}}^T\mathrm{\mathbf{r}}^{'}-\mathrm{\mathbf{a}}^T\mathrm{\mathbf{R}}^{'}\mathrm{\mathbf{a}}$}}{\hbox{$2\sigma^2_{\mathcal{N}^{'}}$}}+\frac{\hbox{$1$}}{\hbox{$2$}} \sum\limits_{\stackrel{\mu=1}{\mu \ne u}}^{N_U}a_{\mu}L_a(a_\mu) \right] \\ \\
+&&-\stackrel{\mathrm{max}}{\mathrm{\mathbf{a}},a_u=-1}\left[ \frac{\hbox{$2\mathrm{\mathbf{a}}^T\mathrm{\mathbf{r}}^{'}-\mathrm{\mathbf{a}}^T\mathrm{\mathbf{R}}^{'}\mathrm{\mathbf{a}}$}}{\hbox{$2\sigma^2_{\mathcal{N}^{'}}$}}+\frac{\hbox{$1$}}{\hbox{$2$}} \sum\limits_{\stackrel{\mu=1}{\mu \ne u}}^{N_U}a_{\mu}L_a(a_\mu) \right]
+\end{array}
+\end{eqnarray}
+We now realize a receiver structure as shown in \textbf{Figure x.x} to calculate the solutions presented in (4.12) and (4.14). During first iteration no a-priori information is available and only term given in (4.8) is calculated which remains constant for subsequent iteration, are feed directly to the FEC decoders which then delivers the LLR's $L_a(a_u)$. Then $L_a(a_u)$ is feed-back as a-priori information for the pre-processor to improve the estimates of $L(\hat{a}_u\vert \mathrm{\mathbf{r}})$. \\ \\
+In this step we reduce the complexity of FEC decoders to grow linearly with the users. But still pre-processor grows exponentially to the number of users.
+\section{Linear and Non-Linear Multi-User Detection}
+In an another step to reduce the complexity of pre-processors is to employ linear joint pre-processors. One property of linear joint pre-processors is that they do not exploit the knowledge of the finite alphabet. Since it assumes continuously distributed transmitted signals. Later we see this as a potential dis-advantage which overrules the choice to implement in our system. Nevertheless we explain the concept of linear multi-user detection. \\ \\
+Since linear multi-user detector assumes continuously distributed transmitted signals and it is obvious that complexity grows linearly with the users. \\ \\
+In this approach one has to solve very simple linear equation $\mathrm{\mathbf{y}}=\mathrm{\mathbf{S}}\mathrm{\mathbf{a}}+\mathrm{\mathbf{n}}$ to find $\mathrm{\mathbf{a}}$. Solution can be obtained if we find a suitable matrix such that multiplication with $\mathrm{\mathbf{S}}$ gives identity term. Let we assume the matrix as $\mathrm{\mathbf{W}}$ and upon multiplication with $\mathrm{\mathbf{y}}$ gives the solution $\mathrm{\mathbf{\hat{a}}}\;=\;\mathrm{\mathbf{W}}\cdot\mathrm{\mathbf{y}}$.
+\subsection{Decorrelator}
+Decorrelator or equivalently the zero-forcing equalizer searches for the symbol vectors that minimizes the squared Euclidean distance from the received vector $\mathrm{\mathbf{y}}$. Mathematically it is given as follows
+\begin{equation}
+\mathrm{\mathbf{\hat{a}_{ZF}}}=\stackrel{argmin}{\mathrm{\mathbf{\tilde{a}}}\in\mathrm{\mathbf{C}}^{N_U}}\vert\vert\mathrm{\mathbf{y}}-\mathrm{\mathbf{S}}\mathrm{\mathbf{\tilde{a}}}\vert\vert^2
+\end{equation}
+then the solution is
+\begin{equation}
+\mathrm{\mathbf{\tilde{a}}_{ZF}}=\mathrm{\mathbf{W}_{ZF}} \cdot \mathrm{\mathbf{y}} = (\mathrm{\mathbf{S}}^H\mathrm{\mathbf{S}})^{-1} \cdot \mathrm{\mathbf{S}}^H\cdot\mathrm{\mathbf{y}}=\mathrm{\mathbf{R}}^{-1}\cdot\mathrm{\mathbf{r}}
+\end{equation}
+Decorrelator takes the output from the channel $\mathrm{\mathbf{y}}$ which then do the matched filtering by multiplying with $\mathrm{\mathbf{S}}^H$ then the output of the matched filter $\mathrm{\mathbf{r}}$ is decorrelated with $\mathrm{\mathbf{R}}^{-1}$ which then results in
+\begin{equation}
+\mathrm{\mathbf{\hat{a}}_{ZF}}=\mathrm{\mathbf{R}}^{-1}\mathrm{\mathbf{S}}^H\cdot(\mathrm{\mathbf{S}}\mathrm{\mathbf{a}}+\mathrm{\mathbf{n}})=\mathrm{\mathbf{a}}+\mathrm{\mathbf{R}}^{-1}\mathrm{\mathbf{S}}^H\cdot\mathrm{\mathbf{n}}=\mathrm{\mathbf{a}}+\mathrm{\mathbf{W}_{ZF}}\cdot\mathrm{\mathbf{n}}
+\end{equation}
+The output of the matched filter consist of the desired symbol vector $\mathrm{\mathbf{a}}$ and modified noise vector. By using zero-forcing techniques we can completely suppress the interference with the cost of amplifying the noise by a factor $\mathrm{\mathbf{R}}^{-1}$. Performance curves are shown for various signal-to-noise ratio levels in [K\"uhn05].
+\subsection{Minimum Mean Square Error Receiver}
+As we know that matched filter concentrates only on the background noise and completely ignores the interference, and where as the decorrelator concentrates only on the interference and ignores the noise and we see these schemes are two extremes implementing them do not give optimum results. Now a compromising solution for the two extreme cases is obtained with MMSE detector which minimizes the average squared Euclidean distance between the estimate $\mathrm{\mathbf{\hat{a}}_{MMSE}}\;=\;\mathrm{\mathbf{W}_{MMSE}}\cdot\mathrm{\mathbf{y}}$ and the true data vector $\mathrm{\mathbf{a}}$ with $\mathrm{\mathbf{W}_{MMSE}}\;=\;\stackrel{argmin}{\tilde{\mathrm{\mathbf{W}}}\in\mathrm{\mathbf{C}}^{N_U\mathrm{x}N_s}}\mathrm{E}\left\{\vert\vert\mathrm{\mathbf{\tilde{W}y}}-\mathrm{\mathbf{a}}\vert\vert^2\right\}$.\\ \\
+After some assumptions finally we reach to
+\begin{equation}
+\mathrm{\mathbf{W}_{MMSE}}=(\mathrm{\mathbf{S}}^H\mathrm{\mathbf{S}}+\frac{\hbox{$\sigma^2_{\mathcal{N}}$}}{\hbox{$\sigma^2_{\mathcal{A}}$}}\mathrm{\mathbf{I}}N_U)^{-1}\cdot\mathrm{\mathbf{S}}^{H}=\left(\mathrm{\mathbf{R}}+\frac{\hbox{$N_0$}}{\hbox{$E_s$}}\mathrm{\mathbf{I}}_{N_U}\right)^{-1}\cdot\mathrm{\mathbf{S}}^H
+\end{equation}
+As we mentioned already the MMSE is a compromise between the decorrelator and the matched filter, which is obvious when we let $\sigma^2_{\mathcal{N}}\rightarrow 0$ then the identity part $\mathrm{\mathbf{I}}_{N_U}$ get canceled and we obtain the simple decorrelator. Thereby suppressing the interference completely. Suppose when  $\sigma^2_{\mathcal{N}}\rightarrow \infty$ then $\mathrm{\mathbf{R}}$ can be neglected, thus arises the case for the matched filter. As see that no complete suppression of interference some residual interference remains which disturb the data, but it proved MMSE solution is far better then the other cases.
+\subsection{Linear Parallel Interference Cancellation}
+As we see in previous sections that the solution to the linear equation can be obtained by calculating the pseudo inverse of the system matrix $\mathrm{\mathbf{S}}$, but the solution can also be obtained by iterative methods. We use those methods and see what advantage we get when compared to the previous method. We start from the output of the matched filter bank
+\begin{equation}
+\mathrm{\mathbf{r}}=\mathrm{\mathbf{R}}\mathrm{\mathbf{a}}+\mathrm{\mathbf{S}}^H\mathrm{\mathbf{n}}\hspace{5mm}\Rightarrow\hspace{5mm}\mathrm{\mathbf{\hat{a}}}=\mathrm{\mathbf{W}}\cdot\mathrm{\mathbf{r}}\hspace{5mm}\Leftrightarrow\hspace{5mm}\mathrm{\mathbf{M}}\cdot\mathrm{\mathbf{\hat{a}}}=\mathrm{\mathbf{r}}
+\end{equation}
+We now find the solution to our problem, by solving the linear equation systems $\mathrm{\mathbf{M}}\cdot\mathrm{\mathbf{\hat{a}}}\;=\;\mathrm{\mathbf{r}}$. Rather writing in matrix form we now take the single element in the matrix and write it as follows
+\begin{equation}
+r_u=M_{u,u}\hat{a}_u+\sum\limits_{v=1}^{u-1}M_{u,v}\hat{a}_v+\sum\limits_{v=u+1}^{N_U}M_{u,v}\hat{a}_v
+\end{equation}
+as we see that received value $r_u$ consist of the superposition of the scaled desired symbol $\hat{a}_u$ and the weighted interfering symbols $\hat{a}_{v\ne u}$. Now we start the iterative solution with the weighted matched filter output of the interfering symbols as the starting values $\hat{a}^{(0)}_{v\ne u}\;=\;r_{v\ne u}/M_{v,u}$, which can be subtracted on $r_u$ leads to improvised estimates $\hat{a}_u^{(1)}$ after the first iteration. In such a way we proceed for all the users and repeat the iteration until we reach to global optimum. At the $\mu$-th iteration, the $u$-th symbol becomes
+\begin{equation}
+\hat{a}_u^{(\mu)}=M_{u,u}^{-1}\cdot\left[r_u-\sum\limits_{v=1}^{u-1}M_{u,v}\hat{a}_v^{(\mu-1)}-\sum\limits_{v=u+1}^{N_U}M_{u,v}\hat{a}_v^{(\mu-1}\right]
+\end{equation}
+This method of finding solutions to simultaneous linear equation is called Jacobi algorithm and which is also know as parallel interference cancellation.\\ \\
+Interestingly the choose of the matrix $\mathrm{\mathbf{M}}$ determines type of detector, if $\mathrm{\mathbf{M}}=\mathrm{\mathbf{R}}$ then all the co-efficients of $M_{u,v}$ and $R_{u,v}$ are then the obtained detector is decorrelator. For MMSE filter the choice of $\mathrm{\mathbf{M}}$ equal to $\mathrm{\mathbf{R}}+\sigma_{\mathcal{N}}^{2}/\sigma_{\mathcal{A}}^{2}\cdot\mathrm{\mathbf{I}}_{N_U}$. \\ \\
+The convergence properties of parallel interference cancellation shows rather very poor which is well discussed in [K\"uhn05].
+\subsection{Linear Successive Interference Cancellation}
+A substantial improvement in convergence behavior is seen when cancellation of interference takes place successively. We explain the cancellation mechanism in a generic way that at the $\mu$-th iteration for user $u$ uses only the estimates $\hat{a}_{v\ne u}^{\mu-1}$ of previous iteration $\mu$-1. Since at the $\mu$-th iteration we already have the updated estimates $\hat{a}_{v<u}^{(\mu)}$ for users $1\leq v < u$, rather the old estimates $\hat{a}_{v<u}^{(\mu-1)}$ as in (4.21).  The $\mu$-th element is given as 
+\begin{equation}
+a_u^{(\mu)}=M_{u,u}^{-1}\cdot \left[r_u-\sum\limits_{v=1}^{u-1}M_{u,v}\hat{a}_v^{(\mu)}-\sum\limits_{v=u+1}^{N_U}M_{u,v}\hat{a}_v^{(\mu-1)}\right]
+\end{equation}
+This method of finding solution to simultaneous equation is called Gauss-Seidel algorithm.\\ \\
+The convergence properties for linear successive interference cancellation were analyzed and shown detail in [K\"uhn05].
+\section{Non-linear Iterative Multi-User Detection}
+As we mentioned in the beginning of the previous section that linear detectors do not exploit the finite nature of the transmitted signals, since the assumption there in a continously distributed transmitted signals there by we loose certain amount of information. \\ \\
+This can be overcome by introducing a non-linear devices to exploit the finite nature of the alphabet. Introducing a non-linear device means the signals $\hat{a}_{v\ne u}^{\mu}$ in (4.21) or (4.22) is passed through a non-linear device before they used for interference cancellation. \\ \\
+We study some of non-linear device and find which is more suitable for our communication system.
+\subsection{Non-linear Devices}
+We start with very simple non-linear device, which is hard-decision where decision is made based upon the sign of the signal.
+\begin{equation}
+\mathcal{Q}_{\mathrm{HD}}(y)=\mathrm{sgn}(y)
+\end{equation}
+Though simplicity has main advantage, the potential disadvantage is that if the decision is made wrong, then the interference get twice as much then original. Otherwise, it gets completely canceled when the decision is correct. Making wrong decision is highly probable during the initial stages with very large system loads $\beta$ that leads to undesirable effects. \\ \\
+In order to keep the undesirable effect as less as possible, we leave the un-reliable samples un-decided. Of-course with these approac we do not cancel interference perfectly but the error is rather very small when compared to previous approach. A very simple clipper realizes the above mentioned approach.
+\begin{eqnarray}
+\mathcal{Q}_{\mathrm{clip}}(y)=\left\{
+\begin{array}{rllr}
+-1&\hspace{2mm}&\mathrm{for}&\;y < -1 \\ 
+ y&\hspace{2mm}&\mathrm{for}&\vert\; y \vert \leq 1 \\ 
++1&\hspace{2mm}&\mathrm{for}&\;y > +1
+\end{array}
+\right.
+\end{eqnarray}
+Clipper is designed by exploiting the fact that transmitted signals cannot go larger than one. In this method interference is totally canceled, if the signal has the correct sign and the magnitude of the signal is larger then one. For the small values whose reliability is low which is left undecided. As we mentioned previously the interference is party reduced, but when compared with hard-decision the performance wise it gets much better.\\ \\
+As we see that clipper still behaves more or less like hard-decision the preformance we obtain is quite far from optimum. So we go for another approach in which we employ tanh-function that will give decicdes more softer then above two methods. Most interesting thing in this approach is that we can model the tanh function in according to the level of interference we have in your system. Such a modelling require exact level of interference to be known, but i most of the time it is unknown. So we introduce a parameter called $\alpha$ that depends on SNR as well as the effective interference.
+\begin{equation}
+\mathcal{Q}_{\mathrm{tan}}(y)=\mathrm{tanh}(\alpha y)
+\end{equation}
+\textbf{Figure x.x} shows the tanh function with different values of $\alpha$. For small $\alpha$ function is very smooth and the values which we obtain are rather very un-reliable even for very large inputs. When $\alpha=1$ tanh function behaves like a clipper and for $\alpha>1$ function leads to hard-decision.
+\subsection{Non-Linear Parallel Interference Cancellation}
+Our main task is to optimize the parameter $\alpha$ of the non-linear function tanh. As we deal with coded CDMA systems building a non-linear parallel interference canceler is very simple in the sense that at the first iteration the output of the matched filter $r_u$ is feed directly to the de-interleavers and followed by FEC decoder. The decoder delivers soft-outputs $L(\hat{b}_u)$ which then again interleaved and feed to non-linear function. This treatment is necessary indeed because, in general the magnitudes of log-likelihood ratios not limited. Such a limitation is required, since the true coded bits are either +1 or -1. Since it is well known for us that expectation of a bit can be calculated with its log-likelihood ratio by passing log-likelihood ratio to the tanh($L/2$) function. Then the interfering signals are weighted with correlation coefficients $M_{u,u}$ as follows
+\begin{equation}
+\hat{a}_v^{(\mu-1)}=\mathcal{Q}\left(M_{u,v}^{-1}\cdot \tilde{r}_v^{(\mu-1)}\right)
+\end{equation}
+these estimates are weighted with the correlation coefficients $M_{u,v}$, which is summed and subtracted from the matched filter output $r_u$
+\begin{equation}
+\tilde{r}_u^{(\mu)}=r_u-\sum\limits_{v\ne u}M_{u,v}\cdot \hat{a}_v^{(\mu-1)}
+\end{equation}
+when estimated interference for all users are subtracted for all the users, the procedure is repeated again until the iterative schemes converges to global optimum. There is also the case that iterative scheme get stuck in local optimum due to low SNR and or very high system loads.
+\subsection{Non-Linear Successive Interference Cancellation}
+As we discussed in the previous section the same thing can also be extended to successive interference cancellation and at the canceler we apply Gauss-Seidel algorithm. The parameter $\alpha$ which is to be optimized according to system parameters are discussed in [K\"uhn05]. \\ \\
+\centerline{**********} \\ \\
+After analzying various schemes we finally conclude that employing non-linear detection detection schemes with individual interleaver and FEC decoder and applying turbo principle is optimum to implement in our communication scheme. \\ \\
+For such a scheme it is necessary to analyze the convergence behaviour, which is our main goal in our project. So, in the next chapter we introduce various analysis tools which studies the convergence properties with the incorproation of parallel and successive interference canceler. Later we see what interesting mechanics does certain information gives and which leads to find solution to some of the problems for which solution is yet to be known. 

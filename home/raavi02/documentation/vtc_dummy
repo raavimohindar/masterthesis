@@ -1,0 +1,28 @@
+The last in the sequence of estimation tools to analyze the iterative detection scheme which employs Parallel Interference Cancellation scheme is the Variance Transfer Characteristics. \\ \\
+We start the mathematical evolution of this analysis tools from the output of the matched filter
+\begin{equation}
+r[k]=\mathrm{\mathbf{C}}^T[k]\cdot \mathrm{\mathbf{y}}[k]=\mathrm{\mathbf{R}}[k]\cdot\mathrm{\mathbf{r}}[k]+\mathrm{\mathbf{\tilde{n}}}[k]
+\end{equation} 
+which eventually de-spreads the signal and delivers the sufficient statistics. Then it is passed through the Parallel Interference canceler and delivers the output as
+\begin{equation}
+\mathrm{\mathbf{y}}[k]=\sqrt{P_k}\mathrm{\mathbf{b}}[k]\mathrm{\mathbf{C}}[k]+\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}\sqrt{P_m}(\mathrm{\mathbf{b}}-\mathrm{\mathbf{\bar{b}}})\mathrm{\mathbf{C}}[m]+\mathrm{\mathbf{n}}[k]
+\end{equation}
+In the above equation tells us that on desired user the interference of the rest of the users do play a dominant role, and we now write the interference part alone as
+\begin{equation}
+\psi[k]=\sum\limits_{\stackrel{m=1}{(m\neq k)}}^K\sqrt{P_m}(\mathrm{\mathbf{b}}[m]-\mathrm{\mathbf{\tilde{b}}}[m])(\mathrm{\mathbf{C}}[m]^T\mathrm{\mathbf{C}}[m])+\mathrm{\mathbf{n}}[k]
+\end{equation}
+Above equation is an estimate of the interference and we assume such an estimate is unbiased and i.i.d random varible so we apply the first and second order statistics, henceforth we obtain
+\begin{equation}
+\mathrm{E}[\,\psi[k]\,]=0,\hspace{10mm}\mathrm{First\;order\;statistics\;gets\;vanished.}
+\end{equation}
+\begin{equation}
+E[\,\psi^2[k]\,]=\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}P_m\,\mathrm{E}\left[(\mathrm{\mathbf{d}}[m]-\mathrm{\mathbf{\tilde{d}}}[m])^2\right]\mathrm{E}\left[(\mathrm{\mathbf{C}}[m]^T-\mathrm{\mathbf{C}}[m])\right]+\sigma^2
+\end{equation}
+further more we see that $E\left[\left(\mathrm{\mathbf{C}}[m]^T-\mathrm{\mathbf{C}}[m]\right)\right]\;=\;\frac{\hbox{$1$}}{\hbox{$N$}}$ then 
+\begin{equation}
+\sigma_k^2=\frac{\hbox{$1$}}{\hbox{$N$}}\sum\limits_{\stackrel{m=1}{(m\neq k)}}^{K}P_m\mathrm{E}\left[\left(\mathrm{\mathbf{d}}-\mathrm{\mathbf{\tilde{d}}}\right)^2\right]+\sigma^2
+\end{equation}
+For equal power system we write the equation as
+\begin{equation}
+\sigma_{\mathrm{eff}}^2=\frac{\hbox{$\sigma^2$}}{\hbox{$P$}}+\frac{\hbox{$K-1$}}{\hbox{$N$}}\sigma_d^2;\hspace{10mm}\sigma_d^2=\mathrm{E}\left[\left(\mathrm{\mathbf{d}}[k]-\mathrm{\mathbf{\tilde{d}}}[k]\right)^2\right]
+\end{equation}

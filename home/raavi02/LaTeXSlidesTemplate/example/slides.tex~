@@ -1,0 +1,74 @@
+\documentclass[fleqn]{article}
+%\usepackage[german]{babel}
+%\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{options}
+\usepackage{colordvi}    
+\usepackage[dvips]{graphicx}
+\usepackage{rotating}  
+%\usepackage{times}
+\usepackage{epsfig}
+\DeclareGraphicsExtensions{ps,pst,eps}
+\DeclareGraphicsRule{ps}{eps}{pst}{}
+\input{ANTcolor.tex}
+\input{mathe.tex}
+\input{latex2e}
+\input{cleanrahmenA4quer}
+
+% Vervielfachung der Linienstaerken definieren (fuer Matlab-Bilder und Tintenstrahldrucker)
+\newcommand{\setlinewidthfactor}[1]{\special{ps:/LineWidthFactor #1 def}}
+\newcommand{\lwfac}{4}
+
+% Trennung weitestgehenst unterdruecken
+%\spaceskip=3.33pt plus3.34pt minus1.11pt
+\hyphenpenalty=5000
+
+\sloppy
+
+% Gleichungsnummerierung
+\makeatletter
+\@addtoreset{equation}{section}
+\def\theequation{\arabic{equation}}
+\makeatother
+
+% Fussnotennummerierung
+\makeatletter
+\@addtoreset{footnote}{page}
+\def\thefootnote{\fnsymfol{footnote}}
+\makeatother
+
+\textwidth25.7cm          % Seitengroesse
+\textheight16cm           % Seitengroesse
+\oddsidemargin -2.5mm     % Raender fuer cps: -2.5mm;  fuer cpsA3: -6mm;  fuer psA3: 2mm;  fuer Softwarelabor: -2.5mm
+\evensidemargin -2.5mm    % Raender fuer cps: -2.5mm;  fuer cpsA3: -6mm;  fuer psA3: 2mm;  fuer Softwarelabor: -2.5mm
+\topmargin -16mm          % Seitenvorschub -2mm fuer A4-Ausdrucke, 3mm fuer A3-Ausdrucke
+\pagestyle{headings}      % Seitenkopf
+\headsep=1cm              % Abstand zum Kopf
+\parindent0cm             % Absatzeinrueckung
+\renewcommand{\baselinestretch}{1.3} % Zeilenabstand
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+\renewcommand{\textfraction}{0}
+\renewcommand{\floatpagefraction}{1}
+\renewcommand{\normalsize}{\huge}
+\newcommand{\FBOX}[1]{\fbox{~~$\displaystyle{#1}$~~}}
+\newcommand{\TITEL}[2]{\section*{\huge \sf #1\hspace*{1ex}#2}}
+\newcommand{\UNTERTITEL}[2]{\subsection*{\huge \sf #1\hspace*{1ex}#2}}
+\newcommand{\FOEL}{\vspace{-0.3cm}}
+\special{landscape}
+
+%%% Text in Formel einfügen (mit Abstand!)
+\newcommand{\mtext}[1]{\quad\mathrm{\hbox{ #1} }\;\,}
+
+
+\begin{document}
+  \begin{flushleft}
+    \sf
+    \normalsize
+    \setbox\datum=\hbox{\includegraphics[scale=0.35]{uniHB2.eps}} 
+    \setbox\titelzeile=\hbox{}
+    \input{slides-pages}
+  \end{flushleft}
+\end{document}
+
+%%% EOF %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

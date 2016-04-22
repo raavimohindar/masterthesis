@@ -1,0 +1,88 @@
+% ----------------------------------------------------------
+%
+%	ANT-Farbbefehle im Hinblick auf 
+%	Farbfolienausdrucke mit einem  
+%	HP-Laserjet Farblaser-drucker.
+%
+%	\input{ANTcolor.tex}     --> im Toplevel-File vor \begin{document}
+%
+%
+%	Folgende Farben sind definiert:
+%
+%	ANTrot
+%	ANTgruen
+%	ANTblau
+%	ANTgelb
+%	ANTcyan
+%	ANTmagenta
+%	ANTweiss
+%	ANTgrau
+%	ANTschwarz
+%
+%	Der Aufruf kann auf mehrere Arten geschehen: 
+%
+%	\ANTrot{text}    	: text   wird rot dargestellt
+%	\ANTrotBF{text}		: text   wird rot und fett dargestellt
+%	\ANTrotMBF{text}	: text   wird rot und fett (Mathe-Modus) dargestellt
+%	\color{ANTrot}		: Einstellen der allgemeinen Vordergrundfarbe
+%
+%				1998   H. Schmidt
+% ----------------------------------------------------------
+
+
+\usepackage{color} % Farbe mit LaTeX2e
+%\usepackage{colordvi}
+
+
+% ----- Farbdefinitionen ------
+%
+\definecolor{ANTrot}{rgb}{0.6,0,0}
+\definecolor{ANTgruen}{rgb}{0.2,0.6,0.2}
+\definecolor{ANTblau}{rgb}{0.05,0.4,0.8}
+\definecolor{ANTcyan}{rgb}{0.2,0.8,0.8}
+\definecolor{ANTgelb}{rgb}{0.8,0.8,0.1}
+\definecolor{ANTmagenta}{rgb}{0.8,0.2,0.8}
+\definecolor{ANTweiss}{rgb}{1,1,1}
+\definecolor{ANTschwarz}{rgb}{0,0,0}
+\definecolor{ANTgrau}{rgb}{0.4,0.4,0.4}
+
+
+
+% ----- normale Schrift (auch Formeln) -----
+%
+\newcommand{\ANTrot}[1]{{\color{ANTrot}{#1}}}
+\newcommand{\ANTgruen}[1]{{\color{ANTgruen}{#1}}}
+\newcommand{\ANTblau}[1]{{\color{ANTblau}{#1}}}
+\newcommand{\ANTcyan}[1]{{\color{ANTcyan}{#1}}}
+\newcommand{\ANTgelb}[1]{{\color{ANTgelb}{#1}}}
+\newcommand{\ANTmagenta}[1]{{\color{ANTmagenta}{#1}}}
+\newcommand{\ANTweiss}[1]{{\color{ANTweiss}{#1}}}
+\newcommand{\ANTgrau}[1]{{\color{ANTgrau}{#1}}}
+\newcommand{\ANTschwarz}[1]{{\color{ANTschwarz}{#1}}}
+
+
+% ----- fette Normalschrift --------
+%
+\newcommand{\ANTrotBF}[1]{{{\bf \color{ANTrot}{#1}}}}
+\newcommand{\ANTgruenBF}[1]{{{\bf \color{ANTgruen}{#1}}}}
+\newcommand{\ANTblauBF}[1]{{{\bf \color{ANTblau}{#1}}}}
+\newcommand{\ANTcyanBF}[1]{{{\bf \color{ANTcyan}{#1}}}}
+\newcommand{\ANTgelbBF}[1]{{{\bf \color{ANTgelb}{#1}}}}
+\newcommand{\ANTmagentaBF}[1]{{{\bf \color{ANTmagenta}{#1}}}}
+\newcommand{\ANTweissBF}[1]{{{\bf \color{ANTweiss}{#1}}}}
+\newcommand{\ANTgrauBF}[1]{{{\bf \color{ANTgrau}{#1}}}}
+\newcommand{\ANTschwarzBF}[1]{{{\bf \color{ANTschwarz}{#1}}}}
+
+% ------ Formeln in Fettschrift ------
+%
+\newcommand{\ANTrotMBF}[1]{{\color{ANTrot}{\mathbf{#1}}}}
+\newcommand{\ANTgruenMBF}[1]{{\color{ANTgruen}{\mathbf{#1}}}}
+\newcommand{\ANTblauMBF}[1]{{\color{ANTblau}{\mathbf{#1}}}}
+\newcommand{\ANTcyanMBF}[1]{{\color{ANTcyan}{\mathbf{#1}}}}
+\newcommand{\ANTgelbMBF}[1]{{\color{ANTgelb}{\mathbf{#1}}}}
+\newcommand{\ANTmagentaMBF}[1]{{\color{ANTmagenta}{\mathbf{#1}}}}
+\newcommand{\ANTweissMBF}[1]{{\color{ANTweiss}{\mathbf{#1}}}}
+\newcommand{\ANTgrauMBF}[1]{{\color{ANTgrau}{\mathbf{#1}}}}
+\newcommand{\ANTschwarzMBF}[1]{{\color{ANTschwarz}{\mathbf{#1}}}}
+
+
